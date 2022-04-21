@@ -6,7 +6,10 @@ import { createGlobalStyle } from "styled-components";
 const queryClient = new QueryClient();
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -59,8 +62,7 @@ table {
 }
 body {
   font-weight: 300;
-  font-family: 'Source Sans Pro', sans-serif;
-  color: red;
+  font-family: 'Noto Sans KR', sans-serif;
   line-height: 1.2;
   overflow-x: hidden;
 }
