@@ -1,8 +1,9 @@
-import "../styles/globals.css";
+import "@styles/globals.css";
 import type { AppProps } from "next/app";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { createGlobalStyle } from "styled-components";
 import MainLayout from "components/layout";
+import Head from "next/head";
 
 const queryClient = new QueryClient();
 
@@ -75,13 +76,18 @@ a {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <MainLayout>
-        <Component {...pageProps} />
-      </MainLayout>
-
-      <GlobalStyle />
-    </QueryClientProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Dday Chill</title>
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+        <GlobalStyle />
+      </QueryClientProvider>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
-import { NextPage } from "next";
 import useUserData from "hooks/useUserData";
+import { NextPage } from "next";
 
 const login: NextPage = () => {
   const { data: userData, isLoading } = useUserData();
