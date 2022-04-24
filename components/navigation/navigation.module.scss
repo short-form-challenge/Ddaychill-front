@@ -1,0 +1,37 @@
+.navWrapper {
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+  width: inherit;
+  padding: 10px 40px 37px 40px;
+  font-size: 10px;
+
+  .navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    div {
+      width: 24px;
+    }
+
+    .home {
+      margin-top: 4px;
+    }
+
+    .hi {
+      color: antiquewhite;
+    }
+  }
+
+  .icon {
+    color: #cccccd;
+  }
+  .iconChecked {
+    color: #4d23d6;
+  }
+}
