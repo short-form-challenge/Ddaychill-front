@@ -167,4 +167,172 @@ export default [
       text: "공부",
     },
   },
+  {
+    id: 13,
+    title: "바다 앞에서 요기",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 2023,
+    user: {
+      id: 1,
+      nickName: "레오와 두리",
+    },
+    category: {
+      id: 1,
+      text: "운동",
+    },
+  },
+  {
+    id: 14,
+    title: "월요일 운동",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 20,
+    user: {
+      id: 2,
+      nickName: "야옹 멍멍",
+    },
+    category: {
+      id: 1,
+      text: "운동",
+    },
+  },
+  {
+    id: 15,
+    title: "일요일 러닝",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 202,
+    user: {
+      id: 3,
+      nickName: "클레오",
+    },
+    category: {
+      id: 1,
+      text: "운동",
+    },
+  },
+  {
+    id: 16,
+    title: "근력키우기",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 2042,
+    user: {
+      id: 4,
+      nickName: "딸기",
+    },
+    category: {
+      id: 1,
+      text: "운동",
+    },
+  },
+  {
+    id: 17,
+    title: "3대측정일!",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 202,
+    user: {
+      id: 5,
+      nickName: "김계란",
+    },
+    category: {
+      id: 1,
+      text: "운동",
+    },
+  },
+  {
+    id: 18,
+    title: "매일 주짓수수련",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 202,
+    user: {
+      id: 1,
+      nickName: "레오와 두리",
+    },
+    category: {
+      id: 1,
+      text: "운동",
+    },
+  },
+  {
+    id: 19,
+    title: "오랜만에 공부",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 2023,
+    user: {
+      id: 1,
+      nickName: "레오와 두리",
+    },
+    category: {
+      id: 2,
+      text: "공부",
+    },
+  },
+  {
+    id: 20,
+    title: "월요일 영어공부",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 20,
+    user: {
+      id: 2,
+      nickName: "야옹 멍멍",
+    },
+    category: {
+      id: 2,
+      text: "공부",
+    },
+  },
+  {
+    id: 21,
+    title: "이제 하루남았다~!",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 202,
+    user: {
+      id: 3,
+      nickName: "클레오",
+    },
+    category: {
+      id: 2,
+      text: "공부",
+    },
+  },
+  {
+    id: 22,
+    title: "월요일 공부..",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 2042,
+    user: {
+      id: 4,
+      nickName: "딸기",
+    },
+    category: {
+      id: 2,
+      text: "공부",
+    },
+  },
+  {
+    id: 23,
+    title: "공부합시다",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 202,
+    user: {
+      id: 1,
+      nickName: "레오와 두리",
+    },
+    category: {
+      id: 2,
+      text: "공부",
+    },
+  },
+  {
+    id: 24,
+    title: "일요일 공부",
+    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    like: 202,
+    user: {
+      id: 10,
+      nickName: "두리",
+    },
+    category: {
+      id: 2,
+      text: "공부",
+    },
+  },
 ];
