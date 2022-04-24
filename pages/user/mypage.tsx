@@ -1,7 +1,7 @@
 import { NextPage } from "next";
-import styles from "styles/user/profile.module.scss";
+import styles from "styles/user/mypage.module.scss";
 
-const Profile: NextPage = () => {
+const MyPage: NextPage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.profileBG}>
@@ -48,4 +48,4 @@ const Profile: NextPage = () => {
   );
 };
 
-export default Profile;
+export default MyPage;
