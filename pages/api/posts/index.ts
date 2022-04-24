@@ -20,11 +20,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     ? data.findIndex((v) => v.id === Number(req.query.lastId)) + 1
     : 0;
 
-  if (idx + 2 >= data.length - 1) {
+  if (idx + 10 >= data.length - 1) {
     isLast = true;
   }
 
-  data = data.slice(idx, idx + 2);
+  data = data.slice(idx, idx + 10);
 
   console.log(data);
   res.status(200).json({ posts: data, isLast });
