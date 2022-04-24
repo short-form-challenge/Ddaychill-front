@@ -1,4 +1,4 @@
-import useUserData from "hooks/useUserData";
+import useUserData from "hooks/user/useUserData";
 import { NextPage } from "next";
 
 const login: NextPage = () => {

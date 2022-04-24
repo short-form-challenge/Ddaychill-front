@@ -1,8 +1,7 @@
-export interface User {
+export interface IUser {
   id: number;
-  name: string;
-  pet: string;
-  address: string;
-  hometown: string;
-  age: number;
+  email?: string;
+  avatar?: string;
+  nickName: string;
+  password: string;
 }
