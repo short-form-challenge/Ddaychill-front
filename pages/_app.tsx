@@ -4,6 +4,10 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import MainLayout from "@components/layout/layout";
 import Head from "next/head";
 import "styles/reset.scss";
+import Navigation from "@components/navigation/navigation";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 const queryClient = new QueryClient();
 
@@ -21,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <MainLayout>
           <Component {...pageProps} />
+          <Navigation />
         </MainLayout>
       </QueryClientProvider>
     </>

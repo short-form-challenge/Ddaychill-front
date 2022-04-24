@@ -23,3 +23,11 @@ a {
 .material-symbols-rounded.liked {
   color: #4d23d6;
 }
+
+.navigation-icon {
+  color: #cccccd;
+}
+
+.navigation-icon-clicked {
+  color: #cccccd;
+}
