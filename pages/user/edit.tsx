@@ -19,11 +19,17 @@ const ProfileModify: NextPage = () => {
       <div className={styles.modifyInputWrap}>
         <div className={styles.inputItem}>
           <div className={styles.inputLable}>닉네임</div>
-          <div className={styles.modifyInput}></div>
+          <input
+            className={styles.modifyInput}
+            placeholder="닉네임을 적어주세요"
+          ></input>
         </div>
         <div className={styles.inputItem}>
           <div className={styles.inputLable}>가입 이메일</div>
-          <div className={styles.modifyInput}></div>
+          <input
+            className={styles.modifyInput}
+            placeholder="Ddaychill@gmail.com"
+          ></input>
         </div>
       </div>
     </div>
