@@ -1,10 +1,13 @@
+import Tabs from "@components/header/Tabs";
+import Navigation from "@components/navigation/navigation";
 import VideoList from "@components/video/VideoList";
 
 const favorite = () => {
   return (
     <>
-      <div>title</div>
+      <Tabs />
       <VideoList />
+      <Navigation />
     </>
   );
 };

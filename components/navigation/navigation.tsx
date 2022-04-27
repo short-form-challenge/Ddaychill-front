@@ -20,12 +20,7 @@ const Navigation = () => {
           <a className={style.home}>홈</a>
         </div>
       </Link>
-      <Link
-        href={{
-          pathname: "/videos",
-          query: { test: "test" },
-        }}
-      >
+      <Link href={"/myvideo"}>
         <div
           className={`${style.navItem} ${
             tabMenu === "/videos" ? style.iconChecked : style.icon

@@ -1,8 +1,10 @@
+import { faker } from "@faker-js/faker";
+
 export default [
   {
     id: 1,
     title: "바다 앞에서 요기",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 2023,
     user: {
       id: 1,
@@ -16,7 +18,7 @@ export default [
   {
     id: 2,
     title: "월요일 운동",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 20,
     user: {
       id: 2,
@@ -30,7 +32,7 @@ export default [
   {
     id: 3,
     title: "일요일 러닝",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 202,
     user: {
       id: 3,
@@ -44,7 +46,7 @@ export default [
   {
     id: 4,
     title: "근력키우기",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 2042,
     user: {
       id: 4,
@@ -58,7 +60,7 @@ export default [
   {
     id: 5,
     title: "3대측정일!",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 202,
     user: {
       id: 5,
@@ -72,7 +74,7 @@ export default [
   {
     id: 6,
     title: "매일 주짓수수련",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 202,
     user: {
       id: 1,
@@ -86,7 +88,7 @@ export default [
   {
     id: 7,
     title: "오랜만에 공부",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 2023,
     user: {
       id: 1,
@@ -100,7 +102,7 @@ export default [
   {
     id: 8,
     title: "월요일 영어공부",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 20,
     user: {
       id: 2,
@@ -114,7 +116,7 @@ export default [
   {
     id: 9,
     title: "이제 하루남았다~!",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 202,
     user: {
       id: 3,
@@ -128,7 +130,7 @@ export default [
   {
     id: 10,
     title: "월요일 공부..",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 2042,
     user: {
       id: 4,
@@ -142,7 +144,7 @@ export default [
   {
     id: 11,
     title: "공부합시다",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 202,
     user: {
       id: 1,
@@ -156,7 +158,7 @@ export default [
   {
     id: 12,
     title: "일요일 공부",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 202,
     user: {
       id: 10,
@@ -170,7 +172,7 @@ export default [
   {
     id: 13,
     title: "바다 앞에서 요기",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 2023,
     user: {
       id: 1,
@@ -184,7 +186,7 @@ export default [
   {
     id: 14,
     title: "월요일 운동",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 20,
     user: {
       id: 2,
@@ -198,7 +200,7 @@ export default [
   {
     id: 15,
     title: "일요일 러닝",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 202,
     user: {
       id: 3,
@@ -212,7 +214,7 @@ export default [
   {
     id: 16,
     title: "근력키우기",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 2042,
     user: {
       id: 4,
@@ -226,7 +228,7 @@ export default [
   {
     id: 17,
     title: "3대측정일!",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 202,
     user: {
       id: 5,
@@ -240,7 +242,7 @@ export default [
   {
     id: 18,
     title: "매일 주짓수수련",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.sports(0, 0, true),
     like: 202,
     user: {
       id: 1,
@@ -254,7 +256,7 @@ export default [
   {
     id: 19,
     title: "오랜만에 공부",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 2023,
     user: {
       id: 1,
@@ -268,7 +270,7 @@ export default [
   {
     id: 20,
     title: "월요일 영어공부",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 20,
     user: {
       id: 2,
@@ -282,7 +284,7 @@ export default [
   {
     id: 21,
     title: "이제 하루남았다~!",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 202,
     user: {
       id: 3,
@@ -296,7 +298,7 @@ export default [
   {
     id: 22,
     title: "월요일 공부..",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 2042,
     user: {
       id: 4,
@@ -310,7 +312,7 @@ export default [
   {
     id: 23,
     title: "공부합시다",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 202,
     user: {
       id: 1,
@@ -324,7 +326,7 @@ export default [
   {
     id: 24,
     title: "일요일 공부",
-    thumb: "https://via.placeholder.com/300/09f/fff.png",
+    thumb: faker.image.cats(0, 0, true),
     like: 202,
     user: {
       id: 10,

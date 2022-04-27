@@ -4,11 +4,10 @@ export const ListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3px;
-  padding: 0 20px;
+  padding: 80px 20px;
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
-  padding-bottom: 15 0px;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
@@ -19,6 +18,7 @@ export const CardWrapper = styled.div`
   width: 100%;
   margin-bottom: 5px;
   position: relative;
+  cursor: pointer;
 `;
 
 export const ImgWrapper = styled.div`
