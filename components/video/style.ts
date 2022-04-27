@@ -1,19 +1,27 @@
-.listWrapper {
+import styled from "styled-components";
+
+export const ListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3px;
   padding: 0 20px;
   overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
-}
+  padding-bottom: 15 0px;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
-.cardWrapper {
+export const CardWrapper = styled.div`
   width: 100%;
   margin-bottom: 5px;
   position: relative;
-}
+`;
 
-.imgWrapper {
+export const ImgWrapper = styled.div`
   width: 100%;
   display: flex;
   max-height: 240px;
@@ -28,9 +36,9 @@
 
     object-fit: cover;
   }
-}
+`;
 
-.contents {
+export const Contents = styled.div`
   position: absolute;
   bottom: 0;
   background-color: rgba(36, 21, 21, 0.3);
@@ -39,9 +47,9 @@
   display: flex;
   justify-content: space-between;
   padding: 15px 10px;
-}
+`;
 
-.mainContent {
+export const MainContent = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
@@ -55,16 +63,16 @@
   span {
     font-size: 10px;
   }
-}
-.subContent {
+`;
+
+export const SubContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.likeCount {
-  margin-top: 3px;
-  color: white;
-  font-size: 10px;
-}
+  .likeCount {
+    margin-top: 3px;
+    color: white;
+    font-size: 10px;
+  }
+`;

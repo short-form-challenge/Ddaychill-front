@@ -1,11 +1,17 @@
-import type { NextPage } from "next";
+import Navigation from "@components/navigation/navigation";
+import VideoList from "@components/video/VideoList";
 
-const Home: NextPage = () => {
+import { NextPage } from "next";
+import Tabs from "@components/header/Tabs";
+
+const index: NextPage = () => {
   return (
-    <div>
-      <div>ddd</div>
-    </div>
+    <>
+      <Tabs />
+      <VideoList />
+      <Navigation />
+    </>
   );
 };
 
-export default Home;
+export default index;

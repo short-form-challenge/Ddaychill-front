@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "react-query";
 
 const usePost = (userId = 0, cateId = 0) =>
   useInfiniteQuery<QueryResult>(
-    ["posts"],
+    ["posts", userId, cateId],
     async ({ pageParam = 0 }) => {
       return await axios
         .get(`/api/posts?userId=${userId}&cate=${cateId}&lastId=${pageParam}`)
