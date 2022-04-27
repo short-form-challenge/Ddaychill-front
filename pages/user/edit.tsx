@@ -1,11 +1,18 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import styles from "styles/user/profileModify.module.scss";
 
 const ProfileModify: NextPage = () => {
+  const router = useRouter();
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <div className={styles.goBackButton}>{"<"}</div>
+        <div
+          className={styles.goBackButton}
+          onClick={() => router.push("./mypage")}
+        >
+          <span className="material-symbols-rounded">arrow_back_ios</span>
+        </div>
         <div className={styles.screenName}>내 정보 수정</div>
         <div className={styles.saveButton}>저장</div>
       </div>
@@ -19,11 +26,17 @@ const ProfileModify: NextPage = () => {
       <div className={styles.modifyInputWrap}>
         <div className={styles.inputItem}>
           <div className={styles.inputLable}>닉네임</div>
-          <div className={styles.modifyInput}></div>
+          <input
+            className={styles.modifyInput}
+            placeholder="닉네임을 적어주세요"
+          ></input>
         </div>
         <div className={styles.inputItem}>
           <div className={styles.inputLable}>가입 이메일</div>
-          <div className={styles.modifyInput}></div>
+          <input
+            className={styles.modifyInput}
+            placeholder="Ddaychill@gmail.com"
+          ></input>
         </div>
       </div>
     </div>

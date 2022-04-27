@@ -6,7 +6,7 @@
 .profileBG {
   width: 100%;
   padding: 20px 20px;
-  background: linear-gradient(180deg, #4d23d6, #8dabff);
+  background: linear-gradient(197.78deg, #4d23d6 30.81%, #8dabff 107.31%);
 }
 .userInfoWrap {
   margin-top: 86px;
@@ -107,6 +107,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.5px solid #cccccd;
+  cursor: pointer;
 }
 .menuText {
   font-style: normal;
@@ -116,6 +117,8 @@
   color: #252525;
 }
 .arrowIcon {
+  width: 24px;
+  height: 24px;
 }
 .accountMenuWrap {
   display: flex;
@@ -125,6 +128,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: absolute;
+  bottom: 90px;
 }
 .accountMenuText {
   font-style: normal;
@@ -132,6 +137,7 @@
   font-size: 11px;
   line-height: 16px;
   color: #cccccd;
+  cursor: pointer;
 }
 .accountLine {
   height: 10px;

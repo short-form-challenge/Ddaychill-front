@@ -1,0 +1,38 @@
+.wrapper {
+  padding: 14px 20px 0px 20px;
+}
+.headerWrap {
+  display: flex;
+  justify-content: center;
+}
+.focusedCategory {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  margin: 0px 9px;
+  cursor: pointer;
+  border-bottom: 2px solid black;
+}
+.unFocusedCategory {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  margin: 0px 9px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+}
+.badgeListWrap {
+  margin-top: 60px;
+  display: flex;
+  //   justify-content: center;
+  flex-wrap: wrap;
+}
+.emptyBadge {
+  width: 68px;
+  height: 68px;
+  background: #c4c4c4;
+  border-radius: 50%;
+  margin: 21px;
+}

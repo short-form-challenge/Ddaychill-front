@@ -1,7 +1,9 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import styles from "styles/user/mypage.module.scss";
 
 const MyPage: NextPage = () => {
+  const router = useRouter();
   return (
     <div className={styles.wrapper}>
       <div className={styles.profileBG}>
@@ -28,13 +30,20 @@ const MyPage: NextPage = () => {
         </div>
       </div>
       <div className={styles.menuWrap}>
-        <div className={styles.menuItem}>
+        <div className={styles.menuItem} onClick={() => router.push("./edit")}>
           <div className={styles.menuText}>내 계정</div>
-          <div className={styles.arrowIcon}>{">"}</div>
+          <div className={styles.arrowIcon}>
+            <span className="material-symbols-rounded">arrow_forward_ios</span>
+          </div>
         </div>
-        <div className={styles.menuItem}>
+        <div
+          className={styles.menuItem}
+          onClick={() => router.push("./badgelist")}
+        >
           <div className={styles.menuText}>뱃지 현황</div>
-          <div className={styles.arrowIcon}>{">"}</div>
+          <div className={styles.arrowIcon}>
+            <span className="material-symbols-rounded">arrow_forward_ios</span>
+          </div>
         </div>
         <div className={styles.accountMenuWrap}>
           <div className={styles.accountMenu}>
