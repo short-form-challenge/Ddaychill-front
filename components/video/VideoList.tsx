@@ -1,12 +1,20 @@
 import VideoCard from "./VideoCard";
-import styles from "./video.module.scss";
 import { useEffect, useRef } from "react";
 import usePost from "hooks/post/usePost";
+import { ListWrapper } from "./style";
+import { useRouter } from "next/router";
 
-const VideoList = ({ categoryId = 0 }) => {
+const VideoList = () => {
+  const router = useRouter();
+  const {
+    query: { categoryId },
+  } = router;
+  console.log(categoryId);
   const listRef = useRef<HTMLDivElement>(null);
-  const { data, isLoading, fetchNextPage } = usePost(0, categoryId);
-
+  const { data, isLoading, fetchNextPage } = usePost(
+    0,
+    categoryId ? +categoryId : 0
+  );
   useEffect(() => {
     function onScroll() {
       if (
@@ -27,11 +35,11 @@ const VideoList = ({ categoryId = 0 }) => {
     };
   }, [listRef, data, isLoading]);
   return (
-    <div ref={listRef} className={styles.listWrapper}>
+    <ListWrapper ref={listRef}>
       {data?.pages?.map((group) =>
         group.result.map((v) => <VideoCard key={v.id} item={v} />)
       )}
-    </div>
+    </ListWrapper>
   );
 };
 

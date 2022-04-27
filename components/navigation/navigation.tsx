@@ -22,13 +22,13 @@ const Navigation = () => {
       </Link>
       <Link
         href={{
-          pathname: "/",
+          pathname: "/videos",
           query: { test: "test" },
         }}
       >
         <div
           className={`${style.navItem} ${
-            tabMenu === "/" ? style.iconChecked : style.icon
+            tabMenu === "/videos" ? style.iconChecked : style.icon
           }`}
         >
           <div>
@@ -37,10 +37,10 @@ const Navigation = () => {
           <a className={style.home}>마이비디오</a>
         </div>
       </Link>
-      <Link href="/">
+      <Link href="/favorite">
         <div
           className={`${style.navItem} ${
-            tabMenu === "/" ? style.iconChecked : style.icon
+            tabMenu === "/favorite" ? style.iconChecked : style.icon
           }`}
         >
           <div>
