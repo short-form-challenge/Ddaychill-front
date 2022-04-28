@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const ListWrapper = styled.div`
@@ -14,7 +15,7 @@ export const ListWrapper = styled.div`
   }
 `;
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled(motion.div)`
   width: 100%;
   margin-bottom: 5px;
   position: relative;

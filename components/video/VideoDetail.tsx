@@ -1,6 +1,13 @@
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 import styled from "styled-components";
+import faker from "@faker-js/faker";
 
 const VideoDetail = () => {
+  const {
+    query: { videoId },
+  } = useRouter();
+  console.log(videoId);
   return (
     <DetailWrapper>
       <VideoWrapper>
@@ -12,7 +19,7 @@ const VideoDetail = () => {
       <ContentBox>
         <Profile>
           <Avatar>
-            <img src="" alt="" />
+            <img src={faker.image.cats()} alt="" />
           </Avatar>
           <Nickname>@레오와 두리</Nickname>
         </Profile>
@@ -39,7 +46,7 @@ const VideoDetail = () => {
   );
 };
 
-const DetailWrapper = styled.div`
+const DetailWrapper = styled(motion.div)`
   position: relative;
   height: 100%;
   padding-bottom: 80px;
@@ -51,11 +58,11 @@ const VideoWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: black;
-
+  overflow: hidden;
   height: 100%;
   img {
-    width: 100%;
-    aspect-ratio: 1 / 1.44;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -64,20 +71,36 @@ const ContentBox = styled.div`
   display: flex;
   justify-content: space-between;
   bottom: 90px;
-
   z-index: 30;
   width: 100%;
   padding: 0 15px;
   padding-bottom: 10px;
 `;
 
-const Profile = styled.div``;
+const Profile = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 70px;
+`;
 
-const Avatar = styled.div``;
+const Avatar = styled.div`
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+`;
 
 const Nickname = styled.div`
   color: white;
   font-weight: 600;
+  font-size: 14px;
 `;
 
 const Info = styled.div`
@@ -87,12 +110,12 @@ const Info = styled.div`
   justify-content: space-between;
   align-items: center;
   svg {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
   .material-symbols-rounded {
     font-size: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-top: 20px;
   }
   .likeCount {
