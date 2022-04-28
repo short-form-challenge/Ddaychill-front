@@ -5,11 +5,15 @@ import styled from "styled-components";
 const HeaderWrapper = styled.div`
   font-size: 18px;
   font-weight: 700;
-  padding: 25px;
+  padding: 30px;
+  width: 100%;
   display: flex;
+  position: absolute;
+  background-color: white;
   justify-content: center;
   align-items: center;
   gap: 15px;
+  z-index: 10;
 `;
 
 const Tab = styled.div<{ selected: boolean }>`

@@ -7,9 +7,10 @@ import { useRouter } from "next/router";
 const VideoList = () => {
   const router = useRouter();
   const {
+    pathname,
     query: { categoryId },
   } = router;
-  console.log(categoryId);
+  console.log(pathname);
   const listRef = useRef<HTMLDivElement>(null);
   const { data, isLoading, fetchNextPage } = usePost(
     0,
