@@ -5,7 +5,7 @@ import styles from "styles/user/mypage.module.scss";
 
 const MyPage: NextPage = () => {
   const router = useRouter();
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth] = useState(true);
   return (
     <div className={styles.wrapper}>
       <div className={styles.profileBG}>
