@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, FC, useState } from "react";
 import styled from "styled-components";
 import {
   checkEmail,
@@ -12,7 +12,7 @@ interface FormInputValue {
   signupValues: Dispatch<SetStateAction<Object>>;
   // data: object;
 }
-const FormInput: React.FC<FormInputValue> = ({
+const FormInput: FC<FormInputValue> = ({
   setSignupValues,
   signupValues,
   data,

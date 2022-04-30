@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, FC, SetStateAction, useState, useEffect } from "react";
 import styled from "styled-components";
 import FormInput from "@components/Input/FormInput";
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
@@ -19,7 +19,7 @@ interface Props {
 
 type FormProps = SignupForm & Props;
 
-const Signup: React.FC<FormProps> = () => {
+const Signup: FC<FormProps> = () => {
   const [signupValues, setSignupValues] = useState<SignupForm>({
     email: "",
     password: "",
