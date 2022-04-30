@@ -8,6 +8,8 @@ export const signupFormInfo = [
       isValied: "사용 가능한 이메일입니다.",
       inValied: "이미 사용중인 이메일입니다.",
     },
+    maxlength: "100",
+    type: "text",
   },
   {
     id: 1,
@@ -15,9 +17,11 @@ export const signupFormInfo = [
     valueName: "password",
     placeholder: "비밀번호를 입력하세요",
     validation: {
-      isValied: "영문 대/소문자, 숫자를 사용하세요",
-      inValied: "영문 대/소문자, 숫자를 모두 사용하세요",
+      isValied: "",
+      inValied: "영문, 숫자를 모두 사용하세요",
     },
+    maxlength: "20",
+    type: "password",
   },
   {
     id: 2,
@@ -28,6 +32,8 @@ export const signupFormInfo = [
       isValied: "",
       inValied: "비밀번호가 일치하지 않습니다",
     },
+    maxlength: "20",
+    type: "password",
   },
   {
     id: 3,
@@ -38,5 +44,7 @@ export const signupFormInfo = [
       isValied: "",
       inValied: "이미 사용중인 닉네임입니다.",
     },
+    maxlength: "10",
+    type: "text",
   },
 ];

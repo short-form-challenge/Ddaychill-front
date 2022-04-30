@@ -3,7 +3,7 @@ import styled from "styled-components";
 import FormInput from "@components/Input/FormInput";
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
-import { signupFormInfo } from "utils/signupFormInfo ";
+import { signupFormInfo } from "utils/signupFormInfo";
 
 interface SignupForm {
   email: string;
@@ -26,6 +26,12 @@ const Signup: React.FC<FormProps> = () => {
     passwordCheck: "",
     nickName: "",
   });
+  const [isValid, setIsValid] = useState<boolean>({
+    email: null,
+    password: null,
+    passwordCheck: null,
+    nickName: null,
+  });
 
   useEffect(() => {
     console.log(signupValues);
@@ -34,28 +40,32 @@ const Signup: React.FC<FormProps> = () => {
   return (
     <>
       <PaddingWrapper padding={35}>
-        <Flex>
-          {signupFormInfo.map((el) => {
-            console.log(el);
-            return (
-              <FormInput
-                key={el.id}
-                data={el}
-                setSignupValues={setSignupValues}
-                signupValues={signupValues}
-              />
-            );
-          })}
-        </Flex>
-        <ButtonDivider>
-          <MainButton
-            text="확인"
-            type="submit"
-            onClick={() => console.log(signupValues)}
-            // 임시
-            disabled={!signupValues.nickName}
-          />
-        </ButtonDivider>
+        <form type="submit">
+          <Flex>
+            {signupFormInfo.map((el) => {
+              console.log(el);
+              return (
+                <FormInput
+                  key={el.id}
+                  data={el}
+                  setSignupValues={setSignupValues}
+                  signupValues={signupValues}
+                  isValid={isValid}
+                  setIsValid={setIsValid}
+                />
+              );
+            })}
+          </Flex>
+          <ButtonDivider>
+            <MainButton
+              text="확인"
+              type="submit"
+              onClick={() => console.log(signupValues)}
+              // 임시
+              disabled={!signupValues.nickName}
+            />
+          </ButtonDivider>
+        </form>
       </PaddingWrapper>
     </>
   );
