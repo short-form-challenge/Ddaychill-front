@@ -21,13 +21,13 @@ const MyPage: NextPage = () => {
           <div className={styles.loginMenuWrap}>
             <div
               className={styles.loginButton}
-              onClick={() => router.push("./login")}
+              onClick={() => router.push("/auth/login")}
             >
               로그인
             </div>
             <div
               className={styles.loginButton}
-              onClick={() => router.push("./join")}
+              onClick={() => router.push("/auth/signup")}
             >
               회원가입
             </div>
