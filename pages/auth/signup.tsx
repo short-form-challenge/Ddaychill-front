@@ -1,48 +1,36 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, SetStateAction, FC } from "react";
 import styled from "styled-components";
-import FormInput from "@components/Input/FormInput";
+
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
-import { signupFormInfo } from "utils/signupFormInfo";
 
-interface SignupForm {
-  email: string;
-  password: string;
-  passwordCheck: string;
-  nickName: string;
-}
+import { ISignupForm } from "interface/auth";
 
-interface Props {
+interface ISignupFormWithProps extends ISignupForm {
   setSignupValues: Dispatch<SetStateAction<Object>>;
   signupValues: Dispatch<SetStateAction<Object>>;
 }
 
-type FormProps = SignupForm & Props;
-
-const Signup: React.FC<FormProps> = () => {
-  const [signupValues, setSignupValues] = useState<SignupForm>({
-    email: "",
-    password: "",
-    passwordCheck: "",
-    nickName: "",
-  });
-  const [isValid, setIsValid] = useState<boolean>({
-    email: null,
-    password: null,
-    passwordCheck: null,
-    nickName: null,
-  });
-
-  useEffect(() => {
-    console.log(signupValues);
-  }, [signupValues]);
+const Signup: FC<ISignupFormWithProps> = () => {
+  // const [signupValues, setSignupValues] = useState<ISignupForm>({
+  //   email: "",
+  //   password: "",
+  //   passwordCheck: "",
+  //   nickName: "",
+  // });
+  // const [isValid, setIsValid] = useState<ISignupFormVaild>({
+  //   email: null,
+  //   password: null,
+  //   passwordCheck: null,
+  //   nickName: null,
+  // });
 
   return (
     <>
       <PaddingWrapper padding={35}>
-        <form type="submit">
+        <form>
           <Flex>
-            {signupFormInfo.map((el) => {
+            {/* {signupFormInfo.map((el) => {
               console.log(el);
               return (
                 <FormInput
@@ -54,15 +42,15 @@ const Signup: React.FC<FormProps> = () => {
                   setIsValid={setIsValid}
                 />
               );
-            })}
+            })} */}
           </Flex>
           <ButtonDivider>
             <MainButton
               text="확인"
               type="submit"
-              onClick={() => console.log(signupValues)}
+              onClick={() => console.log("hi")}
               // 임시
-              disabled={!signupValues.nickName}
+              // disabled={!signupValues.nickName}
             />
           </ButtonDivider>
         </form>

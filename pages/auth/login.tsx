@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
-import useLogin from "hooks/auth/useLogin";
 
 interface LoginForm {
   email: string;
   password: string;
 }
 
-const LoginPage: React.FC<LoginForm> = ({ email, password }) => {
+const LoginPage: FC<LoginForm> = ({ email, password }) => {
   const [loginForm, setLoginForm] = useState<LoginForm>({
     email: "",
     password: "",
@@ -26,7 +25,7 @@ const LoginPage: React.FC<LoginForm> = ({ email, password }) => {
     route.push("/");
   };
 
-  const { data, isLoading } = useLogin();
+  // const { data } = useLogin();
 
   return (
     <PaddingWrapper padding={36}>
@@ -37,7 +36,6 @@ const LoginPage: React.FC<LoginForm> = ({ email, password }) => {
           <span>Dday chill</span>&nbsp;과 함께 해요
         </div>
       </Header>
-      <div>{data}</div>
       <InputForms>
         <LoginInput
           placeholder="아이디"
@@ -128,7 +126,7 @@ const SignupButton = styled.button`
   }
 `;
 
-const ErrorMessage = styled.div`
-  font-size: 10px;
-  color: #fa3030;
-`;
+// const ErrorMessage = styled.div`
+//   font-size: 10px;
+//   color: #fa3030;
+// `;

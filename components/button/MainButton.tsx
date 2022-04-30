@@ -1,5 +1,11 @@
 import styled from "styled-components";
-const MainButton = ({ text, ...rest }) => {
+const MainButton = ({
+  text,
+  ...rest
+}: {
+  text: string;
+  [key: string]: any;
+}) => {
   return (
     <>
       <Button {...rest}>{text}</Button>
