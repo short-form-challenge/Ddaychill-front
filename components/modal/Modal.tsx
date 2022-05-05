@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import MainButton from "../button/MainButton";
 
-const Madal = ({
+const Modal = ({
   children,
   onClickMainCofirm,
   mainConfirm,
@@ -30,7 +30,7 @@ const Madal = ({
   );
 };
 
-export default Madal;
+export default Modal;
 
 const BackDrop = styled.div`
   position: fixed;

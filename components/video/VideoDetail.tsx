@@ -5,14 +5,63 @@ import { IVideo } from "interface/video";
 import { cls } from "libs/utils";
 import { useMutation, useQueryClient } from "react-query";
 import { postToggleLike } from "apis/post";
+import { useState } from "react";
+import MainButton from "@components/button/MainButton";
+import ButtonModal from "@components/modal/ButtonModal";
+import { useRouter } from "next/router";
 
 interface Props {
   data: IVideo | undefined;
   isLoading: boolean;
 }
 
+export interface IButtons {
+  text?: string;
+  action?: () => void;
+}
+
 const VideoDetail = ({ data, isLoading }: Props) => {
+  const isLoggedIn = true;
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+
+  const buttons: (IButtons | null)[] = [
+    {
+      text: "정보",
+      action: () => {
+        setShowModal(false);
+        setShowInfo(true);
+        setShowDelete(false);
+      },
+    },
+    ...[
+      isLoggedIn
+        ? {
+            text: "수정",
+            action: () => {
+              router.push("/");
+            },
+          }
+        : null,
+    ],
+    ...[
+      isLoggedIn
+        ? {
+            text: "삭제",
+            action: () => {
+              setShowDelete(true);
+              setShowModal(false);
+              setShowInfo(false);
+            },
+          }
+        : null,
+    ],
+  ];
+
+  console.log();
 
   const { mutate: toggleLike, isLoading: likeLoading } = useMutation(
     (videoId: string) => postToggleLike(videoId)
@@ -32,6 +81,12 @@ const VideoDetail = ({ data, isLoading }: Props) => {
 
   return (
     <DetailWrapper>
+      {showModal && (
+        <ButtonModal
+          buttons={buttons.filter((v) => v !== null)}
+          onClose={() => setShowModal(false)}
+        />
+      )}
       <VideoWrapper>
         <img src={data?.thumb} alt="" />
       </VideoWrapper>
@@ -44,6 +99,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
         </Profile>
         <Info>
           <svg
+            onClick={() => setShowModal((prev) => !prev)}
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
             fill="none"

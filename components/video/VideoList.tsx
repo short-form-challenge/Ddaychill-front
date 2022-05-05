@@ -1,7 +1,7 @@
 import VideoCard from "./VideoCard";
 import { useEffect, useRef } from "react";
 import { ListWrapper } from "./style";
-import { QueryResult } from "interface/post";
+import { QueryResult } from "interface/video";
 import {
   FetchNextPageOptions,
   InfiniteData,
