@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const ListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 240px);
   gap: 3px;
   padding: 80px 20px;
   overflow-y: auto;
@@ -17,6 +18,7 @@ export const ListWrapper = styled.div`
 
 export const CardWrapper = styled(motion.div)`
   width: 100%;
+  height: 240px;
   margin-bottom: 5px;
   position: relative;
   cursor: pointer;
@@ -43,7 +45,6 @@ export const Contents = styled.div`
   position: absolute;
   bottom: 0;
   background-color: rgba(36, 21, 21, 0.3);
-  margin-bottom: 5px;
   width: 100%;
   display: flex;
   justify-content: space-between;

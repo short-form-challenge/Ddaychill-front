@@ -1,5 +1,5 @@
 import axios from "axios";
-import { QueryResult } from "interface/post";
+import { QueryResult } from "interface/video";
 import { useQuery } from "react-query";
 
 const useVaildCheck = (text: string, type: "email" | "nickname") =>

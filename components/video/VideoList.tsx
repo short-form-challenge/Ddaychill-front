@@ -1,21 +1,23 @@
 import VideoCard from "./VideoCard";
 import { useEffect, useRef } from "react";
-import usePost from "hooks/post/usePost";
 import { ListWrapper } from "./style";
-import { useRouter } from "next/router";
+import { QueryResult } from "interface/post";
+import {
+  FetchNextPageOptions,
+  InfiniteData,
+  InfiniteQueryObserverResult,
+} from "react-query";
 
-const VideoList = () => {
-  const router = useRouter();
-  const {
-    pathname,
-    query: { categoryId },
-  } = router;
-  console.log(pathname);
+interface Props {
+  data: InfiniteData<QueryResult> | undefined;
+  isLoading: boolean;
+  fetchNextPage: (
+    options?: FetchNextPageOptions | undefined
+  ) => Promise<InfiniteQueryObserverResult<QueryResult, unknown>>;
+}
+
+const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
   const listRef = useRef<HTMLDivElement>(null);
-  const { data, isLoading, fetchNextPage } = usePost(
-    0,
-    categoryId ? +categoryId : 0
-  );
   useEffect(() => {
     function onScroll() {
       if (

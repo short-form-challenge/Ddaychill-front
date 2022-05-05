@@ -3,20 +3,22 @@ import VideoList from "@components/video/VideoList";
 
 import { NextPage } from "next";
 import Tabs from "@components/header/Tabs";
-import { useRouter } from "next/router";
-import VideoDetail from "@components/video/VideoDetail";
-import { AnimatePresence } from "framer-motion";
+import usePost from "hooks/video/useVideo";
+import { useState } from "react";
 
 const index: NextPage = () => {
-  const {
-    query: { videoId },
-  } = useRouter();
+  const [cateId, setCateId] = useState(1);
+  const { data, isLoading, fetchNextPage } = usePost(cateId);
   return (
-    <AnimatePresence>
-      {!videoId && <Tabs />}
-      {videoId ? <VideoDetail /> : <VideoList />}
+    <>
+      <Tabs setCateId={setCateId} cateId={cateId} />
+      <VideoList
+        data={data}
+        isLoading={isLoading}
+        fetchNextPage={fetchNextPage}
+      />
       <Navigation />
-    </AnimatePresence>
+    </>
   );
 };
 

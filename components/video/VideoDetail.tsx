@@ -1,27 +1,46 @@
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import faker from "@faker-js/faker";
+import { IVideo } from "interface/video";
+import { cls } from "libs/utils";
+import { useMutation, useQueryClient } from "react-query";
+import { postToggleLike } from "apis/post";
 
-const VideoDetail = () => {
-  const {
-    query: { videoId },
-  } = useRouter();
-  console.log(videoId);
+interface Props {
+  data: IVideo | undefined;
+  isLoading: boolean;
+}
+
+const VideoDetail = ({ data, isLoading }: Props) => {
+  const queryClient = useQueryClient();
+
+  const { mutate: toggleLike, isLoading: likeLoading } = useMutation(
+    (videoId: string) => postToggleLike(videoId)
+  );
+
+  const handleLikeClick = (videoId: string) => {
+    if (likeLoading) return;
+    toggleLike(videoId, {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["videoDetail", videoId]);
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    });
+  };
+
   return (
     <DetailWrapper>
       <VideoWrapper>
-        <img
-          src="https://i.pinimg.com/originals/33/ba/3a/33ba3ace628b4ca03ec66a2696bc78c6.jpg"
-          alt=""
-        />
+        <img src={data?.thumb} alt="" />
       </VideoWrapper>
       <ContentBox>
         <Profile>
           <Avatar>
             <img src={faker.image.cats()} alt="" />
           </Avatar>
-          <Nickname>@레오와 두리</Nickname>
+          <Nickname>@{data?.user.nickName}</Nickname>
         </Profile>
         <Info>
           <svg
@@ -38,8 +57,16 @@ const VideoDetail = () => {
               d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
             />
           </svg>
-          <span className="material-symbols-rounded liked">favorite</span>
-          <span className="likeCount">10개</span>
+          <span
+            onClick={() => handleLikeClick(String(data?.id))}
+            className={cls(
+              "material-symbols-rounded",
+              data?.isLiked ? "liked" : ""
+            )}
+          >
+            favorite
+          </span>
+          <span className="likeCount">{data?.like}개</span>
         </Info>
       </ContentBox>
     </DetailWrapper>
@@ -110,10 +137,12 @@ const Info = styled.div`
   justify-content: space-between;
   align-items: center;
   svg {
+    cursor: pointer;
     width: 30px;
     height: 30px;
   }
   .material-symbols-rounded {
+    cursor: pointer;
     font-size: 40px;
     margin-bottom: 5px;
     margin-top: 20px;

@@ -1,12 +1,19 @@
-import Tabs from "@components/header/Tabs";
 import Navigation from "@components/navigation/navigation";
 import VideoList from "@components/video/VideoList";
+import { NextPage } from "next";
+import { HeaderWrapper } from "@components/header/Tabs";
+import useFavorite from "hooks/video/useFavorite";
 
-const favorite = () => {
+const favorite: NextPage = () => {
+  const { data, isLoading, fetchNextPage } = useFavorite();
   return (
     <>
-      <Tabs />
-      <VideoList />
+      <HeaderWrapper>관심영상</HeaderWrapper>
+      <VideoList
+        data={data}
+        isLoading={isLoading}
+        fetchNextPage={fetchNextPage}
+      />
       <Navigation />
     </>
   );

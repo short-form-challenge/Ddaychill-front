@@ -1,6 +1,6 @@
 import { IUser } from "./user";
 
-export interface IPost {
+export interface IVideo {
   id: number;
   title: string;
   thumb: string;
@@ -11,10 +11,11 @@ export interface IPost {
     id: number;
     text: string;
   };
+  isLiked: boolean;
 }
 
 export interface QueryResult {
-  result: IPost[];
+  result: IVideo[];
   nextPage: number;
   isLast: boolean;
 }

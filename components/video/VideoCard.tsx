@@ -1,4 +1,5 @@
-import { IPost } from "interface/post";
+import { IVideo } from "interface/video";
+import { cls } from "libs/utils";
 import Link from "next/link";
 import {
   CardWrapper,
@@ -9,12 +10,12 @@ import {
 } from "./style";
 
 interface Props {
-  item: IPost;
+  item: IVideo;
 }
 
 const VideoCard = ({ item }: Props) => {
   return (
-    <Link key={item.id} href={`/?videoId=${item.id}`}>
+    <Link key={item.id} href={`/videos/${item.id}`}>
       <CardWrapper>
         <ImgWrapper>
           <img src={item.thumb} />
@@ -25,7 +26,14 @@ const VideoCard = ({ item }: Props) => {
             <span>2022.04.22</span>
           </MainContent>
           <SubContent>
-            <span className="material-symbols-rounded liked">favorite</span>
+            <span
+              className={cls(
+                "material-symbols-rounded",
+                item.isLiked ? "liked" : "unliked"
+              )}
+            >
+              favorite
+            </span>
             <span className="likeCount">{item.like}개</span>
           </SubContent>
         </Contents>
