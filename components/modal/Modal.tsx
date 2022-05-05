@@ -1,13 +1,22 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 import MainButton from "../button/MainButton";
 
-const Madal = ({
+interface Props {
+  children?: ReactNode;
+  onClickMainCofirm?: () => void;
+  mainConfirm: string;
+  onClickSubConfirm?: () => void;
+  subConfirm?: string;
+}
+
+const Modal = ({
   children,
   onClickMainCofirm,
   mainConfirm,
   onClickSubConfirm,
-  subConfirm = null,
-}) => {
+  subConfirm,
+}: Props) => {
   return (
     <BackDrop>
       <Card>
@@ -30,7 +39,7 @@ const Madal = ({
   );
 };
 
-export default Madal;
+export default Modal;
 
 const BackDrop = styled.div`
   position: fixed;
