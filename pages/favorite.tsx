@@ -1,4 +1,3 @@
-import Navigation from "@components/navigation/navigation";
 import VideoList from "@components/video/VideoList";
 import { NextPage } from "next";
 import { HeaderWrapper } from "@components/header/Tabs";
@@ -14,7 +13,6 @@ const favorite: NextPage = () => {
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}
       />
-      <Navigation />
     </>
   );
 };

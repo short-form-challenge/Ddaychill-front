@@ -1,16 +1,27 @@
-import "@styles/globals.css";
 import type { AppProps } from "next/app";
 import { QueryClientProvider, QueryClient } from "react-query";
-import MainLayout from "@components/layout/layout";
+import { useRouter } from "next/router";
+
 import Head from "next/head";
-import "styles/reset.scss";
+import MainLayout from "@components/layout/layout";
+import Navigation from "../components/navigation/navigation";
+
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import "@styles/globals.css";
+import "styles/reset.scss";
 config.autoAddCss = false;
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const tabMenu = router.pathname;
+
+  const showNavigation = (): boolean | undefined => {
+    if (!tabMenu.includes("auth")) return true;
+  };
+
   return (
     <>
       <Head>
@@ -44,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <MainLayout>
           <Component {...pageProps} />
-          {/* <Navigation /> */}
+          {showNavigation() && <Navigation />}
         </MainLayout>
       </QueryClientProvider>
     </>
