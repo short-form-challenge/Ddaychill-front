@@ -1,42 +1,38 @@
-import { Dispatch, FC, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import styled from "styled-components";
 
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
+import FormInput from "@components/Input/FormInput";
+import { signupFormInfo } from "utils/signupFormInfo";
+import { ISignupForm, ISignupFormVaild } from "interface/auth";
 
-import { ISignupForm } from "interface/auth";
+// interface ISignupFormWithProps extends ISignupForm {
+//   setSignupValues: Dispatch<SetStateAction<Object>>;
+//   signupValues: Dispatch<SetStateAction<Object>>;
+// }
 
-interface ISignupFormWithProps extends ISignupForm {
-  setSignupValues: Dispatch<SetStateAction<Object>>;
-  signupValues: Dispatch<SetStateAction<Object>>;
-}
-
-type FormProps = SignupForm & Props;
-
-const Signup: FC<FormProps> = () => {
-  const [signupValues, setSignupValues] = useState<SignupForm>({
+const Signup = () => {
+  const [signupValues, setSignupValues] = useState<ISignupForm>({
     email: "",
     password: "",
     passwordCheck: "",
     nickName: "",
   });
-  const [isValid, setIsValid] = useState<boolean>({
+
+  const [isValid, setIsValid] = useState<ISignupFormVaild>({
     email: null,
     password: null,
     passwordCheck: null,
     nickName: null,
   });
 
-  useEffect(() => {
-    console.log(signupValues);
-  }, [signupValues]);
-
   return (
     <>
       <PaddingWrapper padding={35}>
         <form>
           <Flex>
-            {/* {signupFormInfo.map((el) => {
+            {signupFormInfo.map((el) => {
               console.log(el);
               return (
                 <FormInput
@@ -48,7 +44,7 @@ const Signup: FC<FormProps> = () => {
                   setIsValid={setIsValid}
                 />
               );
-            })} */}
+            })}
           </Flex>
           <ButtonDivider>
             <MainButton
@@ -56,7 +52,7 @@ const Signup: FC<FormProps> = () => {
               type="submit"
               onClick={() => console.log("hi")}
               // 임시
-              // disabled={!signupValues.nickName}
+              disabled={!signupValues.nickName}
             />
           </ButtonDivider>
         </form>

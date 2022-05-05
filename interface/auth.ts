@@ -4,6 +4,7 @@ interface IValidation {
 }
 
 export interface ISignupItem {
+  // [key: string]: string;
   id: number;
   name: string;
   valueName: string;

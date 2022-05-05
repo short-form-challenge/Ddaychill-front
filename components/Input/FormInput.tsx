@@ -1,5 +1,5 @@
 import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, ChangeEvent } from "react";
 import styled from "styled-components";
 import {
   checkEmail,
@@ -9,20 +9,20 @@ import {
 } from "utils/signupValidation";
 
 interface FormInputValue {
+  [key: string]: any;
+  data: ISignupItem;
   setSignupValues: Dispatch<SetStateAction<Object>>;
   signupValues: ISignupForm;
-  data: ISignupItem;
   setIsValid: Dispatch<SetStateAction<Object>>;
   isValid: ISignupFormVaild;
-  [key: string]: any;
 }
+
 const FormInput: FC<FormInputValue> = ({
   setSignupValues,
   signupValues,
   data,
   setIsValid,
   isValid,
-  ...rest
 }) => {
   const validateInputValue = (value: string, name: string) => {
     switch (name) {
@@ -53,21 +53,23 @@ const FormInput: FC<FormInputValue> = ({
     }
   };
 
-  // let timer;
-  // const debouncInputValue = (event:HTMLInputElement<>) => {
-  //   if (timer) {
-  //     clearTimeout(timer);
-  //   }
-  //   timer = setTimeout(function () {
-  //     console.log("여기에 ajax 요청", event.target.value);
-  //     setSignupValues({
-  //       ...signupValues,
-  //       [data.valueName]: event.target.value,
-  //     });
+  let timer: ReturnType<typeof setTimeout>;
+  const debouncInputValue = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
 
-  //     validateInputValue(event.target.value, data.valueName);
-  //   }, 800);
-  // };
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function () {
+      console.log("여기에 ajax 요청", event.target.value);
+      setSignupValues({
+        ...signupValues,
+        [data.valueName]: event.target.value,
+      });
+
+      validateInputValue(event.target.value, data.valueName);
+    }, 800);
+  };
 
   const handleValueimmediately = (event: any) => {
     setSignupValues({
@@ -91,22 +93,22 @@ const FormInput: FC<FormInputValue> = ({
           onChange={(e) => {
             e.preventDefault();
             if (data.valueName === ("email" || "nickName")) {
-              // debouncInputValue(e);
+              debouncInputValue(e);
             } else {
               handleValueimmediately(e);
             }
           }}
         />
-        {/* {isValid[data.valueName] && (
+        {isValid[data.valueName] && (
           <IconValid className="material-symbols-rounded">done</IconValid>
-        )} */}
+        )}
       </InputText>
-      {/* {isValid[data.valueName] !== null &&
+      {isValid[data.valueName] !== null &&
         (isValid[data.valueName] ? (
           <ValidMsg>{data?.validation?.isValied}</ValidMsg>
         ) : (
           <ValidationMsg>{data?.validation?.inValied}</ValidationMsg>
-        ))} */}
+        ))}
     </FormWrapper>
   );
 };
@@ -136,17 +138,17 @@ const SignupInput = styled.input`
   }
 `;
 
-// const ValidationMsg = styled.div`
-//   width: 100%;
-//   color: #fa3030;
-//   font-size: 10px;
-// `;
+const ValidationMsg = styled.div`
+  width: 100%;
+  color: #fa3030;
+  font-size: 10px;
+`;
 
-// const ValidMsg = styled.div`
-//   width: 100%;
-//   color: black;
-//   font-size: 10px;
-// `;
+const ValidMsg = styled.div`
+  width: 100%;
+  color: black;
+  font-size: 10px;
+`;
 
 const InputText = styled.div`
   position: relative;
@@ -159,7 +161,7 @@ const InputLable = styled.div`
   text-align: start;
 `;
 
-// const IconValid = styled.span`
-//   position: absolute;
-//   right: 3px;
-// `;
+const IconValid = styled.span`
+  position: absolute;
+  right: 3px;
+`;

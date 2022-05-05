@@ -1,22 +1,14 @@
-import { ReactNode } from "react";
 import styled from "styled-components";
 import MainButton from "../button/MainButton";
-
-interface Props {
-  children?: ReactNode;
-  onClickMainCofirm?: () => void;
-  mainConfirm: string;
-  onClickSubConfirm?: () => void;
-  subConfirm?: string;
-}
+import { IModal } from "interface/components";
 
 const Modal = ({
   children,
   onClickMainCofirm,
   mainConfirm,
   onClickSubConfirm,
-  subConfirm,
-}: Props) => {
+  subConfirm = null,
+}: IModal) => {
   return (
     <BackDrop>
       <Card>
@@ -27,8 +19,8 @@ const Modal = ({
             <MainButton
               bgcolor="#F2F2F2"
               color="black"
-              onClick={onClickSubConfirm}
               text={subConfirm}
+              onClick={onClickSubConfirm}
             />
           )}
           {/* 버튼이 2개일 때, 1개일 때 모두 나오는 메인 버튼 */}
