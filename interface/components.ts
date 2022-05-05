@@ -11,6 +11,6 @@ export interface IModal {
   children: ReactNode;
   mainConfirm: string;
   subConfirm?: string | null;
-  onClickMainCofirm: () => MouseEvent;
-  onClickSubConfirm?: () => MouseEvent;
+  onClickMainCofirm: () => void;
+  onClickSubConfirm?: () => void;
 }
