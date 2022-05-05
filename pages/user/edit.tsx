@@ -1,9 +1,15 @@
+import Modal from "@components/modal/Modal";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import styled from "styled-components";
 
 const ProfileModify: NextPage = () => {
   const router = useRouter();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  function onClickToggleModal() {
+    setIsModalVisible((prev) => !prev);
+  }
   return (
     <Wrapper>
       <Header>
@@ -11,7 +17,7 @@ const ProfileModify: NextPage = () => {
           <span className="material-symbols-rounded">arrow_back_ios</span>
         </GoBackButton>
         <ScreenName>내 정보 수정</ScreenName>
-        <SaveButton>저장</SaveButton>
+        <SaveButton onClick={onClickToggleModal}>저장</SaveButton>
       </Header>
       <ImageWrap>
         <ProfileImage>
@@ -30,6 +36,11 @@ const ProfileModify: NextPage = () => {
           <ModifyInput placeholder="Ddaychill@gmail.com"></ModifyInput>
         </InputItem>
       </ModifyInputWrap>
+      {isModalVisible && (
+        <Modal mainConfirm={"확인"} onClickMainCofirm={onClickToggleModal}>
+          수정이 완료되었습니다.
+        </Modal>
+      )}
     </Wrapper>
   );
 };

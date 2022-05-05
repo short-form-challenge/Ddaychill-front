@@ -1,3 +1,4 @@
+import Modal from "@components/modal/Modal";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -7,66 +8,104 @@ import styled from "styled-components";
 const MyPage: NextPage = () => {
   const router = useRouter();
   const [isAuth] = useState(true);
+  const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
+  const [isLogOutModal, setIsLogOutModal] = useState(false);
+  function onClickToggleWithdrawalModal() {
+    setIsWithdrawalModal((prev) => !prev);
+  }
+  function onClickToggleLogOutModal() {
+    setIsLogOutModal((prev) => !prev);
+  }
   return (
-    <Wrapper>
-      <ProfileBG>
-        {!isAuth ? (
-          <UserInfoWrap>
-            <UserPhoto></UserPhoto>
-            <UserNameWrap>
-              <UserName>레오와 두리</UserName>
-              <ChallengeDay>Day 6</ChallengeDay>
-            </UserNameWrap>
-          </UserInfoWrap>
-        ) : (
-          <LoginMenuWrap>
-            <LoginButton onClick={() => router.push("/auth/login")}>
-              로그인
-            </LoginButton>
-            <LoginButton onClick={() => router.push("/auth/signup")}>
-              회원가입
-            </LoginButton>
-          </LoginMenuWrap>
-        )}
-        <ChallengeStatus>
-          {isAuth
-            ? "레오와 두리님 거의 다 왔어요! 힘내보아요!"
-            : "Dday Chill 과 함께 목표 달성을 해보는건 어떠세요?"}
-        </ChallengeStatus>
-        <ChallengeCntWrap>
-          <CntWrap>
-            <CntLable>목표 달성</CntLable>
-            <CntNumber>7</CntNumber>
-          </CntWrap>
-          <CntLine></CntLine>
-          <CntWrap>
-            <CntLable>진행중인 목표</CntLable>
-            <CntNumber>1</CntNumber>
-          </CntWrap>
-        </ChallengeCntWrap>
-      </ProfileBG>
-      <MenuWrap>
-        <MenuItem onClick={() => router.push("./edit")}>
-          <MenuText>내 계정</MenuText>
-          <ArrowIcon>
-            <span className="material-symbols-rounded">arrow_forward_ios</span>
-          </ArrowIcon>
-        </MenuItem>
-        <MenuItem onClick={() => router.push("./badgelist")}>
-          <MenuText>뱃지 현황</MenuText>
-          <ArrowIcon>
-            <span className="material-symbols-rounded">arrow_forward_ios</span>
-          </ArrowIcon>
-        </MenuItem>
-        <AccountMenuWrap>
-          <AccountMenu>
-            <AccountMenuText>탈퇴하기</AccountMenuText>
-            <AccountLine></AccountLine>
-            <AccountMenuText>로그아웃</AccountMenuText>
-          </AccountMenu>
-        </AccountMenuWrap>
-      </MenuWrap>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <ProfileBG>
+          {!isAuth ? (
+            <UserInfoWrap>
+              <UserPhoto></UserPhoto>
+              <UserNameWrap>
+                <UserName>레오와 두리</UserName>
+                <ChallengeDay>Day 6</ChallengeDay>
+              </UserNameWrap>
+            </UserInfoWrap>
+          ) : (
+            <LoginMenuWrap>
+              <LoginButton onClick={() => router.push("/auth/login")}>
+                로그인
+              </LoginButton>
+              <LoginButton onClick={() => router.push("/auth/signup")}>
+                회원가입
+              </LoginButton>
+            </LoginMenuWrap>
+          )}
+          <ChallengeStatus>
+            {isAuth
+              ? "레오와 두리님 거의 다 왔어요! 힘내보아요!"
+              : "Dday Chill 과 함께 목표 달성을 해보는건 어떠세요?"}
+          </ChallengeStatus>
+          <ChallengeCntWrap>
+            <CntWrap>
+              <CntLable>목표 달성</CntLable>
+              <CntNumber>7</CntNumber>
+            </CntWrap>
+            <CntLine></CntLine>
+            <CntWrap>
+              <CntLable>진행중인 목표</CntLable>
+              <CntNumber>1</CntNumber>
+            </CntWrap>
+          </ChallengeCntWrap>
+        </ProfileBG>
+        <MenuWrap>
+          <MenuItem onClick={() => router.push("./edit")}>
+            <MenuText>내 계정</MenuText>
+            <ArrowIcon>
+              <span className="material-symbols-rounded">
+                arrow_forward_ios
+              </span>
+            </ArrowIcon>
+          </MenuItem>
+          <MenuItem onClick={() => router.push("./badgelist")}>
+            <MenuText>뱃지 현황</MenuText>
+            <ArrowIcon>
+              <span className="material-symbols-rounded">
+                arrow_forward_ios
+              </span>
+            </ArrowIcon>
+          </MenuItem>
+          <AccountMenuWrap>
+            <AccountMenu>
+              <AccountMenuText onClick={onClickToggleWithdrawalModal}>
+                탈퇴하기
+              </AccountMenuText>
+              <AccountLine></AccountLine>
+              <AccountMenuText onClick={onClickToggleLogOutModal}>
+                로그아웃
+              </AccountMenuText>
+            </AccountMenu>
+          </AccountMenuWrap>
+        </MenuWrap>
+      </Wrapper>
+      {isWithdrawalModal && (
+        <Modal
+          mainConfirm="아니오"
+          subConfirm="예"
+          onClickMainCofirm={onClickToggleWithdrawalModal}
+          // onClickSubConfirm={onClickToggleModal}
+        >
+          정말 탈퇴하시겠습니까?
+        </Modal>
+      )}
+      {isLogOutModal && (
+        <Modal
+          mainConfirm="아니오"
+          subConfirm="예"
+          onClickMainCofirm={onClickToggleLogOutModal}
+          // onClickSubConfirm={onClickToggleModal}
+        >
+          로그아웃 하시겠습니까?
+        </Modal>
+      )}
+    </>
   );
 };
 
