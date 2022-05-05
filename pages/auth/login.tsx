@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
 import Modal from "../../components/modal/Modal";
-import useLogin from "hooks/auth/useLogin";
 
 interface LoginForm {
   email: string;
@@ -26,7 +25,7 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
   };
 
   const handleSignup = () => {
-    route.push("/");
+    route.push("/auth/signup");
   };
 
   // const { data } = useLogin();
@@ -40,7 +39,6 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
           </span>
         </Modal>
       )}
-
       <PaddingWrapper padding={36}>
         <Header>
           <div>내가 만드는 7일 간의</div>
@@ -49,7 +47,6 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
             <span>Dday chill</span>&nbsp;과 함께 해요
           </div>
         </Header>
-        <div>{data}</div>
         <InputForms>
           <LoginInput
             placeholder="이메일"
