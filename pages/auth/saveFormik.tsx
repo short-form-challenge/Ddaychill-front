@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, FC } from "react";
 import { useRouter } from "next/router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -10,13 +10,12 @@ interface LoginForm {
   password: string;
 }
 
-const LoginPage: React.FC<LoginForm> = ({ email, password }) => {
+const LoginPage: FC<LoginForm> = ({ email, password }) => {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
 
-  const inputRef = useRef(null);
   const route = useRouter();
 
   useEffect(() => {

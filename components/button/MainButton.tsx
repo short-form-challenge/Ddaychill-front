@@ -1,8 +1,15 @@
 import styled from "styled-components";
-const MainButton = ({ text, ...rest }) => {
+const MainButton = ({
+  text,
+  bgcolor = "#4d23d6",
+  color = "white",
+  ...rest
+}) => {
   return (
     <>
-      <Button {...rest}>{text}</Button>
+      <Button color={color} bgcolor={bgcolor} {...rest}>
+        {text}
+      </Button>
     </>
   );
 };
@@ -15,8 +22,8 @@ const Button = styled.button`
   border-radius: 8px;
   margin-bottom: 8px;
   font-weight: 500;
-  background-color: #4d23d6;
-  color: white;
+  background-color: ${(props) => props.bgcolor};
+  color: ${(props) => props.color};
 
   width: 100%;
   cursor: pointer;

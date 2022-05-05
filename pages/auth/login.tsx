@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState, FC } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
+import Modal from "../../components/modal/Modal";
 import useLogin from "hooks/auth/useLogin";
 
 interface LoginForm {
@@ -10,7 +11,8 @@ interface LoginForm {
   password: string;
 }
 
-const LoginPage: React.FC<LoginForm> = ({ email, password }) => {
+const LoginPage: FC<LoginForm> = ({ email, password }) => {
+  const [showModal, setShowModal] = useState(false);
   const [loginForm, setLoginForm] = useState<LoginForm>({
     email: "",
     password: "",
@@ -20,6 +22,7 @@ const LoginPage: React.FC<LoginForm> = ({ email, password }) => {
 
   const handleLogin = () => {
     console.log("handleLogin", loginForm);
+    setShowModal(true);
   };
 
   const handleSignup = () => {
@@ -29,42 +32,52 @@ const LoginPage: React.FC<LoginForm> = ({ email, password }) => {
   const { data, isLoading } = useLogin();
 
   return (
-    <PaddingWrapper padding={36}>
-      <Header>
-        <div>내가 만드는 7일 간의</div>
-        <div>동영상 챌린지,</div>
-        <div>
-          <span>Dday chill</span>&nbsp;과 함께 해요
-        </div>
-      </Header>
-      <div>{data}</div>
-      <InputForms>
-        <LoginInput
-          placeholder="아이디"
-          type="text"
-          onChange={(e) =>
-            setLoginForm({ ...loginForm, email: e.target.value })
-          }
-        />
-        <LoginInput
-          placeholder="비밀번호"
-          type="password"
-          onChange={(e) =>
-            setLoginForm({ ...loginForm, password: e.target.value })
-          }
-        />
-      </InputForms>
-      <Buttons>
-        <MainButton
-          disabled={loginForm.email === "" || loginForm.password === ""}
-          onClick={() => handleLogin()}
-          text="로그인"
-        />
-        {loginForm.email === "" && loginForm.password === "" && (
-          <SignupButton onClick={() => handleSignup()}>회원가입</SignupButton>
-        )}
-      </Buttons>
-    </PaddingWrapper>
+    <>
+      {showModal && (
+        <Modal mainConfirm="확인" onClickMainCofirm={() => setShowModal(false)}>
+          <span>
+            이메일 또는 비밀번호가 <br /> 일치하지 않습니다
+          </span>
+        </Modal>
+      )}
+
+      <PaddingWrapper padding={36}>
+        <Header>
+          <div>내가 만드는 7일 간의</div>
+          <div>동영상 챌린지,</div>
+          <div>
+            <span>Dday chill</span>&nbsp;과 함께 해요
+          </div>
+        </Header>
+        <div>{data}</div>
+        <InputForms>
+          <LoginInput
+            placeholder="이메일"
+            type="text"
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, email: e.target.value })
+            }
+          />
+          <LoginInput
+            placeholder="비밀번호"
+            type="password"
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, password: e.target.value })
+            }
+          />
+        </InputForms>
+        <Buttons>
+          <MainButton
+            disabled={loginForm.email === "" || loginForm.password === ""}
+            onClick={() => handleLogin()}
+            text="로그인"
+          />
+          {loginForm.email === "" && loginForm.password === "" && (
+            <SignupButton onClick={() => handleSignup()}>회원가입</SignupButton>
+          )}
+        </Buttons>
+      </PaddingWrapper>
+    </>
   );
 };
 
