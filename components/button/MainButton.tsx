@@ -1,16 +1,9 @@
 import styled from "styled-components";
 const MainButton = ({
   text,
-<<<<<<< HEAD
-  ...rest
-}: {
-  text: string;
-  [key: string]: any;
-=======
   bgcolor = "#4d23d6",
   color = "white",
   ...rest
->>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
 }) => {
   return (
     <>
