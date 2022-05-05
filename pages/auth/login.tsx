@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 import { FC, useState } from "react";
+=======
+import { useState, FC } from "react";
+>>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
+<<<<<<< HEAD
+=======
+import Modal from "../../components/modal/Modal";
+import useLogin from "hooks/auth/useLogin";
+>>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
 
 interface LoginForm {
   email: string;
@@ -10,6 +19,10 @@ interface LoginForm {
 }
 
 const LoginPage: FC<LoginForm> = ({ email, password }) => {
+<<<<<<< HEAD
+=======
+  const [showModal, setShowModal] = useState(false);
+>>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
   const [loginForm, setLoginForm] = useState<LoginForm>({
     email: "",
     password: "",
@@ -19,6 +32,7 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
 
   const handleLogin = () => {
     console.log("handleLogin", loginForm);
+    setShowModal(true);
   };
 
   const handleSignup = () => {
@@ -28,6 +42,7 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
   // const { data } = useLogin();
 
   return (
+<<<<<<< HEAD
     <PaddingWrapper padding={36}>
       <Header>
         <div>내가 만드는 7일 간의</div>
@@ -63,6 +78,54 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
         )}
       </Buttons>
     </PaddingWrapper>
+=======
+    <>
+      {showModal && (
+        <Modal mainConfirm="확인" onClickMainCofirm={() => setShowModal(false)}>
+          <span>
+            이메일 또는 비밀번호가 <br /> 일치하지 않습니다
+          </span>
+        </Modal>
+      )}
+
+      <PaddingWrapper padding={36}>
+        <Header>
+          <div>내가 만드는 7일 간의</div>
+          <div>동영상 챌린지,</div>
+          <div>
+            <span>Dday chill</span>&nbsp;과 함께 해요
+          </div>
+        </Header>
+        <div>{data}</div>
+        <InputForms>
+          <LoginInput
+            placeholder="이메일"
+            type="text"
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, email: e.target.value })
+            }
+          />
+          <LoginInput
+            placeholder="비밀번호"
+            type="password"
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, password: e.target.value })
+            }
+          />
+        </InputForms>
+        <Buttons>
+          <MainButton
+            disabled={loginForm.email === "" || loginForm.password === ""}
+            onClick={() => handleLogin()}
+            text="로그인"
+          />
+          {loginForm.email === "" && loginForm.password === "" && (
+            <SignupButton onClick={() => handleSignup()}>회원가입</SignupButton>
+          )}
+        </Buttons>
+      </PaddingWrapper>
+    </>
+>>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
   );
 };
 

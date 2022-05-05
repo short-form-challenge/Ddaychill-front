@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
 import { Dispatch, FC, SetStateAction } from "react";
+=======
+import { Dispatch, SetStateAction, FC, useState } from "react";
+>>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
 import styled from "styled-components";
 import {
   checkEmail,

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Dispatch, SetStateAction, FC } from "react";
+=======
+import { Dispatch, FC, SetStateAction, useState, useEffect } from "react";
+>>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
 import styled from "styled-components";
 
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
@@ -11,6 +15,7 @@ interface ISignupFormWithProps extends ISignupForm {
   signupValues: Dispatch<SetStateAction<Object>>;
 }
 
+<<<<<<< HEAD
 const Signup: FC<ISignupFormWithProps> = () => {
   // const [signupValues, setSignupValues] = useState<ISignupForm>({
   //   email: "",
@@ -24,6 +29,27 @@ const Signup: FC<ISignupFormWithProps> = () => {
   //   passwordCheck: null,
   //   nickName: null,
   // });
+=======
+type FormProps = SignupForm & Props;
+
+const Signup: FC<FormProps> = () => {
+  const [signupValues, setSignupValues] = useState<SignupForm>({
+    email: "",
+    password: "",
+    passwordCheck: "",
+    nickName: "",
+  });
+  const [isValid, setIsValid] = useState<boolean>({
+    email: null,
+    password: null,
+    passwordCheck: null,
+    nickName: null,
+  });
+
+  useEffect(() => {
+    console.log(signupValues);
+  }, [signupValues]);
+>>>>>>> 2e389e45d2d58533328a6e62316a6f75587a48ee
 
   return (
     <>
