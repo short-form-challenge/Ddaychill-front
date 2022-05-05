@@ -1,4 +1,3 @@
-import Navigation from "@components/navigation/navigation";
 import VideoList from "@components/video/VideoList";
 
 import { NextPage } from "next";
@@ -17,7 +16,6 @@ const index: NextPage = () => {
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}
       />
-      <Navigation />
     </>
   );
 };
