@@ -1,5 +1,4 @@
 import { HeaderWrapper } from "@components/header/Tabs";
-import Navigation from "@components/navigation/navigation";
 import VideoDetail from "@components/video/VideoDetail";
 import useVideoDetail from "hooks/video/useVideoDetail";
 
@@ -14,7 +13,6 @@ const Video: NextPage = () => {
     <>
       <HeaderWrapper>관심영상</HeaderWrapper>
       <VideoDetail data={data} isLoading={isLoading} />
-      <Navigation />
     </>
   );
 };

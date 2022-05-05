@@ -14,7 +14,6 @@ const favorite: NextPage = () => {
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}
       />
-      <Navigation />
     </>
   );
 };
