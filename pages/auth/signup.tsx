@@ -1,18 +1,12 @@
 import { Dispatch, FC, SetStateAction, useState, useEffect } from "react";
 import styled from "styled-components";
-import FormInput from "@components/Input/FormInput";
+
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
 import MainButton from "../../components/button/MainButton";
-import { signupFormInfo } from "utils/signupFormInfo";
 
-interface SignupForm {
-  email: string;
-  password: string;
-  passwordCheck: string;
-  nickName: string;
-}
+import { ISignupForm } from "interface/auth";
 
-interface Props {
+interface ISignupFormWithProps extends ISignupForm {
   setSignupValues: Dispatch<SetStateAction<Object>>;
   signupValues: Dispatch<SetStateAction<Object>>;
 }
@@ -40,9 +34,9 @@ const Signup: FC<FormProps> = () => {
   return (
     <>
       <PaddingWrapper padding={35}>
-        <form type="submit">
+        <form>
           <Flex>
-            {signupFormInfo.map((el) => {
+            {/* {signupFormInfo.map((el) => {
               console.log(el);
               return (
                 <FormInput
@@ -54,15 +48,15 @@ const Signup: FC<FormProps> = () => {
                   setIsValid={setIsValid}
                 />
               );
-            })}
+            })} */}
           </Flex>
           <ButtonDivider>
             <MainButton
               text="확인"
               type="submit"
-              onClick={() => console.log(signupValues)}
+              onClick={() => console.log("hi")}
               // 임시
-              disabled={!signupValues.nickName}
+              // disabled={!signupValues.nickName}
             />
           </ButtonDivider>
         </form>

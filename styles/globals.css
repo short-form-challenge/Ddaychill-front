@@ -24,6 +24,10 @@ a {
   color: #4d23d6;
 }
 
+.material-symbols-rounded.unliked {
+  color: white;
+}
+
 .navigation-icon {
   color: #cccccd;
 }

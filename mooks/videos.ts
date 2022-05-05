@@ -6,6 +6,11 @@ export default [
     title: "바다 앞에서 요기",
     thumb: faker.image.sports(0, 0, true),
     like: 2023,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -20,6 +25,11 @@ export default [
     title: "월요일 운동",
     thumb: faker.image.sports(0, 0, true),
     like: 20,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 2,
       nickName: "야옹 멍멍",
@@ -34,6 +44,11 @@ export default [
     title: "일요일 러닝",
     thumb: faker.image.sports(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 3,
       nickName: "클레오",
@@ -48,6 +63,11 @@ export default [
     title: "근력키우기",
     thumb: faker.image.sports(0, 0, true),
     like: 2042,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 4,
       nickName: "딸기",
@@ -62,6 +82,11 @@ export default [
     title: "3대측정일!",
     thumb: faker.image.sports(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 5,
       nickName: "김계란",
@@ -76,6 +101,11 @@ export default [
     title: "매일 주짓수수련",
     thumb: faker.image.sports(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -90,6 +120,11 @@ export default [
     title: "오랜만에 공부",
     thumb: faker.image.cats(0, 0, true),
     like: 2023,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -104,6 +139,11 @@ export default [
     title: "월요일 영어공부",
     thumb: faker.image.cats(0, 0, true),
     like: 20,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 2,
       nickName: "야옹 멍멍",
@@ -118,6 +158,11 @@ export default [
     title: "이제 하루남았다~!",
     thumb: faker.image.cats(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 3,
       nickName: "클레오",
@@ -132,6 +177,11 @@ export default [
     title: "월요일 공부..",
     thumb: faker.image.cats(0, 0, true),
     like: 2042,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 4,
       nickName: "딸기",
@@ -146,6 +196,11 @@ export default [
     title: "공부합시다",
     thumb: faker.image.cats(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -160,6 +215,11 @@ export default [
     title: "일요일 공부",
     thumb: faker.image.cats(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 10,
       nickName: "두리",
@@ -174,6 +234,11 @@ export default [
     title: "바다 앞에서 요기",
     thumb: faker.image.sports(0, 0, true),
     like: 2023,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -188,6 +253,11 @@ export default [
     title: "월요일 운동",
     thumb: faker.image.sports(0, 0, true),
     like: 20,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 2,
       nickName: "야옹 멍멍",
@@ -202,6 +272,11 @@ export default [
     title: "일요일 러닝",
     thumb: faker.image.sports(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 3,
       nickName: "클레오",
@@ -216,6 +291,11 @@ export default [
     title: "근력키우기",
     thumb: faker.image.sports(0, 0, true),
     like: 2042,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 4,
       nickName: "딸기",
@@ -230,6 +310,11 @@ export default [
     title: "3대측정일!",
     thumb: faker.image.sports(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 5,
       nickName: "김계란",
@@ -244,6 +329,11 @@ export default [
     title: "매일 주짓수수련",
     thumb: faker.image.sports(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -258,6 +348,11 @@ export default [
     title: "오랜만에 공부",
     thumb: faker.image.cats(0, 0, true),
     like: 2023,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -272,6 +367,11 @@ export default [
     title: "월요일 영어공부",
     thumb: faker.image.cats(0, 0, true),
     like: 20,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 2,
       nickName: "야옹 멍멍",
@@ -286,6 +386,11 @@ export default [
     title: "이제 하루남았다~!",
     thumb: faker.image.cats(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 3,
       nickName: "클레오",
@@ -300,6 +405,11 @@ export default [
     title: "월요일 공부..",
     thumb: faker.image.cats(0, 0, true),
     like: 2042,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 4,
       nickName: "딸기",
@@ -314,6 +424,11 @@ export default [
     title: "공부합시다",
     thumb: faker.image.cats(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 1,
       nickName: "레오와 두리",
@@ -328,6 +443,11 @@ export default [
     title: "일요일 공부",
     thumb: faker.image.cats(0, 0, true),
     like: 202,
+    isLiked: false,
+    createdAt: faker.date.between(
+      "2022-03-01T00:00:00.000Z",
+      "2022-05-01T00:00:00.000Z"
+    ),
     user: {
       id: 10,
       nickName: "두리",

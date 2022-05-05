@@ -1,9 +1,9 @@
-const checkNum = /[0-9]/;
+// const checkNum = /[0-9]/;
 const checkEng = /[a-zA-Z]/;
-const checkSpc = /[~!@#$%^&*()_+|<>?:{}]/;
+// const checkSpc = /[~!@#$%^&*()_+|<>?:{}]/;
 const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 
-export const checkEmail = (value) => {
+export const checkEmail = (value: string) => {
   const exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
   if (exptext.test(value) === false) {
     console.log("ㄴㄴ");
@@ -13,7 +13,7 @@ export const checkEmail = (value) => {
   return true;
 };
 
-export const checkPassword = (value) => {
+export const checkPassword = (value: string) => {
   if (value.length > 8) {
     return true;
   } else {
@@ -21,7 +21,7 @@ export const checkPassword = (value) => {
   }
 };
 
-export const dobbleCheckPassword = (value, password) => {
+export const dobbleCheckPassword = (value: string, password: string) => {
   if (value.length > 8 && value === password) {
     return true;
   } else {
@@ -29,7 +29,7 @@ export const dobbleCheckPassword = (value, password) => {
   }
 };
 
-export const checkNickName = (value) => {
+export const checkNickName = (value: string) => {
   if (
     value.length > 2 &&
     value.length < 10 &&

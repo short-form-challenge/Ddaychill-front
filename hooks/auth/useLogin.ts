@@ -7,9 +7,10 @@ interface loginUser {
 }
 
 const useLogin = () => {
-  const { data, isLoading } = useQuery<loginUser>(["login"], async () => {
-    axios.get(`/api/login`).then((res) => console.log("hihi"));
-  });
+  const { data, isLoading } = useQuery<loginUser>(
+    ["login"],
+    async () => await axios.get(`/api/login`).then((res) => res.data)
+  );
   return { data, isLoading };
 };
 

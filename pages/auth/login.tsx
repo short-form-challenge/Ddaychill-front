@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import PaddingWrapper from "../../components/layout/PaddingWrapper";
@@ -29,7 +29,7 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
     route.push("/");
   };
 
-  const { data, isLoading } = useLogin();
+  // const { data } = useLogin();
 
   return (
     <>
@@ -141,7 +141,7 @@ const SignupButton = styled.button`
   }
 `;
 
-const ErrorMessage = styled.div`
-  font-size: 10px;
-  color: #fa3030;
-`;
+// const ErrorMessage = styled.div`
+//   font-size: 10px;
+//   color: #fa3030;
+// `;

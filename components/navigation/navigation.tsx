@@ -11,7 +11,9 @@ const Navigation = () => {
       <Link href="/">
         <div
           className={`${style.navItem} ${
-            tabMenu === "/" ? style.iconChecked : style.icon
+            tabMenu === "/" || tabMenu.includes("/videos")
+              ? style.iconChecked
+              : style.icon
           }`}
         >
           <div>

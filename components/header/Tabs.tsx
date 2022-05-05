@@ -1,8 +1,12 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
-const HeaderWrapper = styled.div`
+interface Props {
+  setCateId: Dispatch<SetStateAction<number>>;
+  cateId: number;
+}
+
+export const HeaderWrapper = styled.div`
   font-size: 18px;
   font-weight: 700;
   padding: 30px;
@@ -22,27 +26,15 @@ const Tab = styled.div<{ selected: boolean }>`
   cursor: pointer;
 `;
 
-const Tabs = () => {
-  const router = useRouter();
-  const { pathname, query } = router;
+const Tabs = ({ setCateId, cateId }: Props) => {
   return (
     <HeaderWrapper>
-      <Link
-        href={{
-          pathname,
-          query: { categoryId: 1 },
-        }}
-      >
-        <Tab selected={!query.categoryId || query.categoryId === "1"}>운동</Tab>
-      </Link>
-      <Link
-        href={{
-          pathname,
-          query: { categoryId: 2 },
-        }}
-      >
-        <Tab selected={query.categoryId === "2"}>공부</Tab>
-      </Link>
+      <Tab selected={cateId === 1} onClick={() => setCateId(1)}>
+        운동
+      </Tab>
+      <Tab selected={cateId === 2} onClick={() => setCateId(2)}>
+        공부
+      </Tab>
     </HeaderWrapper>
   );
 };
