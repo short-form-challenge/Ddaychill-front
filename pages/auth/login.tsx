@@ -12,6 +12,7 @@ interface LoginForm {
 }
 
 const LoginPage: FC<LoginForm> = ({ email, password }) => {
+  const [showModal, setShowModal] = useState(false);
   const [loginForm, setLoginForm] = useState<LoginForm>({
     email: "",
     password: "",
@@ -21,6 +22,7 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
 
   const handleLogin = () => {
     console.log("handleLogin", loginForm);
+    setShowModal(true);
   };
 
   const handleSignup = () => {
@@ -31,11 +33,14 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
 
   return (
     <>
-      <Modal mainConfirm="확인" onClickMainCofirm={() => console.log("모달")}>
-        <span>
-          이메일 또는 비밀번호가 <br /> 일치하지 않습니다
-        </span>
-      </Modal>
+      {showModal && (
+        <Modal mainConfirm="확인" onClickMainCofirm={() => setShowModal(false)}>
+          <span>
+            이메일 또는 비밀번호가 <br /> 일치하지 않습니다
+          </span>
+        </Modal>
+      )}
+
       <PaddingWrapper padding={36}>
         <Header>
           <div>내가 만드는 7일 간의</div>
