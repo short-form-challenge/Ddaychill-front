@@ -1,7 +1,7 @@
-import { ReactNode, MouseEvent } from "react";
+import { ReactNode } from "react";
 
 export interface IMainButton {
-  onClick: () => MouseEvent;
+  onClick: () => void;
   text?: ReactNode;
   bgcolor?: string;
   color?: string;

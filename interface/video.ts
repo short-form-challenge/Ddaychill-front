@@ -12,6 +12,7 @@ export interface IVideo {
     text: string;
   };
   isLiked: boolean;
+  createdAt: string;
 }
 
 export interface QueryResult {
