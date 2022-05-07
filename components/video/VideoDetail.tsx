@@ -1,14 +1,14 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 import faker from "@faker-js/faker";
 import { IVideo } from "interface/video";
 import { cls } from "libs/utils";
 import { useMutation, useQueryClient } from "react-query";
 import { postToggleLike } from "apis/post";
-import { useState } from "react";
-import MainButton from "@components/button/MainButton";
-import ButtonModal from "@components/modal/ButtonModal";
+import { useEffect, useRef, useState } from "react";
+import ButtonModal, { textType } from "@components/modal/ButtonModal";
 import { useRouter } from "next/router";
+import InfoModal from "@components/modal/InfoModal";
 
 interface Props {
   data: IVideo | undefined;
@@ -16,52 +16,20 @@ interface Props {
 }
 
 export interface IButtons {
-  text?: string;
-  action?: () => void;
+  text: string;
+  action: () => void;
 }
 
 const VideoDetail = ({ data, isLoading }: Props) => {
-  const isLoggedIn = true;
+  const videoRef = useRef<HTMLVideoElement>(null);
   const queryClient = useQueryClient();
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
-  const buttons: (IButtons | null)[] = [
-    {
-      text: "정보",
-      action: () => {
-        setShowModal(false);
-        setShowInfo(true);
-        setShowDelete(false);
-      },
-    },
-    ...[
-      isLoggedIn
-        ? {
-            text: "수정",
-            action: () => {
-              router.push("/");
-            },
-          }
-        : null,
-    ],
-    ...[
-      isLoggedIn
-        ? {
-            text: "삭제",
-            action: () => {
-              setShowDelete(true);
-              setShowModal(false);
-              setShowInfo(false);
-            },
-          }
-        : null,
-    ],
-  ];
-
-  console.log();
+  // 효진님
+  const [videoCurrentProgress, setVideoCurrentProgress] = useState(0);
 
   const { mutate: toggleLike, isLoading: likeLoading } = useMutation(
     (videoId: string) => postToggleLike(videoId)
@@ -79,16 +47,60 @@ const VideoDetail = ({ data, isLoading }: Props) => {
     });
   };
 
+  const handleButtonModalClick = (v: textType) => {
+    if (v === "정보") {
+      setShowModal(false);
+      setShowInfo(true);
+      setShowDelete(false);
+    }
+    if (v === "수정") {
+      router.push("/");
+    }
+    if (v === "삭제") {
+      setShowDelete(true);
+      setShowModal(false);
+      setShowInfo(false);
+    }
+  };
+
+  useEffect(() => {
+    const getCurrentTime = () => {
+      setVideoCurrentProgress(
+        (videoRef.current?.currentTime! / videoRef.current?.duration!) * 100
+      );
+    };
+
+    videoRef.current?.addEventListener("timeupdate", getCurrentTime);
+    return () => {
+      videoRef.current?.removeEventListener("timeupdate", getCurrentTime);
+    };
+  }, []);
+
   return (
     <DetailWrapper>
       {showModal && (
         <ButtonModal
-          buttons={buttons.filter((v) => v !== null)}
+          texts={["정보", "수정", "삭제"]}
           onClose={() => setShowModal(false)}
+          onClick={handleButtonModalClick}
         />
       )}
+      <AnimatePresence initial={false}>
+        {showInfo && (
+          <InfoModal
+            done={videoCurrentProgress}
+            onClose={() => setShowInfo(false)}
+            data={data}
+          />
+        )}
+      </AnimatePresence>
       <VideoWrapper>
-        <img src={data?.thumb} alt="" />
+        <video
+          src="/assets/video/sslc-banner.mp4"
+          ref={videoRef}
+          autoPlay
+          muted
+        />
       </VideoWrapper>
       <ContentBox>
         <Profile>
