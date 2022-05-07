@@ -31,14 +31,14 @@ const Signup = () => {
 
   const submitSignupForm = async () => {
     try {
-      // const res = await axios.post(
-      //   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBlMeJmC-0Xp4tJMtmZ--XiOE7dTgQl6tE",
-      //   {
-      //     signupValues,
-      //   }
-      // );
+      const res = await axios.post("http://3.35.10.54:8080/signup", {
+        email: signupValues.email,
+        password: signupValues.password,
+        nickname: signupValues.nickName,
+      });
 
-      console.log("회원가입");
+      console.log("회원가입", res);
+      // 토큰 받아서 저장하기
       setShowModal(true);
     } catch (err) {
       setShowCencleModal(true);
