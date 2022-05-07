@@ -16,7 +16,8 @@ export interface IMainButton {
 export interface IModal {
   children: ReactNode;
   mainConfirm: string;
-  subConfirm?: string | null;
+  subConfirm?: string;
+  modalPosition?: string;
   onClickMainCofirm: () => void;
   onClickSubConfirm?: () => void;
 }

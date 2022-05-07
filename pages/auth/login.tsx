@@ -40,6 +40,7 @@ const LoginPage: FC<ILoginForm> = () => {
       setShowModal(true);
     }
   };
+
   const handleLogin = () => {
     const emailValue = emailRef?.current!.value;
     const passwordValue = passwordRef?.current!.value;

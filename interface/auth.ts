@@ -22,6 +22,7 @@ export interface ISignupForm {
 }
 
 export interface ISignupFormVaild {
+  [index: string]: any;
   email: boolean | null;
   password: boolean | null;
   passwordCheck: boolean | null;

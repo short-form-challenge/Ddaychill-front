@@ -1,17 +1,18 @@
 import styled from "styled-components";
-import MainButton from "../button/MainButton";
+import MainButton from "@components/button/MainButton";
 import { IModal } from "interface/components";
 import { BackDrop } from "./style";
 
 const Modal = ({
   children,
   mainConfirm,
-  subConfirm = null,
+  subConfirm,
   onClickMainCofirm,
   onClickSubConfirm,
+  modalPosition,
 }: IModal) => {
   return (
-    <BackDrop>
+    <BackDrop modalPosition={modalPosition}>
       <Card>
         <MainTextDiv>{children}</MainTextDiv>
         <ModalFooter>

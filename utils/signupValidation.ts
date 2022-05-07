@@ -9,12 +9,11 @@ export const checkEmail = (value: string) => {
     console.log("ㄴㄴ");
     return false;
   }
-  console.log("ㅇㅇ");
   return true;
 };
 
 export const checkPassword = (value: string) => {
-  if (value.length > 8) {
+  if (value.length > 7) {
     return true;
   } else {
     return false;

@@ -23,6 +23,7 @@ const MainButton = ({
         bgcolor={bgcolor}
         onClick={onClick}
         disabled={disabled}
+        type="button"
       >
         {text}
       </Button>
