@@ -4,7 +4,7 @@ interface IValidation {
 }
 
 export interface ISignupItem {
-  // [key: string]: string;
+  [key: string]: any;
   id: number;
   name: string;
   valueName: string;
@@ -26,4 +26,9 @@ export interface ISignupFormVaild {
   password: boolean | null;
   passwordCheck: boolean | null;
   nickName: boolean | null;
+}
+
+export interface ILoginForm {
+  email: string;
+  password: string;
 }

@@ -5,10 +5,10 @@ import { BackDrop } from "./style";
 
 const Modal = ({
   children,
-  onClickMainCofirm,
   mainConfirm,
-  onClickSubConfirm,
   subConfirm = null,
+  onClickMainCofirm,
+  onClickSubConfirm,
 }: IModal) => {
   return (
     <BackDrop>
