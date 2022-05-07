@@ -52,7 +52,6 @@ const Signup = () => {
           <ButtonDivider>
             <MainButton
               text="확인"
-              type="submit"
               onClick={() => console.log("hi")}
               // 임시
               disabled={!signupValues.nickName}

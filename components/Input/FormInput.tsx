@@ -11,9 +11,9 @@ import {
 interface FormInputValue {
   [key: string]: any;
   data: ISignupItem;
-  setSignupValues: Dispatch<SetStateAction<Object>>;
+  setSignupValues: Dispatch<SetStateAction<ISignupForm>>;
   signupValues: ISignupForm;
-  setIsValid: Dispatch<SetStateAction<Object>>;
+  setIsValid: Dispatch<SetStateAction<ISignupFormVaild>>;
   isValid: ISignupFormVaild;
 }
 
@@ -27,28 +27,28 @@ const FormInput: FC<FormInputValue> = ({
   const validateInputValue = (value: string, name: string) => {
     switch (name) {
       case "email":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: checkEmail(value),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          email: checkEmail(value),
+        }));
         break;
       case "password":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: checkPassword(value),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          password: checkPassword(value),
+        }));
         break;
       case "passwordCheck":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: dobbleCheckPassword(value, signupValues.password),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          passwordCheck: dobbleCheckPassword(value, signupValues.password),
+        }));
         break;
       case "nickName":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: checkNickName(value),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          nickName: checkNickName(value),
+        }));
         break;
     }
   };
@@ -99,16 +99,16 @@ const FormInput: FC<FormInputValue> = ({
             }
           }}
         />
-        {isValid[data.valueName] && (
+        {/* {isValid[data.valueName] && (
           <IconValid className="material-symbols-rounded">done</IconValid>
-        )}
+        )} */}
       </InputText>
-      {isValid[data.valueName] !== null &&
+      {/* {isValid[data.valueName] !== null &&
         (isValid[data.valueName] ? (
           <ValidMsg>{data?.validation?.isValied}</ValidMsg>
         ) : (
           <ValidationMsg>{data?.validation?.inValied}</ValidationMsg>
-        ))}
+        ))} */}
     </FormWrapper>
   );
 };
@@ -138,17 +138,17 @@ const SignupInput = styled.input`
   }
 `;
 
-const ValidationMsg = styled.div`
-  width: 100%;
-  color: #fa3030;
-  font-size: 10px;
-`;
+// const ValidationMsg = styled.div`
+//   width: 100%;
+//   color: #fa3030;
+//   font-size: 10px;
+// `;
 
-const ValidMsg = styled.div`
-  width: 100%;
-  color: black;
-  font-size: 10px;
-`;
+// const ValidMsg = styled.div`
+//   width: 100%;
+//   color: black;
+//   font-size: 10px;
+// `;
 
 const InputText = styled.div`
   position: relative;
@@ -161,7 +161,7 @@ const InputLable = styled.div`
   text-align: start;
 `;
 
-const IconValid = styled.span`
-  position: absolute;
-  right: 3px;
-`;
+// const IconValid = styled.span`
+//   position: absolute;
+//   right: 3px;
+// `;

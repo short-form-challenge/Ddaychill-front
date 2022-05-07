@@ -1,4 +1,4 @@
-import { FC, useState, useRef, ChangeEvent } from "react";
+import { FC, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import styled from "styled-components";

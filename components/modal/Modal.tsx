@@ -16,7 +16,7 @@ const Modal = ({
         <MainTextDiv>{children}</MainTextDiv>
         <ModalFooter>
           {/* 버튼이 2개일 때만 나오는 왼쪽버튼 */}
-          {subConfirm && (
+          {subConfirm && onClickSubConfirm && (
             <MainButton
               bgcolor="#F2F2F2"
               color="black"
