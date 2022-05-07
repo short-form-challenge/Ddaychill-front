@@ -1,12 +1,17 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef, ChangeEvent } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 import styled from "styled-components";
 import { ILoginForm } from "interface/auth";
 import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
 import MainButton from "@components/button/MainButton";
 import Modal from "@components/modal/Modal";
+import { checkEmail, checkPassword } from "@utiles/signupValidation";
 
 const LoginPage: FC<ILoginForm> = () => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const [showModal, setShowModal] = useState(false);
   const [loginForm, setLoginForm] = useState<ILoginForm>({
     email: "",
@@ -15,9 +20,31 @@ const LoginPage: FC<ILoginForm> = () => {
 
   const route = useRouter();
 
+  const submitLoginForm = async (email: string, password: string) => {
+    try {
+      const res = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBlMeJmC-0Xp4tJMtmZ--XiOE7dTgQl6tE",
+        {
+          email: email,
+          password: password,
+          // 이건 바뀔 듯
+          returnSecureToken: true,
+        }
+      );
+      console.log(res);
+
+      route.push("/");
+    } catch (err) {
+      console.log(err);
+      // status에 따라 할 수도!
+      setShowModal(true);
+    }
+  };
   const handleLogin = () => {
-    console.log("handleLogin", loginForm);
-    setShowModal(true);
+    const emailValue = emailRef?.current!.value;
+    const passwordValue = passwordRef?.current!.value;
+
+    submitLoginForm(emailValue, passwordValue);
   };
 
   const handleSignup = () => {
@@ -43,6 +70,7 @@ const LoginPage: FC<ILoginForm> = () => {
         </Header>
         <InputForms>
           <LoginInput
+            ref={emailRef}
             placeholder="이메일"
             type="text"
             onChange={(e) =>
@@ -50,6 +78,7 @@ const LoginPage: FC<ILoginForm> = () => {
             }
           />
           <LoginInput
+            ref={passwordRef}
             placeholder="비밀번호"
             type="password"
             onChange={(e) =>
@@ -59,9 +88,11 @@ const LoginPage: FC<ILoginForm> = () => {
         </InputForms>
         <Buttons>
           <MainButton
-            disabled={loginForm.email === "" || loginForm.password === ""}
-            onClick={() => handleLogin()}
             text="로그인"
+            onClick={() => handleLogin()}
+            disabled={
+              !checkEmail(loginForm.email) || !checkPassword(loginForm.password)
+            }
           />
           {loginForm.email === "" && loginForm.password === "" && (
             <SignupButton onClick={() => handleSignup()}>회원가입</SignupButton>
