@@ -43,6 +43,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
       },
       onError: (err) => {
         console.log(err);
+        console.log(showDelete);
       },
     });
   };
