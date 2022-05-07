@@ -22,7 +22,7 @@ export const checkPassword = (value: string) => {
 };
 
 export const dobbleCheckPassword = (value: string, password: string) => {
-  if (value.length > 8 && value === password) {
+  if (value.length > 7 && value === password) {
     return true;
   } else {
     return false;
@@ -31,7 +31,7 @@ export const dobbleCheckPassword = (value: string, password: string) => {
 
 export const checkNickName = (value: string) => {
   if (
-    value.length > 2 &&
+    value.length > 1 &&
     value.length < 10 &&
     (checkEng.test(value) || checkKor.test(value))
   ) {
