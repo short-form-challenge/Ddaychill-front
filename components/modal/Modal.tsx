@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MainButton from "../button/MainButton";
 import { IModal } from "interface/components";
+import { BackDrop } from "./style";
 
 const Modal = ({
   children,
@@ -32,19 +33,6 @@ const Modal = ({
 };
 
 export default Modal;
-
-const BackDrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 const MainTextDiv = styled.div`
   font-size: 16px;

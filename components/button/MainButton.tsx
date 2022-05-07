@@ -1,13 +1,19 @@
-import { FC } from "react";
 import styled from "styled-components";
 import { IMainButton } from "interface/components";
 
-const MainButton: FC<IMainButton> = ({
+interface Props {
+  text: string;
+  bgcolor?: string;
+  color?: string;
+  onClick: () => void;
+}
+
+const MainButton = ({
   text,
   bgcolor = "#4d23d6",
   color = "white",
   onClick,
-}) => {
+}: Props) => {
   return (
     <>
       <Button color={color} bgcolor={bgcolor} onClick={onClick}>

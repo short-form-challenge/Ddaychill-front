@@ -1,28 +1,30 @@
-import { IButtons } from "@components/video/VideoDetail";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import MainButton from "../button/MainButton";
+import { BackDrop } from "./style";
+
+export type textType = "정보" | "수정" | "삭제" | "커버업로드" | "초기화";
 
 interface Props {
-  buttons: (IButtons | null)[];
+  texts: textType[];
   onClose: any;
+  onClick: (v: textType) => void;
 }
 
-const ButtonModal = ({ buttons, onClose }: Props) => {
+const ButtonModal = ({ texts, onClose, onClick }: Props) => {
   return (
     <BackDrop>
       <Wrapper>
         <TopButton>
-          {buttons.map((button, i) => (
+          {texts?.map((v) => (
             <MainButton
-              key={i}
+              key={v}
               bgcolor="#F2F2F2"
               color="black"
-              onClick={button!.action}
-              text={button!.text}
+              onClick={() => onClick(v)}
+              text={v}
             />
           ))}
-          {/* 버튼이 2개일 때, 1개일 때 모두 나오는 메인 버튼 */}
         </TopButton>
         <MainButton onClick={onClose} text={"취소"} />
       </Wrapper>
@@ -31,21 +33,6 @@ const ButtonModal = ({ buttons, onClose }: Props) => {
 };
 
 export default ButtonModal;
-
-const BackDrop = styled.div`
-  position: fixed;
-  margin: 0 auto;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100vh;
-  max-width: 375px;
-  z-index: 100;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-`;
 
 const Wrapper = styled(motion.div)`
   width: 90%;
