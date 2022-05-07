@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { IModal } from "interface/components";
 
-export const BackDrop = styled.div`
+export const BackDrop = styled.div<Pick<IModal, "modalPosition">>`
   position: fixed;
   margin: 0 auto;
   top: 0;
@@ -12,7 +13,8 @@ export const BackDrop = styled.div`
   z-index: 100;
   background: rgba(0, 0, 0, 0.75);
   display: flex;
-  align-items: flex-end;
+  align-items: ${(props) =>
+    props.modalPosition === "bottom" ? "flex-end" : "center"};
   justify-content: center;
 `;
 

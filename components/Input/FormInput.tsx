@@ -99,16 +99,16 @@ const FormInput: FC<FormInputValue> = ({
             }
           }}
         />
-        {/* {isValid[data.valueName] && (
+        {isValid[data.valueName] && (
           <IconValid className="material-symbols-rounded">done</IconValid>
-        )} */}
+        )}
       </InputText>
-      {/* {isValid[data.valueName] !== null &&
+      {isValid[data.valueName] !== null &&
         (isValid[data.valueName] ? (
           <ValidMsg>{data?.validation?.isValied}</ValidMsg>
         ) : (
           <ValidationMsg>{data?.validation?.inValied}</ValidationMsg>
-        ))} */}
+        ))}
     </FormWrapper>
   );
 };
@@ -138,17 +138,17 @@ const SignupInput = styled.input`
   }
 `;
 
-// const ValidationMsg = styled.div`
-//   width: 100%;
-//   color: #fa3030;
-//   font-size: 10px;
-// `;
+const ValidationMsg = styled.div`
+  width: 100%;
+  color: #fa3030;
+  font-size: 10px;
+`;
 
-// const ValidMsg = styled.div`
-//   width: 100%;
-//   color: black;
-//   font-size: 10px;
-// `;
+const ValidMsg = styled.div`
+  width: 100%;
+  color: black;
+  font-size: 10px;
+`;
 
 const InputText = styled.div`
   position: relative;
@@ -161,7 +161,7 @@ const InputLable = styled.div`
   text-align: start;
 `;
 
-// const IconValid = styled.span`
-//   position: absolute;
-//   right: 3px;
-// `;
+const IconValid = styled.span`
+  position: absolute;
+  right: 3px;
+`;

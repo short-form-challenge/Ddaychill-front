@@ -9,9 +9,10 @@ const Modal = ({
   subConfirm = null,
   onClickMainCofirm,
   onClickSubConfirm,
+  modalPosition,
 }: IModal) => {
   return (
-    <BackDrop>
+    <BackDrop modalPosition={modalPosition}>
       <Card>
         <MainTextDiv>{children}</MainTextDiv>
         <ModalFooter>

@@ -13,7 +13,7 @@ interface Props {
 
 const ButtonModal = ({ texts, onClose, onClick }: Props) => {
   return (
-    <BackDrop>
+    <BackDrop modalPosition={"bottom"}>
       <Wrapper>
         <TopButton>
           {texts?.map((v) => (
