@@ -1,6 +1,7 @@
-import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
 import { Dispatch, FC, SetStateAction, ChangeEvent } from "react";
+import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
 import styled from "styled-components";
+
 import {
   checkEmail,
   checkPassword,
