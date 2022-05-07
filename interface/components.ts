@@ -1,10 +1,16 @@
-import { ReactNode, MouseEvent } from "react";
+import { ReactNode } from "react";
+
+export interface PaddingWrapper {
+  children: ReactNode;
+  padding: number;
+}
 
 export interface IMainButton {
-  onClick: () => MouseEvent;
+  onClick: () => void;
   text?: ReactNode;
   bgcolor?: string;
   color?: string;
+  disabled?: boolean;
 }
 
 export interface IModal {

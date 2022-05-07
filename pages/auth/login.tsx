@@ -1,18 +1,14 @@
 import { FC, useState } from "react";
-import styled from "styled-components";
 import { useRouter } from "next/router";
-import PaddingWrapper from "../../components/layout/PaddingWrapper";
-import MainButton from "../../components/button/MainButton";
-import Modal from "../../components/modal/Modal";
+import styled from "styled-components";
+import { ILoginForm } from "interface/auth";
+import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
+import MainButton from "@components/button/MainButton";
+import Modal from "@components/modal/Modal";
 
-interface LoginForm {
-  email: string;
-  password: string;
-}
-
-const LoginPage: FC<LoginForm> = ({ email, password }) => {
+const LoginPage: FC<ILoginForm> = () => {
   const [showModal, setShowModal] = useState(false);
-  const [loginForm, setLoginForm] = useState<LoginForm>({
+  const [loginForm, setLoginForm] = useState<ILoginForm>({
     email: "",
     password: "",
   });
@@ -28,8 +24,6 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
     route.push("/auth/signup");
   };
 
-  // const { data } = useLogin();
-
   return (
     <>
       {showModal && (
@@ -39,7 +33,7 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
           </span>
         </Modal>
       )}
-      <PaddingWrapper padding={36}>
+      <PaddingWrapperDiv padding={36}>
         <Header>
           <div>내가 만드는 7일 간의</div>
           <div>동영상 챌린지,</div>
@@ -73,7 +67,7 @@ const LoginPage: FC<LoginForm> = ({ email, password }) => {
             <SignupButton onClick={() => handleSignup()}>회원가입</SignupButton>
           )}
         </Buttons>
-      </PaddingWrapper>
+      </PaddingWrapperDiv>
     </>
   );
 };

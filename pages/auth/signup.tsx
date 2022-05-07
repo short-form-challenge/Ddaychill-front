@@ -1,18 +1,16 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import styled from "styled-components";
 
-import PaddingWrapper from "../../components/layout/PaddingWrapper";
-import MainButton from "../../components/button/MainButton";
+import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
+import MainButton from "@components/button/MainButton";
 import FormInput from "@components/Input/FormInput";
+import BackButtonHeader from "@components/header/BackButtonHeader";
 import { signupFormInfo } from "utils/signupFormInfo";
 import { ISignupForm, ISignupFormVaild } from "interface/auth";
 
-// interface ISignupFormWithProps extends ISignupForm {
-//   setSignupValues: Dispatch<SetStateAction<Object>>;
-//   signupValues: Dispatch<SetStateAction<Object>>;
-// }
-
 const Signup = () => {
+  const router = useRouter();
   const [signupValues, setSignupValues] = useState<ISignupForm>({
     email: "",
     password: "",
@@ -29,7 +27,12 @@ const Signup = () => {
 
   return (
     <>
-      <PaddingWrapper padding={35}>
+      <BackButtonHeader
+        text="회원가입"
+        isBackButton={true}
+        onClickBackButton={() => router.back()}
+      ></BackButtonHeader>
+      <PaddingWrapperDiv padding={35}>
         <form>
           <Flex>
             {signupFormInfo.map((el) => {
@@ -56,7 +59,7 @@ const Signup = () => {
             />
           </ButtonDivider>
         </form>
-      </PaddingWrapper>
+      </PaddingWrapperDiv>
     </>
   );
 };

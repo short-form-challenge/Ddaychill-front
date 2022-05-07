@@ -1,20 +1,13 @@
-import { ReactNode } from "react";
+import { FC } from "react";
+import { PaddingWrapper } from "interface/components";
+import styled from "styled-components";
 
-import style from "./PaddingWrapper.module.scss";
-
-interface PaddingWrapper {
-  children: ReactNode;
-  padding: number;
-}
-const PadddingTwenty = ({ children, padding, ...rest }: PaddingWrapper) => {
-  return (
-    <div
-      className={padding === 20 ? style.paddingDefault : style.paddingLogin}
-      {...rest}
-    >
-      {children}
-    </div>
-  );
+const PaddingWrapperDiv: FC<PaddingWrapper> = ({ children, padding = 20 }) => {
+  return <PaddingDefault padding={padding}>{children}</PaddingDefault>;
 };
 
-export default PadddingTwenty;
+export default PaddingWrapperDiv;
+
+const PaddingDefault = styled.div<{ padding: number }>`
+  padding: 0 ${(props) => `${props?.padding}px`};
+`;
