@@ -42,7 +42,7 @@ const Upload = () => {
           </CategoryBoxWrap>
         </CategoryWrap>
         <UploadButtonWrap>
-          <MainButton text={"업로드"} />
+          <MainButton onClick={() => console.log("upload")} text={"업로드"} />
         </UploadButtonWrap>
       </Wrap>
       {isModalVisible && (
