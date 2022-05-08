@@ -1,4 +1,3 @@
-import VideoList from "@components/video/VideoList";
 import styled from "styled-components";
 
 const Profile = () => {
@@ -18,7 +17,7 @@ const Profile = () => {
           <DayTag>Day 1</DayTag>
         </TagWrap>
       </Wrapper>
-      <VideoList />
+      {/* <VideoList /> */}
     </>
   );
 };

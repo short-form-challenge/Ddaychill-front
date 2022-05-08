@@ -5,6 +5,7 @@ interface Props {
   text: string;
   bgcolor?: string;
   color?: string;
+  disabled?: boolean;
   onClick: () => void;
 }
 
@@ -13,10 +14,17 @@ const MainButton = ({
   bgcolor = "#4d23d6",
   color = "white",
   onClick,
+  disabled,
 }: Props) => {
   return (
     <>
-      <Button color={color} bgcolor={bgcolor} onClick={onClick}>
+      <Button
+        color={color}
+        bgcolor={bgcolor}
+        onClick={onClick}
+        disabled={disabled}
+        type="button"
+      >
         {text}
       </Button>
     </>

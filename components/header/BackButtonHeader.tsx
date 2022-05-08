@@ -1,13 +1,21 @@
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { HeaderWrapper } from "./Tabs";
 
 interface Props {
   text: string;
   isBackButton?: boolean;
+  isCloseButton?: boolean;
   onClickBackButton?: () => void;
 }
 
-const BackButtonHeader = ({ text, onClickBackButton, isBackButton }: Props) => {
+const BackButtonHeader = ({
+  text,
+  onClickBackButton,
+  isBackButton,
+  isCloseButton,
+}: Props) => {
+  const router = useRouter();
   return (
     <HeaderWrapper>
       {isBackButton && (
@@ -16,6 +24,11 @@ const BackButtonHeader = ({ text, onClickBackButton, isBackButton }: Props) => {
         </GoBackButton>
       )}
       {text}
+      {isCloseButton && (
+        <CloseButton onClick={() => router.back()}>
+          <span className="material-symbols-rounded">close</span>
+        </CloseButton>
+      )}
     </HeaderWrapper>
   );
 };
@@ -26,5 +39,13 @@ const GoBackButton = styled.div`
   width: 24px;
   height: 24px;
   left: 20px;
+  cursor: pointer;
+`;
+
+const CloseButton = styled.div`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 20px;
   cursor: pointer;
 `;

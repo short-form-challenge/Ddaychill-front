@@ -30,7 +30,7 @@ const animate = {
 
 const InfoModal = ({ data, onClose, done }: Props) => {
   return (
-    <BackDrop>
+    <BackDrop modalPosition={"bottom"}>
       <InfoCard
         variants={animate}
         initial="initial"

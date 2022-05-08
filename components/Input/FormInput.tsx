@@ -1,6 +1,7 @@
-import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
 import { Dispatch, FC, SetStateAction, ChangeEvent } from "react";
+import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
 import styled from "styled-components";
+
 import {
   checkEmail,
   checkPassword,
@@ -11,9 +12,9 @@ import {
 interface FormInputValue {
   [key: string]: any;
   data: ISignupItem;
-  setSignupValues: Dispatch<SetStateAction<Object>>;
+  setSignupValues: Dispatch<SetStateAction<ISignupForm>>;
   signupValues: ISignupForm;
-  setIsValid: Dispatch<SetStateAction<Object>>;
+  setIsValid: Dispatch<SetStateAction<ISignupFormVaild>>;
   isValid: ISignupFormVaild;
 }
 
@@ -27,28 +28,28 @@ const FormInput: FC<FormInputValue> = ({
   const validateInputValue = (value: string, name: string) => {
     switch (name) {
       case "email":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: checkEmail(value),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          email: checkEmail(value),
+        }));
         break;
       case "password":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: checkPassword(value),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          password: checkPassword(value),
+        }));
         break;
       case "passwordCheck":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: dobbleCheckPassword(value, signupValues.password),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          passwordCheck: dobbleCheckPassword(value, signupValues.password),
+        }));
         break;
       case "nickName":
-        setIsValid({
-          ...signupValues,
-          [data.valueName]: checkNickName(value),
-        });
+        setIsValid((prev) => ({
+          ...prev,
+          nickName: checkNickName(value),
+        }));
         break;
     }
   };

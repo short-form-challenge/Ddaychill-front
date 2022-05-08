@@ -1,22 +1,23 @@
 import styled from "styled-components";
-import MainButton from "../button/MainButton";
+import MainButton from "@components/button/MainButton";
 import { IModal } from "interface/components";
 import { BackDrop } from "./style";
 
 const Modal = ({
   children,
   mainConfirm,
-  subConfirm = null,
+  subConfirm,
   onClickMainCofirm,
   onClickSubConfirm,
+  modalPosition,
 }: IModal) => {
   return (
-    <BackDrop>
+    <BackDrop modalPosition={modalPosition}>
       <Card>
         <MainTextDiv>{children}</MainTextDiv>
         <ModalFooter>
           {/* 버튼이 2개일 때만 나오는 왼쪽버튼 */}
-          {subConfirm && (
+          {subConfirm && onClickSubConfirm && (
             <MainButton
               bgcolor="#F2F2F2"
               color="black"

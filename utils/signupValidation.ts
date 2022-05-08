@@ -9,12 +9,11 @@ export const checkEmail = (value: string) => {
     console.log("ㄴㄴ");
     return false;
   }
-  console.log("ㅇㅇ");
   return true;
 };
 
 export const checkPassword = (value: string) => {
-  if (value.length > 8) {
+  if (value.length > 7) {
     return true;
   } else {
     return false;
@@ -22,7 +21,7 @@ export const checkPassword = (value: string) => {
 };
 
 export const dobbleCheckPassword = (value: string, password: string) => {
-  if (value.length > 8 && value === password) {
+  if (value.length > 7 && value === password) {
     return true;
   } else {
     return false;
@@ -31,7 +30,7 @@ export const dobbleCheckPassword = (value: string, password: string) => {
 
 export const checkNickName = (value: string) => {
   if (
-    value.length > 2 &&
+    value.length > 1 &&
     value.length < 10 &&
     (checkEng.test(value) || checkKor.test(value))
   ) {

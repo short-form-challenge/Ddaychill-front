@@ -1,8 +1,9 @@
+import { useState } from "react";
+import styled from "styled-components";
+
 import MainButton from "@components/button/MainButton";
 import BackButtonHeader from "@components/header/BackButtonHeader";
 import Modal from "@components/modal/Modal";
-import { useState } from "react";
-import styled from "styled-components";
 
 const Upload = () => {
   const [cateId, setCateId] = useState(1);
@@ -42,7 +43,7 @@ const Upload = () => {
           </CategoryBoxWrap>
         </CategoryWrap>
         <UploadButtonWrap>
-          <MainButton text={"업로드"} />
+          <MainButton onClick={() => console.log("upload")} text={"업로드"} />
         </UploadButtonWrap>
       </Wrap>
       {isModalVisible && (

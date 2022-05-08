@@ -1,4 +1,4 @@
-import VideoList from "@components/video/VideoList";
+// import VideoList from "@components/video/VideoList";
 
 import { NextPage } from "next";
 
@@ -6,7 +6,7 @@ const index: NextPage = () => {
   return (
     <>
       <div>title</div>
-      <VideoList />
+      {/* <VideoList /> */}
     </>
   );
 };
