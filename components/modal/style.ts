@@ -18,8 +18,9 @@ export const BackDrop = styled.div`
 
 export const InfoCard = styled(motion.div)<{ variants: any }>`
   background-color: white;
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  height: 35%;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   padding: 18px;

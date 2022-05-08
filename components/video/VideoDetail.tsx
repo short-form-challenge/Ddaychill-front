@@ -32,7 +32,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   const [videoCurrentProgress, setVideoCurrentProgress] = useState(0);
 
   const { mutate: toggleLike, isLoading: likeLoading } = useMutation(
-    (videoId: string) => postToggleLike(videoId)
+    (videoId: string) => postToggleLike(videoId, data?.isLiked!)
   );
 
   const handleLikeClick = (videoId: string) => {

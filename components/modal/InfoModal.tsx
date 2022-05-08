@@ -12,17 +12,17 @@ interface Props {
 
 const animate = {
   initial: {
-    transform: `translateY(500px)`,
+    transform: `translateY(300%)`,
     opacity: 1,
     transition: `transform 2s ease`,
   },
   animate: {
-    transform: `translateY(0px)`,
+    transform: `translateY(0%)`,
     opacity: 1,
     transition: `transform 0.33s ease`,
   },
   exit: {
-    transform: `translateY(500px)`,
+    transform: `translateY(300%)`,
     opacity: 1,
     transition: `transform 2s ease`,
   },
