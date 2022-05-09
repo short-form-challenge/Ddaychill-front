@@ -257,7 +257,7 @@ const AccountMenu = styled.div`
   flex-direction: row;
   align-items: center;
   position: absolute;
-  bottom: 90px;
+  bottom: 110px;
 `;
 const AccountMenuText = styled.div`
   font-style: normal;
