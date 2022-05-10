@@ -3,7 +3,32 @@
 export default [
   {
     userId: 1,
-    token:
-      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwicm9sZXMiOltdLCJpYXQiOjE2NTA4MDUxNTMsImV4cCI6MTY1MDgwODc1M30.AteO00o9W_65M8qUNSu82E60TwPwSssZNTB1s1C2zRDaK3nPWBKPj1o9hEANgHlvBDOask-R1mw13txhzSjpXA",
+    email: "gywlsh274@gmail.com",
+    token: "token1",
+    msg: "성공했습니다.",
+  },
+  {
+    userId: 2,
+    email: "gywlsh274@naver.com",
+    token: "token2",
+    msg: "성공했습니다.",
+  },
+  {
+    userId: 3,
+    email: "test@test.com",
+    token: "token3",
+    msg: "성공했습니다.",
+  },
+  {
+    userId: 4,
+    email: "test1@test.com",
+    token: "token4",
+    msg: "성공했습니다.",
+  },
+  {
+    userId: 5,
+    email: "test2@test.com",
+    token: "token5",
+    msg: "성공했습니다.",
   },
 ];
