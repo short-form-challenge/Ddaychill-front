@@ -13,6 +13,7 @@ const index: NextPage = () => {
   const { data, isLoading, fetchNextPage } = usePost(cateId);
 
   const router = useRouter();
+  // get react-query 로빼기
   const checkLogin = async () => {
     try {
       const res = await axios.get("/api/isLogin");

@@ -32,7 +32,7 @@ const Signup = () => {
 
   const submitSignupForm = async () => {
     try {
-      await axios.post(`${API}/signin`, {
+      await axios.post(`${API}/signup`, {
         email: signupValues.email,
         password: signupValues.password,
         nickname: signupValues.nickName,
