@@ -33,7 +33,7 @@ const LoginPage: FC<ILoginForm> = () => {
         // },
       });
       console.log("로그인", res);
-      const token = res.data.token;
+      const token = res.headers["X-AUTH_TOKEN"];
       sessionStorage.setItem("accessToken", token);
 
       route.push("/");
@@ -80,6 +80,7 @@ const LoginPage: FC<ILoginForm> = () => {
             onChange={(e) =>
               setLoginForm({ ...loginForm, email: e.target.value })
             }
+            autoComplete="off"
           />
           <LoginInput
             ref={passwordRef}
@@ -88,6 +89,7 @@ const LoginPage: FC<ILoginForm> = () => {
             onChange={(e) =>
               setLoginForm({ ...loginForm, password: e.target.value })
             }
+            autoComplete="off"
           />
         </InputForms>
         <Buttons>

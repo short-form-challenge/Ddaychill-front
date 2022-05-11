@@ -5,7 +5,6 @@ import VideoList from "@components/video/VideoList";
 import Tabs from "@components/header/Tabs";
 import usePost from "hooks/video/useVideo";
 
-import axios from "axios";
 import { useRouter } from "next/router";
 
 const index: NextPage = () => {
@@ -13,18 +12,9 @@ const index: NextPage = () => {
   const { data, isLoading, fetchNextPage } = usePost(cateId);
 
   const router = useRouter();
-  // get react-query 로빼기
-  const checkLogin = async () => {
-    try {
-      const res = await axios.get("/api/isLogin");
-      if (res.status === 200 && sessionStorage.getItem("accessToken")) {
-        router.push("/");
-      } else {
-        router.push("/auth/login");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+  const checkLogin = () => {
+    if (!sessionStorage.getItem("accessToken"))
+      return router.push("/auth/login");
   };
 
   useEffect(() => {

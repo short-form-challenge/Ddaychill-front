@@ -99,6 +99,7 @@ const FormInput: FC<FormInputValue> = ({
               handleValueimmediately(e);
             }
           }}
+          autoComplete="off"
         />
         {isValid[data.valueName] && (
           <IconValid className="material-symbols-rounded">done</IconValid>
