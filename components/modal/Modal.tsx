@@ -19,6 +19,7 @@ const Modal = ({
           {/* 버튼이 2개일 때만 나오는 왼쪽버튼 */}
           {subConfirm && onClickSubConfirm && (
             <MainButton
+              style={{ marginRight: "10px" }}
               bgcolor="#F2F2F2"
               color="black"
               text={subConfirm}

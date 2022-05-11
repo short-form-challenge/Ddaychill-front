@@ -29,7 +29,7 @@ export const getFavorites = async (pageParam = 0) =>
 export const getVideoDetail = async (id: string | undefined) =>
   await axios.get(`/api/videos/${id}`).then((res) => res.data);
 
-export const postToggleLike = async (videoId: string, isLiked: boolean) => {
+export const postToggleLike = async (videoId: number, isLiked: boolean) => {
   console.log(videoId);
   return isLiked
     ? await axios
@@ -39,3 +39,8 @@ export const postToggleLike = async (videoId: string, isLiked: boolean) => {
         .post(`http://3.35.10.54:8080/videos/upLikes/${videoId}/${1}`)
         .then((res) => res.data);
 };
+
+export const deleteVideo = async (videoId: number) =>
+  await axios
+    .delete(`http://3.35.10.54:8080/videos/${videoId}`)
+    .then((res) => res.data);

@@ -26,4 +26,5 @@ export const InfoCard = styled(motion.div)<{ variants: any }>`
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   padding: 18px;
+  max-width: 375px;
 `;

@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { IMainButton } from "interface/components";
+import { CSSProperties } from "react";
 
 interface Props {
   text: string;
   bgcolor?: string;
   color?: string;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
+  style?: CSSProperties;
+  type: "button" | "submit" | "reset";
 }
 
 const MainButton = ({
@@ -15,15 +18,19 @@ const MainButton = ({
   color = "white",
   onClick,
   disabled,
+  style,
+  type = "button",
 }: Props) => {
   return (
     <>
       <Button
+        style={style}
         color={color}
         bgcolor={bgcolor}
         onClick={onClick}
         disabled={disabled}
-        type="button"
+        type={type}
+        {...(onClick && { onClick })}
       >
         {text}
       </Button>
@@ -37,7 +44,6 @@ const Button = styled.button<IMainButton>`
   border: none;
   padding: 13px 0px;
   border-radius: 8px;
-  margin-bottom: 8px;
   font-weight: 500;
   background-color: ${(props) => props?.bgcolor};
   color: ${(props) => props?.color};
