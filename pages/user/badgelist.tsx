@@ -18,7 +18,7 @@ const Badgelist = () => {
           </CntWrap>
         </BadgeCntWrap>
         <BadgeListWrap>
-          {new Array(15).fill(1).map((index) => (
+          {new Array(18).fill(1).map((index) => (
             <EmptyBadge key={index} />
           ))}
         </BadgeListWrap>
@@ -31,11 +31,15 @@ export default Badgelist;
 
 const Wrapper = styled.div`
   margin-top: 82px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const BadgeListWrap = styled.div`
-  padding: 0px 77px;
+  padding: 0px 50px;
   margin-top: 34px;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 `;
 
@@ -44,8 +48,10 @@ const EmptyBadge = styled.div`
   height: 50px;
   background: #c4c4c4;
   border-radius: 50%;
+  margin: 15px 18px;
 `;
 const BadgeCntWrap = styled.div`
+  width: 280px;
   margin-top: 20px;
   display: flex;
   justify-content: center;
