@@ -1,6 +1,8 @@
 import { FC, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { API } from "config";
+
 import styled from "styled-components";
 import { ILoginForm } from "interface/auth";
 import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
@@ -22,16 +24,17 @@ const LoginPage: FC<ILoginForm> = () => {
 
   const submitLoginForm = async (email: string, password: string) => {
     try {
-      const res = await axios.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBlMeJmC-0Xp4tJMtmZ--XiOE7dTgQl6tE",
-        {
-          email: email,
-          password: password,
-          // 이건 바뀔 듯
-          returnSecureToken: true,
-        }
-      );
-      console.log(res);
+      const res = await axios.post(`${API}/signin`, {
+        // const res = await axios.post(`/api/isLogin`, { -> 지우지마세욤~
+        email: email,
+        password: password,
+        // headers: {
+        //   "X-AUTH-TOKEN": sessionStorage.getItem("accessToken"),
+        // },
+      });
+      console.log("로그인", res);
+      const token = res.data.token;
+      sessionStorage.setItem("accessToken", token);
 
       route.push("/");
     } catch (err) {
@@ -163,8 +166,3 @@ const SignupButton = styled.button`
     opacity: 0.9;
   }
 `;
-
-// const ErrorMessage = styled.div`
-//   font-size: 10px;
-//   color: #fa3030;
-// `;
