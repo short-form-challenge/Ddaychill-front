@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { API } from "config";
 import styled from "styled-components";
 
+import { signupFormInfo } from "utils/signupFormInfo";
 import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
 import MainButton from "@components/button/MainButton";
 import FormInput from "@components/Input/FormInput";
 import BackButtonHeader from "@components/header/BackButtonHeader";
 import Modal from "@components/modal/Modal";
-import { signupFormInfo } from "utils/signupFormInfo";
 import { ISignupForm, ISignupFormVaild } from "interface/auth";
 
 const Signup = () => {
@@ -31,14 +32,12 @@ const Signup = () => {
 
   const submitSignupForm = async () => {
     try {
-      // const res = await axios.post(
-      //   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBlMeJmC-0Xp4tJMtmZ--XiOE7dTgQl6tE",
-      //   {
-      //     signupValues,
-      //   }
-      // );
+      await axios.post(`${API}/signin`, {
+        email: signupValues.email,
+        password: signupValues.password,
+        nickname: signupValues.nickName,
+      });
 
-      console.log("회원가입");
       setShowModal(true);
     } catch (err) {
       setShowCencleModal(true);
