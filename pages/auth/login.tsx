@@ -80,6 +80,7 @@ const LoginPage: FC<ILoginForm> = () => {
             onChange={(e) =>
               setLoginForm({ ...loginForm, email: e.target.value })
             }
+            autoComplete="off"
           />
           <LoginInput
             ref={passwordRef}
@@ -88,6 +89,7 @@ const LoginPage: FC<ILoginForm> = () => {
             onChange={(e) =>
               setLoginForm({ ...loginForm, password: e.target.value })
             }
+            autoComplete="off"
           />
         </InputForms>
         <Buttons>
