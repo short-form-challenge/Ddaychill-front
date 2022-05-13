@@ -47,7 +47,7 @@ const Button = styled.button<IMainButton>`
   font-weight: 500;
   background-color: ${(props) => props?.bgcolor};
   color: ${(props) => props?.color};
-
+  margin: 0 3px 8px 3px;
   width: 100%;
   cursor: pointer;
 

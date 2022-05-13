@@ -25,17 +25,20 @@ const LoginPage: FC<ILoginForm> = () => {
   const submitLoginForm = async (email: string, password: string) => {
     try {
       const res = await axios.post(`${API}/signin`, {
-        // const res = await axios.post(`/api/isLogin`, { -> 지우지마세욤~
+        // const res = await axios.post(`/api/isLogin`, {
         email: email,
         password: password,
-        // headers: {
-        //   "X-AUTH-TOKEN": sessionStorage.getItem("accessToken"),
-        // },
       });
+<<<<<<< HEAD
       console.log("로그인", res);
+=======
+      console.log(res.data);
+      // 찐
+>>>>>>> 48841d9e3e2f042e1434984540fa004f88a8e8f3
       const token = res.headers["x-auth-token"];
       sessionStorage.setItem("accessToken", token);
-
+      // 찝
+      // sessionStorage.setItem("accessToken", res.data.token);
       route.push("/");
     } catch (err) {
       console.log(err);

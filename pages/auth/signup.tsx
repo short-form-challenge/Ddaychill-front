@@ -4,7 +4,7 @@ import axios from "axios";
 import { API } from "config";
 import styled from "styled-components";
 
-import { signupFormInfo } from "utils/signupFormInfo";
+import { signupFormInfo } from "@utiles/sighupFormInfo";
 import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
 import MainButton from "@components/button/MainButton";
 import FormInput from "@components/Input/FormInput";

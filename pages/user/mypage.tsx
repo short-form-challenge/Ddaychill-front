@@ -1,13 +1,13 @@
 import Modal from "@components/modal/Modal";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 // import styles from "styles/user/mypage.module.scss";
 
 const MyPage: NextPage = () => {
   const router = useRouter();
-  const [isAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(true);
   const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
   const [isLogOutModal, setIsLogOutModal] = useState(false);
   function onClickToggleWithdrawalModal() {
@@ -16,6 +16,18 @@ const MyPage: NextPage = () => {
   function onClickToggleLogOutModal() {
     setIsLogOutModal((prev) => !prev);
   }
+
+  useEffect(() => {
+    if (sessionStorage.getItem("accessToken")) {
+      setIsAuth(false);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("accessToken");
+    router.push("/auth/login");
+  };
+
   return (
     <>
       <Wrapper>
@@ -100,7 +112,7 @@ const MyPage: NextPage = () => {
           mainConfirm="아니오"
           subConfirm="예"
           onClickMainCofirm={onClickToggleLogOutModal}
-          // onClickSubConfirm={onClickToggleModal}
+          onClickSubConfirm={handleLogout}
         >
           로그아웃 하시겠습니까?
         </Modal>
