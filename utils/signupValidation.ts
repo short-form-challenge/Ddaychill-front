@@ -6,7 +6,6 @@ const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 export const checkEmail = (value: string) => {
   const exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
   if (exptext.test(value) === false) {
-    console.log("ㄴㄴ");
     return false;
   }
   return true;
