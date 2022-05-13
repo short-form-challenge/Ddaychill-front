@@ -33,7 +33,7 @@ const LoginPage: FC<ILoginForm> = () => {
         // },
       });
       console.log("로그인", res);
-      const token = res.data.token;
+      const token = res.headers["x-auth-token"];
       sessionStorage.setItem("accessToken", token);
 
       route.push("/");
@@ -94,6 +94,7 @@ const LoginPage: FC<ILoginForm> = () => {
           <MainButton
             text="로그인"
             onClick={() => handleLogin()}
+            type="button"
             disabled={
               !checkEmail(loginForm.email) || !checkPassword(loginForm.password)
             }

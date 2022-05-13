@@ -37,8 +37,8 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
-  // 효진님
-  const [videoCurrentProgress, setVideoCurrentProgress] = useState(0);
+  const [videoCurrentTime, setVideoCurrentTime] = useState(0);
+  const [videoDuration, setVideoDuration] = useState(0);
 
   const { mutate: toggleLike, isLoading: likeLoading } = useMutation(
     (videoId: number) => postToggleLike(videoId, data?.isLiked!)
@@ -93,9 +93,8 @@ const VideoDetail = ({ data, isLoading }: Props) => {
 
   useEffect(() => {
     const getCurrentTime = () => {
-      setVideoCurrentProgress(
-        (videoRef.current?.currentTime! / videoRef.current?.duration!) * 100
-      );
+      setVideoCurrentTime(videoRef.current?.currentTime!);
+      setVideoDuration(videoRef.current?.duration!);
     };
 
     videoRef.current?.addEventListener("timeupdate", getCurrentTime);
@@ -116,7 +115,9 @@ const VideoDetail = ({ data, isLoading }: Props) => {
       <AnimatePresence initial={false}>
         {showInfo && (
           <InfoModal
-            done={videoCurrentProgress}
+            done={(videoCurrentTime / videoDuration) * 100}
+            videoCurrentTime={videoCurrentTime}
+            videoDuration={videoDuration}
             onClose={() => setShowInfo(false)}
             data={data}
           />
