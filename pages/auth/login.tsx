@@ -29,12 +29,8 @@ const LoginPage: FC<ILoginForm> = () => {
         email: email,
         password: password,
       });
-<<<<<<< HEAD
-      console.log("로그인", res);
-=======
-      console.log(res.data);
+
       // 찐
->>>>>>> 48841d9e3e2f042e1434984540fa004f88a8e8f3
       const token = res.headers["x-auth-token"];
       sessionStorage.setItem("accessToken", token);
       // 찝
