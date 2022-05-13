@@ -18,6 +18,7 @@ const ButtonModal = ({ texts, onClose, onClick }: Props) => {
         <TopButton>
           {texts?.map((v) => (
             <MainButton
+              type="button"
               key={v}
               bgcolor="#F2F2F2"
               color="black"
@@ -26,7 +27,7 @@ const ButtonModal = ({ texts, onClose, onClick }: Props) => {
             />
           ))}
         </TopButton>
-        <MainButton onClick={onClose} text={"취소"} />
+        <MainButton type="button" onClick={onClose} text={"취소"} />
       </Wrapper>
     </BackDrop>
   );

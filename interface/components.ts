@@ -6,7 +6,7 @@ export interface PaddingWrapper {
 }
 
 export interface IMainButton {
-  onClick: () => void;
+  onClick?: () => void;
   text?: ReactNode;
   bgcolor?: string;
   color?: string;

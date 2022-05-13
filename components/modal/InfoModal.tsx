@@ -8,27 +8,35 @@ interface Props {
   data: IVideo | undefined;
   onClose: () => void;
   done: number;
+  videoCurrentTime: number;
+  videoDuration: number;
 }
 
 const animate = {
   initial: {
-    transform: `translateY(500px)`,
+    transform: `translateY(300%)`,
     opacity: 1,
     transition: `transform 2s ease`,
   },
   animate: {
-    transform: `translateY(0px)`,
+    transform: `translateY(0%)`,
     opacity: 1,
     transition: `transform 0.33s ease`,
   },
   exit: {
-    transform: `translateY(500px)`,
+    transform: `translateY(300%)`,
     opacity: 1,
     transition: `transform 2s ease`,
   },
 };
 
-const InfoModal = ({ data, onClose, done }: Props) => {
+const InfoModal = ({
+  data,
+  onClose,
+  done,
+  videoCurrentTime,
+  videoDuration,
+}: Props) => {
   return (
     <BackDrop modalPosition={"bottom"}>
       <InfoCard
@@ -69,8 +77,12 @@ const InfoModal = ({ data, onClose, done }: Props) => {
           <ProgressBarDone done={done}></ProgressBarDone>
         </ProgressBar>
         <VideoTime>
-          <span>0:00</span>
-          <span>5:00</span>
+          <span>{`${Math.floor(videoCurrentTime / 60)}:${
+            Math.floor(videoCurrentTime % 60) < 10 ? "0" : ""
+          }${Math.floor(videoCurrentTime % 60)}`}</span>
+          <span>{`${Math.floor(videoDuration / 60)}:${
+            Math.floor(videoDuration % 60) < 10 ? "0" : ""
+          }${Math.floor(videoDuration % 60)}`}</span>
         </VideoTime>
       </InfoCard>
     </BackDrop>

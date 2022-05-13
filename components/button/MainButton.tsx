@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { IMainButton } from "interface/components";
+import { CSSProperties } from "react";
 
 interface Props {
   text: string;
   bgcolor?: string;
   color?: string;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
+  style?: CSSProperties;
+  type: "button" | "submit" | "reset";
 }
 
 const MainButton = ({
@@ -15,15 +18,19 @@ const MainButton = ({
   color = "white",
   onClick,
   disabled,
+  style,
+  type = "button",
 }: Props) => {
   return (
     <>
       <Button
+        style={style}
         color={color}
         bgcolor={bgcolor}
         onClick={onClick}
         disabled={disabled}
-        type="button"
+        type={type}
+        {...(onClick && { onClick })}
       >
         {text}
       </Button>

@@ -1,14 +1,23 @@
-import { AnimatePresence, motion } from "framer-motion";
-import styled from "styled-components";
+import { AnimatePresence } from "framer-motion";
 import faker from "@faker-js/faker";
 import { IVideo } from "interface/video";
 import { cls } from "libs/utils";
 import { useMutation, useQueryClient } from "react-query";
-import { postToggleLike } from "apis/post";
+import { deleteVideo, postToggleLike } from "apis/post";
 import { useEffect, useRef, useState } from "react";
 import ButtonModal, { textType } from "@components/modal/ButtonModal";
 import { useRouter } from "next/router";
 import InfoModal from "@components/modal/InfoModal";
+import Modal from "@components/modal/Modal";
+import {
+  Avatar,
+  ContentBox,
+  DetailWrapper,
+  Info,
+  Nickname,
+  Profile,
+  VideoWrapper,
+} from "./style";
 
 interface Props {
   data: IVideo | undefined;
@@ -28,22 +37,40 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
-  // 효진님
-  const [videoCurrentProgress, setVideoCurrentProgress] = useState(0);
+  const [videoCurrentTime, setVideoCurrentTime] = useState(0);
+  const [videoDuration, setVideoDuration] = useState(0);
 
   const { mutate: toggleLike, isLoading: likeLoading } = useMutation(
-    (videoId: string) => postToggleLike(videoId)
+    (videoId: number) => postToggleLike(videoId, data?.isLiked!)
   );
 
-  const handleLikeClick = (videoId: string) => {
+  const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation(
+    (videoId: number) => deleteVideo(videoId)
+  );
+
+  // 좋아요 클릭시 핸들러
+  const handleLikeClick = (videoId: number) => {
     if (likeLoading) return;
-    toggleLike(videoId, {
+    toggleLike(+videoId, {
       onSuccess: (data) => {
         queryClient.invalidateQueries(["videoDetail", videoId]);
       },
       onError: (err) => {
         console.log(err);
-        console.log(showDelete);
+      },
+    });
+  };
+
+  // 삭제 클릭시 핸들러
+  const handleDelete = () => {
+    if (deleteLoading) return;
+    deleteMutate(data?.id!, {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["videos", 1]);
+        router.push("/");
+      },
+      onError: (err) => {
+        console.log(err);
       },
     });
   };
@@ -66,16 +93,15 @@ const VideoDetail = ({ data, isLoading }: Props) => {
 
   useEffect(() => {
     const getCurrentTime = () => {
-      setVideoCurrentProgress(
-        (videoRef.current?.currentTime! / videoRef.current?.duration!) * 100
-      );
+      setVideoCurrentTime(videoRef.current?.currentTime!);
+      setVideoDuration(videoRef.current?.duration!);
     };
 
     videoRef.current?.addEventListener("timeupdate", getCurrentTime);
     return () => {
       videoRef.current?.removeEventListener("timeupdate", getCurrentTime);
     };
-  }, []);
+  }, [videoRef]);
 
   return (
     <DetailWrapper>
@@ -89,12 +115,24 @@ const VideoDetail = ({ data, isLoading }: Props) => {
       <AnimatePresence initial={false}>
         {showInfo && (
           <InfoModal
-            done={videoCurrentProgress}
+            done={(videoCurrentTime / videoDuration) * 100}
+            videoCurrentTime={videoCurrentTime}
+            videoDuration={videoDuration}
             onClose={() => setShowInfo(false)}
             data={data}
           />
         )}
       </AnimatePresence>
+      {showDelete && (
+        <Modal
+          subConfirm="예"
+          onClickSubConfirm={handleDelete}
+          mainConfirm="아니오"
+          onClickMainCofirm={() => setShowDelete(false)}
+        >
+          <div>영상을 정말 삭제하시겠습니까?</div>
+        </Modal>
+      )}
       <VideoWrapper>
         <video
           src="/assets/video/sslc-banner.mp4"
@@ -127,7 +165,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
             />
           </svg>
           <span
-            onClick={() => handleLikeClick(String(data?.id))}
+            onClick={() => handleLikeClick(data?.id!)}
             className={cls(
               "material-symbols-rounded",
               data?.isLiked ? "liked" : ""
@@ -141,85 +179,5 @@ const VideoDetail = ({ data, isLoading }: Props) => {
     </DetailWrapper>
   );
 };
-
-const DetailWrapper = styled(motion.div)`
-  position: relative;
-  height: 100%;
-  padding-bottom: 80px;
-`;
-
-const VideoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  overflow: hidden;
-  height: 100%;
-  img {
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const ContentBox = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  bottom: 90px;
-  z-index: 30;
-  width: 100%;
-  padding: 0 15px;
-  padding-bottom: 10px;
-`;
-
-const Profile = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 70px;
-`;
-
-const Avatar = styled.div`
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 10px;
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-`;
-
-const Nickname = styled.div`
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-`;
-
-const Info = styled.div`
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  svg {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-  }
-  .material-symbols-rounded {
-    cursor: pointer;
-    font-size: 40px;
-    margin-bottom: 5px;
-    margin-top: 20px;
-  }
-  .likeCount {
-    font-weight: 700;
-    font-size: 12px;
-  }
-`;
 
 export default VideoDetail;

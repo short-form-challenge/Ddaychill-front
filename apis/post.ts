@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API } from "config";
 
 export const getVideos = async (cateId = 0, pageParam = 0) =>
   await axios
@@ -29,5 +30,27 @@ export const getFavorites = async (pageParam = 0) =>
 export const getVideoDetail = async (id: string | undefined) =>
   await axios.get(`/api/videos/${id}`).then((res) => res.data);
 
-export const postToggleLike = async (videoId: string) =>
-  await axios.post(`/api/videos/${videoId}/likes`).then((res) => res.data);
+export const postToggleLike = async (videoId: number, isLiked: boolean) => {
+  console.log(videoId);
+  return isLiked
+    ? await axios
+        .post(`${API}/videos/downLikes/${videoId}/${1}`)
+        .then((res) => res.data)
+    : await axios
+        .post(`${API}/videos/upLikes/${videoId}/${1}`)
+        .then((res) => res.data);
+};
+
+export const deleteVideo = async (videoId: number) =>
+  await axios.delete(`${API}/videos/${videoId}`).then((res) => res.data);
+
+export const postVideo = async (frm: FormData) => {
+  const token = sessionStorage.getItem("accessToken");
+  console.log(API);
+  if (!token) return;
+  return await axios.post(`${API}/videos`, frm, {
+    headers: {
+      "X-AUTH-TOKEN": token,
+    },
+  });
+};
