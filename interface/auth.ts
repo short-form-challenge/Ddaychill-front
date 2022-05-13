@@ -9,7 +9,7 @@ export interface ISignupItem {
   valueName: string;
   placeholder: string;
   validation?: IValidation;
-  maxlength: string;
+  maxlength?: number;
   type: string;
   [key: string]: any;
 }
