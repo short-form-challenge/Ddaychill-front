@@ -1,11 +1,13 @@
 import type { AppProps } from "next/app";
-import { QueryClientProvider, QueryClient } from "react-query";
 import { useRouter } from "next/router";
-// import { isLoggedIn } from "@utiles/useLogin";
+import { useEffect, useState } from "react";
+import { QueryClientProvider, QueryClient } from "react-query";
 
+// import { isLoggedIn } from "@utiles/useLogin";
 import Head from "next/head";
 import MainLayout from "@components/layout/layout";
-import Navigation from "../components/navigation/navigation";
+import Navigation from "@components/navigation/navigation";
+import Modal from "@components/modal/Modal";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -16,12 +18,34 @@ config.autoAddCss = false;
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [loginModal, setLoginModal] = useState(false);
   const router = useRouter();
   const tabMenu = router.pathname;
 
   const showNavigation = (): boolean | undefined => {
     if (!tabMenu.includes("auth")) return true;
   };
+
+  const checkLogin = () => {
+    // if (!sessionStorage.getItem("accessToken")) {
+    //   router.push("/auth/login");
+    // } else
+    if (
+      !(
+        router.pathname.includes("auth") ||
+        router.pathname === "/user/mypage" ||
+        router.pathname === "/"
+      )
+    ) {
+      setLoginModal(true);
+      console.log("hihi");
+    }
+  };
+
+  useEffect(() => {
+    checkLogin();
+    console.log(router);
+  }, [router]);
 
   return (
     <>
@@ -55,6 +79,22 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <MainLayout>
+          {loginModal && (
+            <Modal
+              subConfirm="아니오"
+              mainConfirm="예"
+              onClickSubConfirm={() => {
+                setLoginModal(false);
+                router.push("/");
+              }}
+              onClickMainCofirm={() => {
+                setLoginModal(false);
+                router.push("/auth/login");
+              }}
+            >
+              <div>로그인을 통해 소통을 시작해보세요.</div>
+            </Modal>
+          )}
           <Component {...pageProps} />
           {showNavigation() && <Navigation />}
         </MainLayout>

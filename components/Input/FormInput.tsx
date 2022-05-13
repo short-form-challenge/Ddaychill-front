@@ -100,6 +100,7 @@ const FormInput: FC<FormInputValue> = ({
             }
           }}
           autoComplete="off"
+          maxLength={data.maxlength}
         />
         {isValid[data.valueName] && (
           <IconValid className="material-symbols-rounded">done</IconValid>

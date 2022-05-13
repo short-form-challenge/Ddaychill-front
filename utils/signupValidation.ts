@@ -1,7 +1,7 @@
-// const checkNum = /[0-9]/;
+const checkNum = /[0-9]/;
 const checkEng = /[a-zA-Z]/;
-// const checkSpc = /[~!@#$%^&*()_+|<>?:{}]/;
 const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+// const checkSpc = /[~!@#$%^&*()_+|<>?:{}]/;
 
 export const checkEmail = (value: string) => {
   const exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
@@ -12,7 +12,7 @@ export const checkEmail = (value: string) => {
 };
 
 export const checkPassword = (value: string) => {
-  if (value.length > 7) {
+  if (value.length > 7 && checkEng.test(value) && checkNum.test(value)) {
     return true;
   } else {
     return false;
