@@ -6,7 +6,7 @@ export const signupFormInfo = [
     placeholder: "이메일을 입력하세요.",
     validation: {
       isValied: "사용 가능한 이메일입니다.",
-      inValied: "이미 사용중인 이메일입니다.",
+      inValied: "사용 불가능한 이메일입니다.",
     },
     maxlength: "100",
     type: "text",
@@ -39,10 +39,10 @@ export const signupFormInfo = [
     id: 3,
     name: "닉네임",
     valueName: "nickName",
-    placeholder: "닉네임을 입력하세요.",
+    placeholder: "닉네임을 입력하세요. (2~10자)",
     validation: {
       isValied: "",
-      inValied: "이미 사용중인 닉네임입니다.",
+      inValied: "다른 닉네임을 사용해주세요.",
     },
     maxlength: "10",
     type: "text",

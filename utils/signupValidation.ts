@@ -3,12 +3,20 @@ const checkEng = /[a-zA-Z]/;
 const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 // const checkSpc = /[~!@#$%^&*()_+|<>?:{}]/;
 
-export const checkEmail = (value: string) => {
+export const checkLoginEmail = (value: string) => {
   const exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
-  if (exptext.test(value) === false) {
-    return false;
+  if (exptext.test(value)) {
+    return true;
   }
-  return true;
+  return false;
+};
+
+export const checkEmail = (value: string, resStatus: boolean) => {
+  const exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
+  if (exptext.test(value) && resStatus) {
+    return true;
+  }
+  return false;
 };
 
 export const checkPassword = (value: string) => {
@@ -27,11 +35,12 @@ export const dobbleCheckPassword = (value: string, password: string) => {
   }
 };
 
-export const checkNickName = (value: string) => {
+export const checkNickName = (value: string, resStatus: boolean) => {
   if (
     value.length > 1 &&
     value.length < 10 &&
-    (checkEng.test(value) || checkKor.test(value))
+    (checkEng.test(value) || checkKor.test(value)) &&
+    !!resStatus
   ) {
     return true;
   } else {
