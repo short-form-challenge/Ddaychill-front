@@ -1,4 +1,7 @@
 import Modal from "@components/modal/Modal";
+import axios from "axios";
+import { API } from "config";
+import { IProfile } from "interface/profile";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -7,21 +10,50 @@ import styled from "styled-components";
 
 const MyPage: NextPage = () => {
   const router = useRouter();
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
   const [isLogOutModal, setIsLogOutModal] = useState(false);
+  const [item, setItem] = useState<IProfile>({
+    challenges: [
+      {
+        badgeCnt: 0,
+        category: "",
+        dayCnt: 0,
+      },
+    ],
+    nickname: "",
+    ongoingChallengeCnt: 0,
+    profileFilePath: "",
+    totalBadgeCnt: 0,
+    userId: 0,
+  });
+
+  useEffect(() => {
+    getMyData();
+    if (window.sessionStorage.getItem("accessToken")) {
+      setIsAuth(true);
+    }
+  }, []);
+
+  const getMyData = async () => {
+    try {
+      const res = await axios.get(`${API}/users/myProfile`, {
+        headers: {
+          "X-AUTH-TOKEN": `${sessionStorage.getItem("accessToken")}`,
+        },
+      });
+      setItem(res.data.data);
+      console.log(res.data);
+    } catch (error) {
+      // alert(error);
+    }
+  };
   function onClickToggleWithdrawalModal() {
     setIsWithdrawalModal((prev) => !prev);
   }
   function onClickToggleLogOutModal() {
     setIsLogOutModal((prev) => !prev);
   }
-
-  useEffect(() => {
-    if (sessionStorage.getItem("accessToken")) {
-      setIsAuth(false);
-    }
-  }, []);
 
   const handleLogout = () => {
     sessionStorage.removeItem("accessToken");
@@ -32,12 +64,12 @@ const MyPage: NextPage = () => {
     <>
       <Wrapper>
         <ProfileBG>
-          {!isAuth ? (
+          {isAuth ? (
             <UserInfoWrap>
               <UserPhoto></UserPhoto>
               <UserNameWrap>
-                <UserName>레오와 두리</UserName>
-                <ChallengeDay>Day 6</ChallengeDay>
+                <UserName>{item.nickname}</UserName>
+                <ChallengeDay>Day 2</ChallengeDay>
               </UserNameWrap>
             </UserInfoWrap>
           ) : (
@@ -58,12 +90,12 @@ const MyPage: NextPage = () => {
           <ChallengeCntWrap>
             <CntWrap>
               <CntLable>목표 달성</CntLable>
-              <CntNumber>7</CntNumber>
+              <CntNumber>{item.totalBadgeCnt}</CntNumber>
             </CntWrap>
             <CntLine></CntLine>
             <CntWrap>
               <CntLable>진행중인 목표</CntLable>
-              <CntNumber>1</CntNumber>
+              <CntNumber>{item.ongoingChallengeCnt}</CntNumber>
             </CntWrap>
           </ChallengeCntWrap>
         </ProfileBG>
@@ -84,17 +116,19 @@ const MyPage: NextPage = () => {
               </span>
             </ArrowIcon>
           </MenuItem>
-          <AccountMenuWrap>
-            <AccountMenu>
-              <AccountMenuText onClick={onClickToggleWithdrawalModal}>
-                탈퇴하기
-              </AccountMenuText>
-              <AccountLine></AccountLine>
-              <AccountMenuText onClick={onClickToggleLogOutModal}>
-                로그아웃
-              </AccountMenuText>
-            </AccountMenu>
-          </AccountMenuWrap>
+          {isAuth && (
+            <AccountMenuWrap>
+              <AccountMenu>
+                <AccountMenuText onClick={onClickToggleWithdrawalModal}>
+                  탈퇴하기
+                </AccountMenuText>
+                <AccountLine></AccountLine>
+                <AccountMenuText onClick={onClickToggleLogOutModal}>
+                  로그아웃
+                </AccountMenuText>
+              </AccountMenu>
+            </AccountMenuWrap>
+          )}
         </MenuWrap>
       </Wrapper>
       {isWithdrawalModal && (
@@ -102,7 +136,7 @@ const MyPage: NextPage = () => {
           mainConfirm="아니오"
           subConfirm="예"
           onClickMainCofirm={onClickToggleWithdrawalModal}
-          // onClickSubConfirm={onClickToggleModal}
+          // onClickSubConfirm={onClickToggleWithdrawalModal}
         >
           정말 탈퇴하시겠습니까?
         </Modal>

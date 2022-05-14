@@ -27,6 +27,20 @@ export const getFavorites = async (pageParam = 0) =>
     };
   });
 
+export const getUserVideos = async (userId = 0, pageParam = 0) =>
+  await axios
+    .get(`/api/videos?userId=${userId}&lastId=${pageParam}`)
+    .then((res) => {
+      const {
+        data: { videos, isLast },
+      } = res;
+      return {
+        result: videos,
+        nextPage: videos[videos.length - 1].id,
+        isLast: isLast,
+      };
+    });
+
 export const getVideoDetail = async (id: string | undefined) =>
   await axios.get(`/api/videos/${id}`).then((res) => res.data);
 

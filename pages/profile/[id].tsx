@@ -1,6 +1,27 @@
+import VideoList from "@components/video/VideoList";
+import axios from "axios";
+import { API } from "config";
+import useUserVideo from "hooks/video/useUserVideo";
+import usePost from "hooks/video/useVideo";
+import { IProfile } from "interface/profile";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Profile = () => {
+  const [userId, setUserId] = useState(1);
+  const [item, setItem] = useState<IProfile>({});
+  useEffect(() => {
+    getProfileData();
+  }, []);
+  const { data, isLoading, fetchNextPage } = useUserVideo(Number(item.userId));
+
+  const getProfileData = async () => {
+    try {
+      const res = await axios.get(`${API}/users/${userId}/profile`);
+      console.log(res.data.data);
+      setItem(res.data.data);
+    } catch (err) {}
+  };
   return (
     <>
       <Wrapper>
@@ -9,15 +30,20 @@ const Profile = () => {
         </BackArrowIcon>
         <UserInfoWrap>
           <UserPhoto></UserPhoto>
-          <UserName>레오와 두리</UserName>
+          <UserName>{item.nickname}</UserName>
         </UserInfoWrap>
         <TagWrap>
-          <CategoryTag>#운동</CategoryTag>
-          <CategoryTag>#공부</CategoryTag>
-          <DayTag>Day 1</DayTag>
+          {item?.challenges && item?.challenges[0]?.category && (
+            <CategoryTag>#{item?.challenges[0]?.category}</CategoryTag>
+          )}
+          <DayTag>Day {item?.ongoingChallengeCnt}</DayTag>
         </TagWrap>
       </Wrapper>
-      {/* <VideoList /> */}
+      <VideoList
+        data={data}
+        isLoading={isLoading}
+        fetchNextPage={fetchNextPage}
+      />
     </>
   );
 };
@@ -27,13 +53,13 @@ export default Profile;
 const Wrapper = styled.div`
   background: linear-gradient(197.78deg, #4d23d6 30.81%, #8dabff 107.31%);
   padding: 54px 20px 32px 20px;
-  margin-bottom: 12px;
 `;
 
 const BackArrowIcon = styled.div`
   width: 24px;
   height: 24px;
   color: white;
+  cursor: pointer;
 `;
 
 const UserInfoWrap = styled.div`
@@ -86,4 +112,7 @@ const DayTag = styled.span`
   background-color: white;
   border-radius: 6px;
   margin-left: 6px;
+`;
+const VideoListWrap = styled.div`
+  margin-top: -60px;
 `;

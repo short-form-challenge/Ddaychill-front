@@ -1,10 +1,16 @@
 import BackButtonHeader from "@components/header/BackButtonHeader";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const Badgelist = () => {
+  const router = useRouter();
   return (
     <>
-      <BackButtonHeader isBackButton={true} text="뱃지 현황"></BackButtonHeader>
+      <BackButtonHeader
+        onClickBackButton={() => router.push("/user/mypage")}
+        isBackButton={true}
+        text="뱃지 현황"
+      ></BackButtonHeader>
       <Wrapper>
         <BadgeCntWrap>
           <CntWrap>

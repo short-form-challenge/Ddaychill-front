@@ -38,13 +38,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       )
     ) {
       setLoginModal(true);
-      console.log("hihi");
+      // console.log("hihi");
     }
   };
 
   useEffect(() => {
     checkLogin();
-    console.log(router);
+    // console.log(router);
   }, [router]);
 
   return (
@@ -80,20 +80,21 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <MainLayout>
           {loginModal && (
-            <Modal
-              subConfirm="아니오"
-              mainConfirm="예"
-              onClickSubConfirm={() => {
-                setLoginModal(false);
-                router.push("/");
-              }}
-              onClickMainCofirm={() => {
-                setLoginModal(false);
-                router.push("/auth/login");
-              }}
-            >
-              <div>로그인을 통해 소통을 시작해보세요.</div>
-            </Modal>
+            <></>
+            // <Modal
+            //   subConfirm="아니오"
+            //   mainConfirm="예"
+            //   onClickSubConfirm={() => {
+            //     setLoginModal(false);
+            //     router.push("/");
+            //   }}
+            //   onClickMainCofirm={() => {
+            //     setLoginModal(false);
+            //     router.push("/auth/login");
+            //   }}
+            // >
+            //   <div>로그인을 통해 소통을 시작해보세요.</div>
+            // </Modal>
           )}
           <Component {...pageProps} />
           {showNavigation() && <Navigation />}
