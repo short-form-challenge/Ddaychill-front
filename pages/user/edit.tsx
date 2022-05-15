@@ -19,6 +19,7 @@ const ProfileModify: NextPage = () => {
     setIsModalVisible((prev) => !prev);
   }
   const [item, setItem] = useState<IProfile>({});
+  const [errMsg, setErrMsg] = useState("");
   useEffect(() => {
     getMyData();
   }, []);
@@ -60,11 +61,6 @@ const ProfileModify: NextPage = () => {
       setPreviewImg(data.target.result);
     };
   }
-  // const onImgChange = async (event) => {
-  //   const file = event.target.files[0];
-  //   setFile(file);
-  //   setPreviewImg(String(URL.createObjectURL(event.target.files[0])));
-  // };
 
   const putEditNickNm = async () => {
     const frm = new FormData();
@@ -80,7 +76,7 @@ const ProfileModify: NextPage = () => {
         );
         console.log(res);
       } catch (error) {
-        alert("중복된 닉네임이 존재합니다");
+        setErrMsg("이미 사용중인 닉네임입니다.");
         return;
       }
     }
@@ -156,15 +152,20 @@ const ProfileModify: NextPage = () => {
         </ImageWrap>
         <ModifyInputWrap>
           <InputItem>
-            <InputLable>가입 이메일</InputLable>
-            <EmailText>{item.email}</EmailText>
-          </InputItem>
-          <InputItem>
             <InputLable>닉네임</InputLable>
             <ModifyInput
               onChange={onChangeNickNm}
               placeholder={item.nickname}
             ></ModifyInput>
+            <ErrorText>{errMsg}</ErrorText>
+          </InputItem>
+
+          <InputItem>
+            <InputLable>가입 이메일</InputLable>
+            <ModifyEmailInput
+              placeholder={item.email}
+              readOnly
+            ></ModifyEmailInput>
           </InputItem>
         </ModifyInputWrap>
       </Wrapper>
@@ -287,6 +288,30 @@ const ModifyImageButtonText = styled.div`
   line-height: 17px;
   color: #ffffff;
 `;
+const ModifyEmailInput = styled.input`
+  width: 100%;
+  margin-top: 9px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  border-bottom-width: 1px;
+  border-bottom-color: #cccccd;
+  padding-bottom: 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #252525;
+  outline: none;
+
+  ::placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #8c8c8c;
+  }
+`;
 const ModifyInputWrap = styled.div`
   margin-top: 38px;
 `;
@@ -321,14 +346,14 @@ const ModifyInput = styled.input`
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    color: #cccccd;
+    color: #252525;
   }
 `;
-const EmailText = styled.div`
+const ErrorText = styled.div`
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #252525;
-  margin-top: 10px;
+  font-size: 10px;
+  line-height: 14px;
+  color: #fa3030;
+  margin-top: 6px;
 `;
