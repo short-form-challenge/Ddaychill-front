@@ -121,24 +121,25 @@ const MyPage: NextPage = () => {
             </CntWrap>
           </ChallengeCntWrap>
         </ProfileBG>
-        <MenuWrap>
-          <MenuItem onClick={() => router.push("./edit")}>
-            <MenuText>내 계정</MenuText>
-            <ArrowIcon>
-              <span className="material-symbols-rounded">
-                arrow_forward_ios
-              </span>
-            </ArrowIcon>
-          </MenuItem>
-          <MenuItem onClick={() => router.push("./badgelist")}>
-            <MenuText>뱃지 현황</MenuText>
-            <ArrowIcon>
-              <span className="material-symbols-rounded">
-                arrow_forward_ios
-              </span>
-            </ArrowIcon>
-          </MenuItem>
-          {isAuth && (
+        {isAuth && (
+          <MenuWrap>
+            <MenuItem onClick={() => router.push("./edit")}>
+              <MenuText>내 계정</MenuText>
+              <ArrowIcon>
+                <span className="material-symbols-rounded">
+                  arrow_forward_ios
+                </span>
+              </ArrowIcon>
+            </MenuItem>
+            <MenuItem onClick={() => router.push("./badgelist")}>
+              <MenuText>뱃지 현황</MenuText>
+              <ArrowIcon>
+                <span className="material-symbols-rounded">
+                  arrow_forward_ios
+                </span>
+              </ArrowIcon>
+            </MenuItem>
+
             <AccountMenuWrap>
               <AccountMenu>
                 <AccountMenuText onClick={onClickToggleWithdrawalModal}>
@@ -150,8 +151,8 @@ const MyPage: NextPage = () => {
                 </AccountMenuText>
               </AccountMenu>
             </AccountMenuWrap>
-          )}
-        </MenuWrap>
+          </MenuWrap>
+        )}
       </Wrapper>
       {isWithdrawalModal && (
         <Modal
