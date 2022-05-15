@@ -14,19 +14,17 @@ const MyPage: NextPage = () => {
   const [isWithdrawalModal, setIsWithdrawalModal] = useState(false);
   const [isLogOutModal, setIsLogOutModal] = useState(false);
   const [item, setItem] = useState<IProfile>({
-    challenges: [
-      {
-        badgeCnt: 0,
-        category: "",
-        dayCnt: 0,
-      },
-    ],
+    challenges: [],
     nickname: "",
     ongoingChallengeCnt: 0,
     profileFilePath: "",
     totalBadgeCnt: 0,
     userId: 0,
   });
+  const day =
+    item.challenges?.length === 0
+      ? 0
+      : item.challenges && item.challenges[0].dayCnt;
 
   useEffect(() => {
     getMyData();
@@ -48,6 +46,20 @@ const MyPage: NextPage = () => {
       // alert(error);
     }
   };
+  const onClickDeleteUser = async () => {
+    try {
+      const res = await axios.delete(`${API}/users`, {
+        headers: {
+          "X-AUTH-TOKEN": `${sessionStorage.getItem("accessToken")}`,
+        },
+      });
+      console.log(res);
+      onClickToggleWithdrawalModal();
+      sessionStorage.removeItem("accessToken");
+      alert("회원탈퇴가 완료되었습니다.");
+      router.push("/");
+    } catch (error) {}
+  };
   function onClickToggleWithdrawalModal() {
     setIsWithdrawalModal((prev) => !prev);
   }
@@ -59,17 +71,21 @@ const MyPage: NextPage = () => {
     sessionStorage.removeItem("accessToken");
     router.push("/auth/login");
   };
-
+  console.log(item.challenges);
   return (
     <>
       <Wrapper>
         <ProfileBG>
           {isAuth ? (
             <UserInfoWrap>
-              <UserPhoto></UserPhoto>
+              {item.profileFilePath ? (
+                <UserPhoto src={`${API + item.profileFilePath}`} />
+              ) : (
+                <UserPhoto src="/assets/img/noProfileImage.png" />
+              )}
               <UserNameWrap>
                 <UserName>{item.nickname}</UserName>
-                <ChallengeDay>Day 2</ChallengeDay>
+                <ChallengeDay>Day {day}</ChallengeDay>
               </UserNameWrap>
             </UserInfoWrap>
           ) : (
@@ -84,7 +100,13 @@ const MyPage: NextPage = () => {
           )}
           <ChallengeStatus>
             {isAuth
-              ? "레오와 두리님 거의 다 왔어요! 힘내보아요!"
+              ? `${item.nickname}${
+                  Number(day) < 5
+                    ? "님 오늘도 힘내세요!"
+                    : Number(day) < 7
+                    ? "님 거의 다왔어요! 힘내세요!"
+                    : "님 마지막 날이에요! 파이팅!"
+                }`
               : "Dday Chill 과 함께 목표 달성을 해보는건 어떠세요?"}
           </ChallengeStatus>
           <ChallengeCntWrap>
@@ -95,7 +117,7 @@ const MyPage: NextPage = () => {
             <CntLine></CntLine>
             <CntWrap>
               <CntLable>진행중인 목표</CntLable>
-              <CntNumber>{item.ongoingChallengeCnt}</CntNumber>
+              <CntNumber>{item.challenges && item.challenges.length}</CntNumber>
             </CntWrap>
           </ChallengeCntWrap>
         </ProfileBG>
@@ -136,7 +158,7 @@ const MyPage: NextPage = () => {
           mainConfirm="아니오"
           subConfirm="예"
           onClickMainCofirm={onClickToggleWithdrawalModal}
-          // onClickSubConfirm={onClickToggleWithdrawalModal}
+          onClickSubConfirm={onClickDeleteUser}
         >
           정말 탈퇴하시겠습니까?
         </Modal>
@@ -165,7 +187,7 @@ const Wrapper = styled.div`
 const ProfileBG = styled.div`
   width: 100%;
   padding: 20px 20px;
-  background: linear-gradient(197.78deg, #4d23d6 30.81%, #8dabff 107.31%);
+  background: linear-gradient(197.78deg, #4d23d6 30.81%, #139ae9 107.31%);
 `;
 const UserInfoWrap = styled.div`
   margin-top: 86px;
@@ -173,11 +195,10 @@ const UserInfoWrap = styled.div`
   flex-direction: row;
   align-items: center;
 `;
-const UserPhoto = styled.div`
+const UserPhoto = styled.img`
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background-color: sandybrown;
 `;
 const UserNameWrap = styled.div`
   display: flex;
@@ -227,7 +248,7 @@ const ChallengeStatus = styled.div`
   height: 36px;
   display: flex;
   align-items: center;
-  background-color: #4d23d6;
+  background-color: rgba(255, 255, 255, 0.3);
   margin-top: 36px;
   padding-left: 16px;
   border-radius: 6px;

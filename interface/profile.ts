@@ -1,6 +1,6 @@
 interface IChallenges {
   badgeCnt?: number;
-  category?: string;
+  category?: number;
   dayCnt?: number;
 }
 
