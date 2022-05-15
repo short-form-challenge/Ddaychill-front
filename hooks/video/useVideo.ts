@@ -6,8 +6,9 @@ const useVideo = (cateId: number = 0, type: "main" | "my" | "liked") => {
   return useInfiniteQuery<any>(
     ["videos", cateId, type],
     ({ pageParam }) => {
+      console.log(pageParam);
       return type === "main"
-        ? getVideos(cateId, 0, 0)
+        ? getVideos(cateId, pageParam?.id, pageParam?.showId)
         : type === "my"
         ? getMyVideos(pageParam?.id, pageParam?.showId)
         : getFavorites(pageParam?.id, pageParam?.showId);

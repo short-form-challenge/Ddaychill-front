@@ -28,7 +28,6 @@ const VideoList = ({ data, isLoading, fetchNextPage, type }: Props) => {
         listRef?.current!.scrollHeight - 300
       ) {
         if (!isLoading) {
-          console.log("next");
           fetchNextPage();
         }
       }
@@ -42,7 +41,6 @@ const VideoList = ({ data, isLoading, fetchNextPage, type }: Props) => {
     };
   }, [listRef, data, isLoading]);
 
-  console.log(data);
   return (
     <ListLayout ref={listRef} page={type}>
       <ListWrapper>
