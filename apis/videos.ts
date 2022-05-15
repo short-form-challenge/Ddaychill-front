@@ -55,16 +55,9 @@ export const getMyVideos = async (pageParam = 0, showId = 0) => {
     });
 };
 export const getOtherVideos = async (userId = 0, pageParam = 0, showId = 0) => {
-  const token = sessionStorage.getItem("accessToken");
-
   return await axios
     .get(
-      `${API}/videos/myVideos?userId=${userId}&lastId=${pageParam}&showId=${showId}`,
-      {
-        headers: {
-          "X-AUTH-TOKEN": token!,
-        },
-      }
+      `${API}/videos/otherVideos?userId=${+userId}&showId=${showId}&lastId=${pageParam}`
     )
     .then((res) => {
       const { data, last } = res.data;
