@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 
-// import { isLoggedIn } from "@utiles/useLogin";
 import Head from "next/head";
 import MainLayout from "@components/layout/layout";
 import Navigation from "@components/navigation/navigation";
@@ -26,25 +25,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (!tabMenu.includes("auth")) return true;
   };
 
+  // const { data, isLoading } = useLoggedIn();
+  // 수정 전
   const checkLogin = () => {
-    // if (!sessionStorage.getItem("accessToken")) {
-    //   router.push("/auth/login");
-    // } else
     if (
       !(
         router.pathname.includes("auth") ||
         router.pathname === "/user/mypage" ||
         router.pathname === "/"
-      )
+      ) &&
+      !sessionStorage.getItem("accessToken")
     ) {
       setLoginModal(true);
-      console.log("hihi");
     }
   };
 
   useEffect(() => {
     checkLogin();
-    console.log(router);
   }, [router]);
 
   return (

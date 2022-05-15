@@ -8,7 +8,7 @@ import { ILoginForm } from "interface/auth";
 import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
 import MainButton from "@components/button/MainButton";
 import Modal from "@components/modal/Modal";
-import { checkEmail, checkPassword } from "@utiles/signupValidation";
+import { checkLoginEmail, checkPassword } from "@utiles/signupValidation";
 
 const LoginPage: FC<ILoginForm> = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -33,9 +33,12 @@ const LoginPage: FC<ILoginForm> = () => {
       // 찐
       const token = res.headers["x-auth-token"];
       sessionStorage.setItem("accessToken", token);
-      // 찝
+      // 짭
       // sessionStorage.setItem("accessToken", res.data.token);
-      route.push("/");
+      route.push({
+        pathname: "/",
+        query: { isLogin: true },
+      });
     } catch (err) {
       console.log(err);
       // status에 따라 할 수도!
@@ -97,7 +100,8 @@ const LoginPage: FC<ILoginForm> = () => {
             onClick={() => handleLogin()}
             type="button"
             disabled={
-              !checkEmail(loginForm.email) || !checkPassword(loginForm.password)
+              !checkLoginEmail(loginForm.email) ||
+              !checkPassword(loginForm.password)
             }
           />
           {loginForm.email === "" && loginForm.password === "" && (
@@ -168,3 +172,8 @@ const SignupButton = styled.button`
     opacity: 0.9;
   }
 `;
+
+// const ErrorMessage = styled.div`
+//   color: red;
+//   font-size: 10px;
+// `;

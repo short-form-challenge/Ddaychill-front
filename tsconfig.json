@@ -17,7 +17,8 @@
     "paths": {
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"],
-      "@utiles/*": ["utils/*"]
+      "@utiles/*": ["utils/*"],
+      "@public/*": ["public/*"]
     },
     "noEmit": true
   },
