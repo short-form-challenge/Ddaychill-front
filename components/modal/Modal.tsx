@@ -52,7 +52,9 @@ const Card = styled.div`
   text-align: center;
   line-height: 23px;
   z-index: 100;
-  /* overflow: hidden; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 const ModalFooter = styled.div`
