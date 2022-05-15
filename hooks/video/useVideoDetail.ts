@@ -1,9 +1,9 @@
 import { getVideoDetail } from "apis/videos";
-import { IVideo } from "interface/video";
+import { IVideoRes } from "interface/video";
 import { useQuery } from "react-query";
 
 const useVideoDetail = (id: string | undefined) => {
-  const { data, isLoading } = useQuery<IVideo>(
+  const { data, isLoading } = useQuery<IVideoRes>(
     ["videoDetail", id],
     () => getVideoDetail(id),
     { enabled: !!id }
