@@ -54,7 +54,7 @@ const Signup = () => {
           mainConfirm="확인"
           onClickMainCofirm={() => {
             setShowModal(false);
-            router.push("/");
+            router.push("/auth/login");
           }}
         >
           <span>

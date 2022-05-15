@@ -17,7 +17,7 @@ const index: NextPage = () => {
     setOnboardVisible(true);
     setTimeout(() => {
       setOnboardVisible(false);
-    }, 3000);
+    }, 1500);
   }, []);
 
   if (router.query.isLogin && onboardVisible) {
