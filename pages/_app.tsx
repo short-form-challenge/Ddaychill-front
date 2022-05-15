@@ -8,7 +8,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "@styles/globals.css";
 import "styles/reset.scss";
 import AxiosConfig from "libs/axios";
-import { useRouter } from "next/router";
 import OnboardingComponent from "@components/onboarding/OnboardingComponent";
 import { useState } from "react";
 
@@ -18,16 +17,11 @@ config.autoAddCss = false;
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-  const tabMenu = router.pathname;
   const [isLoading, setIsLoading] = useState(true);
 
   setTimeout(() => {
     setIsLoading(false);
   }, 2000);
-
-  // const { data, isLoading } = useLoggedIn();
-  // 수정 전
 
   return (
     <>

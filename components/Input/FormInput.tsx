@@ -1,8 +1,8 @@
 import { Dispatch, FC, SetStateAction, ChangeEvent } from "react";
 import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
 import axios from "axios";
-import { API } from "config";
 import styled from "styled-components";
+import { API } from "config";
 
 import {
   checkEmail,
@@ -34,7 +34,7 @@ const FormInput: FC<FormInputValue> = ({
   const validateInputValue = (
     value: string,
     name: string,
-    resStatus?: string
+    resStatus?: boolean
   ) => {
     switch (name) {
       case "email":
@@ -64,36 +64,8 @@ const FormInput: FC<FormInputValue> = ({
     }
   };
 
-  const getIsEmailValid = async (inputEmail) => {
-    try {
-      const res = await axios.get(`${API}/validate/email?email=${inputEmail}`);
-      if (res.status === 200) {
-        setEmailResValid(true);
-      } else {
-        setEmailResValid(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getIsNicknameValid = async (inputNickname) => {
-    try {
-      const res = await axios.get(
-        `${API}/validate/nickname?nickname=${inputNickname}`
-      );
-      if (res.status === 200) {
-        setNicknameResValid(true);
-      } else {
-        setNicknameResValid(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   let timer: ReturnType<typeof setTimeout>;
-  const debouncInputValue = (
+  const debouncInputValue = async (
     event: ChangeEvent<HTMLInputElement>,
     fieldName: string
   ) => {
@@ -101,23 +73,42 @@ const FormInput: FC<FormInputValue> = ({
     if (timer) {
       clearTimeout(timer);
     }
-    timer = setTimeout(function () {
+    timer = setTimeout(async function () {
       setSignupValues({
         ...signupValues,
         [data.valueName]: event.target.value,
       });
 
       if (fieldName === "email") {
-        getIsEmailValid(event.target.value);
-        validateInputValue(event.target.value, data.valueName, emailResValid);
+        try {
+          const res = await axios.get(
+            `${API}/validate/email?email=${event.target.value}`
+          );
+          if (res.status === 200) {
+            setEmailResValid(true);
+            validateInputValue(event.target.value, data.valueName, true);
+          } else {
+            setEmailResValid(false);
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
       if (fieldName === "nickName") {
-        getIsNicknameValid(event.target.value);
-        validateInputValue(
-          event.target.value,
-          data.valueName,
-          nicknameResValid
-        );
+        try {
+          const res = await axios.get(
+            `${API}/validate/nickname?nickname=${event.target.value}`
+          );
+          console.log(res.status);
+          if (res.status === 200) {
+            setNicknameResValid(true);
+            validateInputValue(event.target.value, data.valueName, true);
+          } else {
+            setNicknameResValid(false);
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
     }, 500);
   };
