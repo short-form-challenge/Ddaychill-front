@@ -9,6 +9,7 @@ import PaddingWrapperDiv from "@components/layout/PaddingWrapper";
 import MainButton from "@components/button/MainButton";
 import Modal from "@components/modal/Modal";
 import { checkLoginEmail, checkPassword } from "@utiles/signupValidation";
+import BackButtonHeader from "@components/header/BackButtonHeader";
 
 const LoginPage: FC<ILoginForm> = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -66,6 +67,7 @@ const LoginPage: FC<ILoginForm> = () => {
           </span>
         </Modal>
       )}
+      <BackButtonHeader text="" isCloseButton={true} />
       <PaddingWrapperDiv padding={36}>
         <Header>
           <div>내가 만드는 7일 간의</div>

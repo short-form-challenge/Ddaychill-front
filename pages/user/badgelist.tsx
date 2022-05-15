@@ -91,10 +91,15 @@ const Badgelist = () => {
 export default Badgelist;
 
 const Wrapper = styled.div`
-  margin-top: 82px;
+  height: 75vh;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const BadgeListWrap = styled.div`
   padding: 0px 50px;

@@ -18,7 +18,6 @@ const Profile = () => {
   const getProfileData = async () => {
     try {
       const res = await axios.get(`${API}/users/${router.query.id}/profile`);
-      console.log(res.data.data);
       setItem(res.data.data);
     } catch (err) {}
   };

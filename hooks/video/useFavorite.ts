@@ -1,4 +1,4 @@
-import { getFavorites } from "apis/post";
+import { getFavorites } from "apis/videos";
 import { QueryResult } from "interface/video";
 import { useInfiniteQuery } from "react-query";
 

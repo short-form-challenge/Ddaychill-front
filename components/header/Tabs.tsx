@@ -12,7 +12,6 @@ export const HeaderWrapper = styled.div`
   padding: 30px;
   width: 100%;
   display: flex;
-  position: absolute;
   background-color: white;
   justify-content: center;
   align-items: center;

@@ -6,14 +6,9 @@ export const ListWrapper = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 240px);
   gap: 3px;
-  padding: 80px 20px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100%;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  padding: 0px 20px;
+  padding-bottom: 80px;
+  height: 80%;
 `;
 
 export const CardWrapper = styled(motion.div)`
@@ -53,11 +48,16 @@ export const Contents = styled.div`
 
 export const MainContent = styled.div`
   color: white;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   h3 {
+    width: 115px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-weight: 700;
     font-size: 12px;
     margin-bottom: 10px;
@@ -86,6 +86,7 @@ export const Avatar = styled.div`
   border-radius: 50%;
   overflow: hidden;
   margin-right: 10px;
+  background-color: blue;
   img {
     width: 100%;
     height: 100%;

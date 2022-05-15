@@ -1,10 +1,10 @@
 import VideoList from "@components/video/VideoList";
 import { NextPage } from "next";
 import { HeaderWrapper } from "@components/header/Tabs";
-import useFavorite from "hooks/video/useFavorite";
+import useVideo from "hooks/video/useVideo";
 
-const favorite: NextPage = () => {
-  const { data, isLoading, fetchNextPage } = useFavorite();
+const favorites: NextPage = () => {
+  const { data, isLoading, fetchNextPage } = useVideo(0, "liked");
   return (
     <>
       <HeaderWrapper>관심영상</HeaderWrapper>
@@ -17,4 +17,4 @@ const favorite: NextPage = () => {
   );
 };
 
-export default favorite;
+export default favorites;

@@ -1,48 +1,33 @@
 import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
-
 import Head from "next/head";
 import MainLayout from "@components/layout/layout";
 import Navigation from "@components/navigation/navigation";
-import Modal from "@components/modal/Modal";
-
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "@styles/globals.css";
 import "styles/reset.scss";
+import AxiosConfig from "libs/axios";
+import { useRouter } from "next/router";
+import OnboardingComponent from "@components/onboarding/OnboardingComponent";
+import { useState } from "react";
+
+AxiosConfig();
 config.autoAddCss = false;
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [loginModal, setLoginModal] = useState(false);
   const router = useRouter();
   const tabMenu = router.pathname;
+  const [isLoading, setIsLoading] = useState(true);
 
-  const showNavigation = (): boolean | undefined => {
-    if (!tabMenu.includes("auth")) return true;
-  };
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 2000);
 
   // const { data, isLoading } = useLoggedIn();
   // 수정 전
-  const checkLogin = () => {
-    if (
-      !(
-        router.pathname.includes("auth") ||
-        router.pathname === "/user/mypage" ||
-        router.pathname === "/"
-      ) &&
-      !sessionStorage.getItem("accessToken")
-    ) {
-      setLoginModal(true);
-    }
-  };
-
-  useEffect(() => {
-    checkLogin();
-  }, [router]);
 
   return (
     <>
@@ -53,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
           href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -62,6 +48,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap"
           rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -76,25 +66,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <MainLayout>
-          {loginModal && (
-            <></>
-            // <Modal
-            //   subConfirm="아니오"
-            //   mainConfirm="예"
-            //   onClickSubConfirm={() => {
-            //     setLoginModal(false);
-            //     router.push("/");
-            //   }}
-            //   onClickMainCofirm={() => {
-            //     setLoginModal(false);
-            //     router.push("/auth/login");
-            //   }}
-            // >
-            //   <div>로그인을 통해 소통을 시작해보세요.</div>
-            // </Modal>
+          {isLoading ? (
+            <OnboardingComponent />
+          ) : (
+            <>
+              <Component {...pageProps} />
+              <Navigation />
+            </>
           )}
-          <Component {...pageProps} />
-          {showNavigation() && <Navigation />}
         </MainLayout>
       </QueryClientProvider>
     </>
