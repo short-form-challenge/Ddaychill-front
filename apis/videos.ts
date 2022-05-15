@@ -111,8 +111,17 @@ export const postToggleLike = async (videoId: number, isLiked: boolean) => {
         .then((res) => res.data);
 };
 
-export const deleteVideo = async (videoId: number) =>
-  await axios.delete(`${API}/videos/${videoId}`).then((res) => res.data);
+export const deleteVideo = async (videoId: number) => {
+  const token = sessionStorage.getItem("accessToken");
+  if (!token) return;
+  return await axios
+    .delete(`${API}/videos/${videoId}`, {
+      headers: {
+        "X-AUTH-TOKEN": token,
+      },
+    })
+    .then((res) => res.data);
+};
 
 export const postVideo = async (frm: FormData) => {
   const token = sessionStorage.getItem("accessToken");
