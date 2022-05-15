@@ -47,7 +47,7 @@ const OnboardWrapper = styled(motion.div)<{ [key: string]: any }>`
   width: 100%;
   z-index: 9;
   opacity: 1;
-  animation: fadeout 3s;
+  animation: fadeout 1.5s;
   animation-name: onboarding;
 `;
 

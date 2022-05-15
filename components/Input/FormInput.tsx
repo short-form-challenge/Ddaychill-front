@@ -110,7 +110,6 @@ const FormInput: FC<FormInputValue> = ({
       if (fieldName === "email") {
         getIsEmailValid(event.target.value);
         validateInputValue(event.target.value, data.valueName, emailResValid);
-        console.log("emaidsldsdsd");
       }
       if (fieldName === "nickName") {
         getIsNicknameValid(event.target.value);
@@ -120,7 +119,7 @@ const FormInput: FC<FormInputValue> = ({
           nicknameResValid
         );
       }
-    }, 800);
+    }, 500);
   };
 
   const handleValueimmediately = (event: any) => {
