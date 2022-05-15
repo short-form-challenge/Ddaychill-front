@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, ChangeEvent } from "react";
-import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
+import { ISignupForm, ISignupFormVaild } from "interface/auth";
 import axios from "axios";
 import styled from "styled-components";
 import { API } from "config";
@@ -13,7 +13,7 @@ import {
 
 interface FormInputValue {
   [key: string]: any;
-  data: ISignupItem;
+  data: any;
   setSignupValues: Dispatch<SetStateAction<ISignupForm>>;
   signupValues: ISignupForm;
   setIsValid: Dispatch<SetStateAction<ISignupFormVaild>>;

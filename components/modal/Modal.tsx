@@ -19,6 +19,7 @@ const Modal = ({
           {/* 버튼이 2개일 때만 나오는 왼쪽버튼 */}
           {subConfirm && onClickSubConfirm && (
             <MainButton
+              type="button"
               style={{ marginRight: "10px" }}
               bgcolor="#F2F2F2"
               color="black"
@@ -27,7 +28,11 @@ const Modal = ({
             />
           )}
           {/* 버튼이 2개일 때, 1개일 때 모두 나오는 메인 버튼 */}
-          <MainButton onClick={onClickMainCofirm} text={mainConfirm} />
+          <MainButton
+            type="button"
+            onClick={onClickMainCofirm}
+            text={mainConfirm}
+          />
         </ModalFooter>
       </Card>
     </BackDrop>
