@@ -22,16 +22,18 @@ const Navigation = () => {
           <a className="home">홈</a>
         </NavItem>
       </Link>
-      <Link href={"/myvideo"}>
-        <NavItem className={tabMenu === "/videos" ? "iconChecked" : "icon"}>
+      <Link href={"/myvideos"}>
+        <NavItem
+          className={tabMenu.includes("/myvideos") ? "iconChecked" : "icon"}
+        >
           <div>
             <span className="material-symbols-rounded">smart_display</span>
           </div>
           <a className="home">마이비디오</a>
         </NavItem>
       </Link>
-      <Link href="/favorite">
-        <NavItem className={tabMenu === "/favorite" ? "iconChecked" : "icon"}>
+      <Link href="/favorites">
+        <NavItem className={tabMenu === "/favorites" ? "iconChecked" : "icon"}>
           <div>
             <span className="material-symbols-rounded">favorite</span>
           </div>

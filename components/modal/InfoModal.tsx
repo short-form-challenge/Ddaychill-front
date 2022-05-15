@@ -55,21 +55,21 @@ const InfoModal = ({
           <Avatar>
             <img src={faker.image.cats()} alt="" />
           </Avatar>
-          <span>@{data?.user.nickName}</span>
+          <span>@{data?.postedBy.nickname}</span>
         </UserInfo>
         <ContentInfo>
           <h3>{data?.title}</h3>
           <span>
-            게시일: {data?.createdAt.split("T")[0].replaceAll("-", ".")}
+            게시일: {data?.postedAt.split("T")[0].replaceAll("-", ".")}
           </span>
         </ContentInfo>
         <CountInfo>
           <Count>
-            <div>{data?.like}</div>
+            <div>{data?.likeCnt}</div>
             <span>좋아요 수</span>
           </Count>
           <Count>
-            <div>3,928</div>
+            <div>{data?.hit}</div>
             <span>조회수</span>
           </Count>
         </CountInfo>

@@ -37,6 +37,7 @@ const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
       listRef.current?.removeEventListener("scroll", onScroll);
     };
   }, [listRef, data, isLoading]);
+  console.log(data);
   return (
     <ListWrapper ref={listRef}>
       {data?.pages?.map((group) =>

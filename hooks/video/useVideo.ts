@@ -1,11 +1,18 @@
-import { getVideos } from "apis/post";
+import { getFavorites, getMyVideos, getVideos } from "apis/videos";
 import { QueryResult } from "interface/video";
 import { useInfiniteQuery } from "react-query";
 
-const usePost = (cateId: number) =>
-  useInfiniteQuery<QueryResult>(
+const useVideo = (cateId: number = 0, type: "main" | "my" | "liked") => {
+  return useInfiniteQuery<QueryResult>(
     ["videos", cateId],
-    ({ pageParam }) => getVideos(cateId, pageParam),
+    ({ pageParam }) => {
+      console.log(pageParam);
+      return type === "main"
+        ? getVideos(cateId, 0, 0)
+        : type === "my"
+        ? getMyVideos(pageParam?.id, pageParam?.showId)
+        : getFavorites();
+    },
     {
       getNextPageParam: (lastPage) => {
         if (!lastPage.isLast) {
@@ -20,5 +27,6 @@ const usePost = (cateId: number) =>
       retry: 1,
     }
   );
+};
 
-export default usePost;
+export default useVideo;

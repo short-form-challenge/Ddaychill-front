@@ -4,11 +4,18 @@ import styled from "styled-components";
 interface Props {
   videoUrl: string;
   getImages: (file: File) => void;
+  getDuration: (time: number | undefined) => void;
   filename: string;
   newThumbnail?: string;
 }
 
-function Thumbnail({ videoUrl, getImages, filename, newThumbnail }: Props) {
+function Thumbnail({
+  videoUrl,
+  getImages,
+  filename,
+  newThumbnail,
+  getDuration,
+}: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [thumbnail, setThumbnail] = useState("");
 
@@ -22,6 +29,7 @@ function Thumbnail({ videoUrl, getImages, filename, newThumbnail }: Props) {
     if (videoRef && videoRef.current) {
       setTimeout(() => {
         if (videoRef.current) {
+          getDuration(videoRef.current.duration);
           const canvas = document.createElement("canvas");
           canvas.width = videoRef.current!.videoWidth;
           canvas.height = videoRef.current!.videoHeight;
@@ -36,9 +44,9 @@ function Thumbnail({ videoUrl, getImages, filename, newThumbnail }: Props) {
           );
           const url = canvas.toDataURL("image/jpeg");
           setThumbnail(url);
-          srcToFile(url, filename, "image/jpeg").then((file) =>
-            getImages(file)
-          );
+          srcToFile(url, filename, "image/jpeg").then((file) => {
+            getImages(file);
+          });
         }
       }, 200);
     }

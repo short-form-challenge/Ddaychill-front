@@ -1,3 +1,4 @@
+import { API } from "config";
 import { IVideo } from "interface/video";
 import { cls } from "libs/utils";
 import Link from "next/link";
@@ -18,12 +19,12 @@ const VideoCard = ({ item }: Props) => {
     <Link key={item.id} href={`/videos/${item.id}`}>
       <CardWrapper>
         <ImgWrapper>
-          <img src={item.thumb} />
+          <img src={`${API}${item.thumbnailPath}`} />
         </ImgWrapper>
         <Contents>
           <MainContent>
             <h3>{item.title}</h3>
-            <span>2022.04.22</span>
+            <span>{item.postedAt.split("T")[0].replace("-", ".")}</span>
           </MainContent>
           <SubContent>
             <span
@@ -34,7 +35,7 @@ const VideoCard = ({ item }: Props) => {
             >
               favorite
             </span>
-            <span className="likeCount">{item.like}개</span>
+            <span className="likeCount">{item.likeCnt}개</span>
           </SubContent>
         </Contents>
       </CardWrapper>

@@ -1,4 +1,4 @@
-import { getVideoDetail } from "apis/post";
+import { getVideoDetail } from "apis/videos";
 import { IVideo } from "interface/video";
 import { useQuery } from "react-query";
 

@@ -1,9 +1,8 @@
 import { AnimatePresence } from "framer-motion";
-import faker from "@faker-js/faker";
-import { IVideo } from "interface/video";
+import { IVideoRes } from "interface/video";
 import { cls } from "libs/utils";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteVideo, postToggleLike } from "apis/post";
+import { deleteVideo, postToggleLike } from "apis/videos";
 import { useEffect, useRef, useState } from "react";
 import ButtonModal, { textType } from "@components/modal/ButtonModal";
 import { useRouter } from "next/router";
@@ -18,9 +17,10 @@ import {
   Profile,
   VideoWrapper,
 } from "./style";
+import { API } from "config";
 
 interface Props {
-  data: IVideo | undefined;
+  data: IVideoRes | undefined;
   isLoading: boolean;
 }
 
@@ -41,7 +41,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   const [videoDuration, setVideoDuration] = useState(0);
 
   const { mutate: toggleLike, isLoading: likeLoading } = useMutation(
-    (videoId: number) => postToggleLike(videoId, data?.isLiked!)
+    (videoId: number) => postToggleLike(videoId, data?.data.isLiked!)
   );
 
   const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation(
@@ -51,9 +51,11 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   // 좋아요 클릭시 핸들러
   const handleLikeClick = (videoId: number) => {
     if (likeLoading) return;
-    toggleLike(+videoId, {
+    toggleLike(videoId, {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(["videoDetail", videoId]);
+        if (data.code === 0) {
+          queryClient.invalidateQueries(["videoDetail", videoId + ""]);
+        }
       },
       onError: (err) => {
         console.log(err);
@@ -64,7 +66,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   // 삭제 클릭시 핸들러
   const handleDelete = () => {
     if (deleteLoading) return;
-    deleteMutate(data?.id!, {
+    deleteMutate(data?.data?.id!, {
       onSuccess: (data) => {
         queryClient.invalidateQueries(["videos", 1]);
         router.push("/");
@@ -119,7 +121,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
             videoCurrentTime={videoCurrentTime}
             videoDuration={videoDuration}
             onClose={() => setShowInfo(false)}
-            data={data}
+            data={data?.data}
           />
         )}
       </AnimatePresence>
@@ -134,19 +136,16 @@ const VideoDetail = ({ data, isLoading }: Props) => {
         </Modal>
       )}
       <VideoWrapper>
-        <video
-          src="/assets/video/sslc-banner.mp4"
-          ref={videoRef}
-          autoPlay
-          muted
-        />
+        <video src={API + data?.data.filePath} ref={videoRef} autoPlay muted />
       </VideoWrapper>
       <ContentBox>
         <Profile>
           <Avatar>
-            <img src={faker.image.cats()} alt="" />
+            {data?.data.postedBy?.avatar && (
+              <img src={API + data?.data.postedBy.avatar} alt="avatar" />
+            )}
           </Avatar>
-          <Nickname>@{data?.user.nickName}</Nickname>
+          <Nickname>@{data?.data.postedBy.nickname}</Nickname>
         </Profile>
         <Info>
           <svg
@@ -165,15 +164,15 @@ const VideoDetail = ({ data, isLoading }: Props) => {
             />
           </svg>
           <span
-            onClick={() => handleLikeClick(data?.id!)}
+            onClick={() => handleLikeClick(data?.data.id!)}
             className={cls(
               "material-symbols-rounded",
-              data?.isLiked ? "liked" : ""
+              data?.data.isLiked ? "liked" : ""
             )}
           >
             favorite
           </span>
-          <span className="likeCount">{data?.like}개</span>
+          <span className="likeCount">{data?.data.likeCnt}개</span>
         </Info>
       </ContentBox>
     </DetailWrapper>

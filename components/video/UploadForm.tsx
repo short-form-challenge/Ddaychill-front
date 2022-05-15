@@ -2,7 +2,7 @@ import MainButton from "@components/button/MainButton";
 import ButtonModal, { textType } from "@components/modal/ButtonModal";
 import Modal from "@components/modal/Modal";
 import Thumbnail from "@components/thumbnail/Thumbnail";
-import { postVideo } from "apis/post";
+import { postVideo } from "apis/videos";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -22,6 +22,7 @@ const UploadForm = () => {
   const [thumbnail, setThumbnail] = useState<File>();
   const [newThumbnail, setNewThumbnail] = useState("");
   const [showAlert, setShowAlert] = useState("");
+  const [duration, setDuration] = useState(0);
   const router = useRouter();
 
   const videoRef = useRef<HTMLInputElement | null>(null);
@@ -48,7 +49,7 @@ const UploadForm = () => {
 
     const videoInfo = {
       title: data.title,
-      length: 450,
+      length: duration,
       categoryId: cateId,
     };
 
@@ -97,6 +98,12 @@ const UploadForm = () => {
 
   const handleThumbnail = (file: File) => {
     setThumbnail(file);
+  };
+
+  const getDuration = (duration: number | undefined) => {
+    if (duration) {
+      setDuration(Math.floor(duration));
+    }
   };
 
   const handleButtonModalClick = (v: textType) => {
@@ -157,6 +164,7 @@ const UploadForm = () => {
                 <Thumbnail
                   filename={files[0].name.split(".")[0]}
                   getImages={handleThumbnail}
+                  getDuration={getDuration}
                   videoUrl={thumbnailUrl}
                   newThumbnail={newThumbnail}
                 />
@@ -179,7 +187,7 @@ const UploadForm = () => {
                     videoRef.current = e;
                     ref(e);
                   }}
-                  accept="video/mp4,video/mkv, video/x-m4v,video/*"
+                  accept="video/mp4,video/mkv,video/x-m4v,video/*"
                   type="file"
                   hidden
                 />
@@ -291,6 +299,10 @@ const Wrap = styled.form`
   flex-direction: column;
   align-items: center;
   padding: 0px 20px;
+  padding-bottom: 80px;
+  overflow-y: auto;
+  overflow-x: auto;
+  height: 70vh;
 `;
 const UploadBox = styled.label<{ clickable: boolean; hidden?: boolean }>`
   position: relative;

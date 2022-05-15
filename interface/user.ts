@@ -2,7 +2,6 @@ export interface IUser {
   id: number;
   email?: string;
   avatar?: string;
-  nickName: string;
-  password: string;
-  name: string;
+  nickname: string;
+  profileFilePath: string;
 }
