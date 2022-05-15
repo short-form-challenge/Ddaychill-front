@@ -1,21 +1,14 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "@components/modal/Modal";
 
 const Navigation = () => {
   const [showModal, setShowModal] = useState(false);
-  const [hasToken, setHasToken] = useState(false);
+
   const router = useRouter();
   const tabMenu = router.pathname;
-
-  useEffect(() => {
-    const token = sessionStorage.getItem("accessToken");
-    if (token) {
-      setHasToken(true);
-    }
-  }, []);
 
   const handleClick = (url: string) => {
     const token = sessionStorage.getItem("accessToken");
