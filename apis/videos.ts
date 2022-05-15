@@ -56,6 +56,24 @@ export const getMyVideos = async (pageParam = 0, showId = 0) => {
       };
     });
 };
+export const getOtherVideos = async (userId = 0, pageParam = 0, showId = 0) => {
+  return await axios
+    .get(
+      `${API}/videos/myVideos?userId=${userId}&lastId=${pageParam}&showId=${showId}`
+    )
+    .then((res) => {
+      console.log(res);
+      const { data, last } = res.data;
+      return {
+        result: data,
+        nextPage: {
+          id: data[data.length - 1]?.id,
+          showId: data[data.length - 1]?.showId,
+        },
+        isLast: last,
+      };
+    });
+};
 
 export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) =>
   await axios

@@ -29,10 +29,11 @@ const Profile = () => {
       setItem(res.data.data);
     } catch (err) {}
   };
+  console.log(item.userId);
   return (
     <>
       <Wrapper>
-        <BackArrowIcon>
+        <BackArrowIcon onClick={() => router.back}>
           <span className="material-symbols-rounded">arrow_back_ios</span>
         </BackArrowIcon>
         <UserInfoWrap>
