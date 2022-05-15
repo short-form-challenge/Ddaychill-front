@@ -1,25 +1,86 @@
 import BackButtonHeader from "@components/header/BackButtonHeader";
+import axios from "axios";
+import { API } from "config";
+import { IProfile } from "interface/profile";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Badgelist = () => {
+  const router = useRouter();
+  const [item, setItem] = useState<IProfile>({
+    challenges: [
+      {
+        badgeCnt: 0,
+        category: 0,
+        dayCnt: 0,
+      },
+    ],
+    nickname: "",
+    ongoingChallengeCnt: 0,
+    profileFilePath: "",
+    totalBadgeCnt: 0,
+    userId: 0,
+  });
+  const healthBgCnt =
+    item.challenges && item.challenges.find((x) => x.category === 1)?.badgeCnt
+      ? Number(item.challenges.find((x) => x.category === 1)?.badgeCnt)
+      : 0;
+  const studyBgCnt =
+    item.challenges && item.challenges.find((x) => x.category === 2)?.badgeCnt
+      ? Number(item.challenges.find((x) => x.category === 2)?.badgeCnt)
+      : 0;
+  useEffect(() => {
+    getMyData();
+  }, []);
+  const getMyData = async () => {
+    try {
+      const res = await axios.get(`${API}/users/myProfile`, {
+        headers: {
+          "X-AUTH-TOKEN": `${sessionStorage.getItem("accessToken")}`,
+        },
+      });
+      setItem(res.data.data);
+      console.log(res.data);
+    } catch (error) {
+      // alert(error);
+    }
+  };
+  console.log(item);
   return (
     <>
-      <BackButtonHeader isBackButton={true} text="뱃지 현황"></BackButtonHeader>
+      <BackButtonHeader
+        onClickBackButton={() => router.push("/user/mypage")}
+        isBackButton={true}
+        text="뱃지 현황"
+      ></BackButtonHeader>
       <Wrapper>
         <BadgeCntWrap>
           <CntWrap>
             <CntLable>운동 뱃지</CntLable>
-            <CntNumber>0</CntNumber>
+            <CntNumber>{healthBgCnt}</CntNumber>
           </CntWrap>
           <CntLine></CntLine>
           <CntWrap>
             <CntLable>공부 뱃지</CntLable>
-            <CntNumber>1</CntNumber>
+            <CntNumber>{studyBgCnt}</CntNumber>
           </CntWrap>
         </BadgeCntWrap>
         <BadgeListWrap>
-          {new Array(18).fill(1).map((index) => (
-            <EmptyBadge key={index} />
+          {new Array(healthBgCnt).fill(1).map((_, index) => (
+            <EmptyBadge
+              src={`/assets/img/healthBadge${(index % 5) + 1}.png`}
+              key={index}
+            />
+          ))}
+          {new Array(studyBgCnt).fill(1).map((_, index) => (
+            <EmptyBadge
+              src={`/assets/img/studyBadge${(index % 5) + 1}.png`}
+              key={index}
+            />
+          ))}
+          {new Array(18 - healthBgCnt - studyBgCnt).fill(1).map((index) => (
+            <EmptyBadge src="/assets/img/noBadge.png" key={index} />
           ))}
         </BadgeListWrap>
       </Wrapper>
@@ -43,10 +104,9 @@ const BadgeListWrap = styled.div`
   flex-wrap: wrap;
 `;
 
-const EmptyBadge = styled.div`
+const EmptyBadge = styled.img`
   width: 50px;
   height: 50px;
-  background: #c4c4c4;
   border-radius: 50%;
   margin: 15px 18px;
 `;
