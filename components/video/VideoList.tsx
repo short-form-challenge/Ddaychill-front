@@ -40,6 +40,7 @@ const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
     };
   }, [listRef, data, isLoading]);
 
+  console.log(data);
   return (
     <ListLayout>
       <ListWrapper ref={listRef}>

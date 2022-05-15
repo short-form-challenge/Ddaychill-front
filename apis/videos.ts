@@ -81,7 +81,7 @@ export const getOtherVideos = async (userId = 0, pageParam = 0, showId = 0) => {
 
 export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) => {
   const token = sessionStorage.getItem("accessToken");
-  await axios
+  return await axios
     .get(
       `${API}/videos/likeVideos?cate=${cateId}&showId=${showId}&lastId=${pageParam}`,
       {
@@ -91,6 +91,7 @@ export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) => {
       }
     )
     .then((res) => {
+      console.log(res);
       const { data, last } = res.data;
       return {
         result: data,

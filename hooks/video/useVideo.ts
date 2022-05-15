@@ -10,11 +10,11 @@ const useVideo = (cateId: number = 0, type: "main" | "my" | "liked") => {
         ? getVideos(cateId, 0, 0)
         : type === "my"
         ? getMyVideos(pageParam?.id, pageParam?.showId)
-        : getFavorites();
+        : getFavorites(pageParam?.id, pageParam?.showId);
     },
     {
       getNextPageParam: (lastPage) => {
-        if (!lastPage?.isLast) {
+        if (!lastPage.isLast) {
           return lastPage?.nextPage;
         } else {
           return undefined;
