@@ -29,7 +29,7 @@ export const getFavorites = async (pageParam = 0) =>
 
 export const getUserVideos = async (userId = 0, pageParam = 0) =>
   await axios
-    .get(`/api/videos?userId=${userId}&lastId=${pageParam}`)
+    .get(`/videos?userId=${userId}&lastId=${pageParam}`)
     .then((res) => {
       const {
         data: { videos, isLast },

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 const Video: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { data, isLoading } = useVideoDetail(id?.toString());
+  const { data, isLoading } = useVideoDetail(id?.toString(), "main");
   return (
     <>
       <VideoDetail data={data} isLoading={isLoading} />

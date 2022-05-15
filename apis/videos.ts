@@ -54,6 +54,30 @@ export const getMyVideos = async (pageParam = 0, showId = 0) => {
       };
     });
 };
+export const getOtherVideos = async (userId = 0, pageParam = 0, showId = 0) => {
+  const token = sessionStorage.getItem("accessToken");
+
+  return await axios
+    .get(
+      `${API}/videos/myVideos?userId=${userId}&lastId=${pageParam}&showId=${showId}`,
+      {
+        headers: {
+          "X-AUTH-TOKEN": token!,
+        },
+      }
+    )
+    .then((res) => {
+      const { data, last } = res.data;
+      return {
+        result: data,
+        nextPage: {
+          id: data[data.length - 1]?.id,
+          showId: data[data.length - 1]?.showId,
+        },
+        isLast: last,
+      };
+    });
+};
 
 export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) =>
   await axios
@@ -61,13 +85,14 @@ export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) =>
       `/videos/likeVideos?cate=${cateId}&showId=${showId}&lastId=${pageParam}`
     )
     .then((res) => {
-      const {
-        data: { videos, isLast },
-      } = res;
+      const { data, last } = res.data;
       return {
-        result: videos,
-        nextPage: videos[videos.length - 1].id,
-        isLast: isLast,
+        result: data,
+        nextPage: {
+          id: data[data.length - 1]?.id,
+          showId: data[data.length - 1]?.showId,
+        },
+        isLast: last,
       };
     });
 

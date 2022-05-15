@@ -2,9 +2,12 @@ import { getVideoDetail } from "apis/videos";
 import { IVideoRes } from "interface/video";
 import { useQuery } from "react-query";
 
-const useVideoDetail = (id: string | undefined) => {
+const useVideoDetail = (
+  id: string | undefined,
+  type: "main" | "my" | "liked"
+) => {
   const { data, isLoading } = useQuery<IVideoRes>(
-    ["videoDetail", id],
+    ["videoDetail", id, type],
     () => getVideoDetail(id),
     { enabled: !!id }
   );

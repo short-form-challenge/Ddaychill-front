@@ -1,11 +1,11 @@
-import { getUserVideos } from "apis/post";
+import { getOtherVideos } from "apis/videos";
 import { QueryResult } from "interface/video";
 import { useInfiniteQuery } from "react-query";
 
 const useUserVideo = (userId: number) =>
   useInfiniteQuery<QueryResult>(
     ["videos", userId],
-    ({ pageParam }) => getUserVideos(userId, pageParam),
+    ({ pageParam }) => getOtherVideos(userId, pageParam?.id, pageParam?.showId),
     {
       getNextPageParam: (lastPage) => {
         if (!lastPage.isLast) {
