@@ -1,7 +1,6 @@
 const checkNum = /[0-9]/;
 const checkEng = /[a-zA-Z]/;
 const checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-// const checkSpc = /[~!@#$%^&*()_+|<>?:{}]/;
 
 export const checkLoginEmail = (value: string) => {
   const exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
@@ -11,7 +10,7 @@ export const checkLoginEmail = (value: string) => {
   return false;
 };
 
-export const checkEmail = (value: string, resStatus: boolean) => {
+export const checkEmail = (value: string, resStatus: boolean | undefined) => {
   const exptext = /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/;
   if (exptext.test(value) && resStatus) {
     return true;
@@ -35,7 +34,10 @@ export const dobbleCheckPassword = (value: string, password: string) => {
   }
 };
 
-export const checkNickName = (value: string, resStatus: boolean) => {
+export const checkNickName = (
+  value: string,
+  resStatus: boolean | undefined
+) => {
   if (
     value.length > 1 &&
     value.length < 10 &&

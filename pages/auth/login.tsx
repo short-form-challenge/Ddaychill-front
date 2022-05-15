@@ -26,27 +26,27 @@ const LoginPage: FC<ILoginForm> = () => {
   const submitLoginForm = async (email: string, password: string) => {
     try {
       const res = await axios.post(`${API}/signin`, {
-        // const res = await axios.post(`/api/isLogin`, {
         email: email,
         password: password,
       });
 
-      // 찐
       const token = res.headers["x-auth-token"];
       sessionStorage.setItem("accessToken", token);
-      // 짭
-      // sessionStorage.setItem("accessToken", res.data.token);
+
       route.push({
         pathname: "/",
         query: { isLogin: true },
       });
     } catch (err) {
       console.log(err);
-      // status에 따라 할 수도!
       setShowModal(true);
     }
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+    setLoginForm({ ...loginForm, email: "", password: "" });
+  };
   const handleLogin = () => {
     const emailValue = emailRef?.current!.value;
     const passwordValue = passwordRef?.current!.value;
@@ -61,7 +61,7 @@ const LoginPage: FC<ILoginForm> = () => {
   return (
     <>
       {showModal && (
-        <Modal mainConfirm="확인" onClickMainCofirm={() => setShowModal(false)}>
+        <Modal mainConfirm="확인" onClickMainCofirm={() => closeModal()}>
           <span>
             이메일 또는 비밀번호가 <br /> 일치하지 않습니다
           </span>
@@ -84,6 +84,7 @@ const LoginPage: FC<ILoginForm> = () => {
             onChange={(e) =>
               setLoginForm({ ...loginForm, email: e.target.value })
             }
+            value={loginForm.email}
             autoComplete="off"
           />
           <LoginInput
@@ -93,6 +94,7 @@ const LoginPage: FC<ILoginForm> = () => {
             onChange={(e) =>
               setLoginForm({ ...loginForm, password: e.target.value })
             }
+            value={loginForm.password}
             autoComplete="off"
           />
         </InputForms>
@@ -139,6 +141,7 @@ const InputForms = styled.div`
 const Buttons = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const LoginInput = styled.input`
@@ -168,14 +171,10 @@ const SignupButton = styled.button`
   background-color: white;
   color: #4d23d6;
   border: 1px solid #4d23d6;
+  width: 100%;
 
   &:hover {
     cursor: pointer;
     opacity: 0.9;
   }
 `;
-
-// const ErrorMessage = styled.div`
-//   color: red;
-//   font-size: 10px;
-// `;
