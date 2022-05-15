@@ -79,10 +79,16 @@ export const getOtherVideos = async (userId = 0, pageParam = 0, showId = 0) => {
     });
 };
 
-export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) =>
+export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) => {
+  const token = sessionStorage.getItem("accessToken");
   await axios
     .get(
-      `/videos/likeVideos?cate=${cateId}&showId=${showId}&lastId=${pageParam}`
+      `${API}/videos/likeVideos?cate=${cateId}&showId=${showId}&lastId=${pageParam}`,
+      {
+        headers: {
+          "X-AUTH-TOKEN": token || "",
+        },
+      }
     )
     .then((res) => {
       const { data, last } = res.data;
@@ -95,6 +101,7 @@ export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) =>
         isLast: last,
       };
     });
+};
 
 export const getVideoDetail = async (id: string | undefined) => {
   const token = sessionStorage.getItem("accessToken");
