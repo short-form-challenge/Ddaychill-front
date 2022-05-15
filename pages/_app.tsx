@@ -10,6 +10,7 @@ import "styles/reset.scss";
 import AxiosConfig from "libs/axios";
 import OnboardingComponent from "@components/onboarding/OnboardingComponent";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 AxiosConfig();
 config.autoAddCss = false;
@@ -18,7 +19,7 @@ const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true);
-
+  const router = useRouter();
   setTimeout(() => {
     setIsLoading(false);
   }, 2000);
@@ -65,7 +66,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           ) : (
             <>
               <Component {...pageProps} />
-              <Navigation />
+              {router.pathname !== "/auth/login" &&
+                router.pathname !== "/user/edit" && <Navigation />}
             </>
           )}
         </MainLayout>
