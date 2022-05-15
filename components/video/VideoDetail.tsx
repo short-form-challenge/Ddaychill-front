@@ -47,6 +47,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation(
     (videoId: number) => deleteVideo(videoId)
   );
+  console.log(data);
 
   // 좋아요 클릭시 핸들러
   const handleLikeClick = (videoId: number) => {
@@ -136,13 +137,17 @@ const VideoDetail = ({ data, isLoading }: Props) => {
         </Modal>
       )}
       <VideoWrapper>
+        d
         <video src={API + data?.data.filePath} ref={videoRef} autoPlay muted />
       </VideoWrapper>
       <ContentBox>
         <Profile>
           <Avatar>
-            {data?.data.postedBy?.avatar && (
-              <img src={API + data?.data.postedBy.avatar} alt="avatar" />
+            {data?.data.postedBy?.profileFilePath && (
+              <img
+                src={API + data?.data.postedBy.profileFilePath}
+                alt="avatar"
+              />
             )}
           </Avatar>
           <Nickname>@{data?.data.postedBy.nickname}</Nickname>

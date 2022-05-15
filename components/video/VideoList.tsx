@@ -1,12 +1,15 @@
 import VideoCard from "./VideoCard";
 import { useEffect, useRef } from "react";
 import { ListWrapper } from "./style";
-import { QueryResult } from "interface/video";
+
+import { useRouter } from "next/router";
+import styled from "styled-components";
 import {
   FetchNextPageOptions,
   InfiniteData,
   InfiniteQueryObserverResult,
 } from "react-query";
+import { QueryResult } from "interface/video";
 
 interface Props {
   data: InfiniteData<QueryResult> | undefined;
@@ -18,6 +21,9 @@ interface Props {
 
 const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
   const listRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  console.log(router.query.isLogin);
+
   useEffect(() => {
     function onScroll() {
       if (
@@ -37,14 +43,26 @@ const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
       listRef.current?.removeEventListener("scroll", onScroll);
     };
   }, [listRef, data, isLoading]);
-  console.log(data);
+
   return (
-    <ListWrapper ref={listRef}>
-      {data?.pages?.map((group) =>
-        group.result.map((v) => <VideoCard key={v.id} item={v} />)
-      )}
-    </ListWrapper>
+    <ListLayout>
+      <ListWrapper ref={listRef}>
+        {data?.pages?.map((group) =>
+          group.result.map((v) => <VideoCard key={v.id} item={v} />)
+        )}
+      </ListWrapper>
+    </ListLayout>
   );
 };
+
+const ListLayout = styled.div`
+  -ms-overflow-style: none;
+  height: 75vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 export default VideoList;

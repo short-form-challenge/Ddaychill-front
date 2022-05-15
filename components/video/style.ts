@@ -6,14 +6,9 @@ export const ListWrapper = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 240px);
   gap: 3px;
-  padding: 80px 20px;
-  overflow-y: auto;
-  overflow-x: auto;
-  height: 100%;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  padding: 0px 20px;
+  padding-bottom: 80px;
+  height: 80%;
 `;
 
 export const CardWrapper = styled(motion.div)`

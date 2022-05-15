@@ -48,7 +48,7 @@ function Thumbnail({
             getImages(file);
           });
         }
-      }, 200);
+      }, 500);
     }
   }, [videoRef]);
 

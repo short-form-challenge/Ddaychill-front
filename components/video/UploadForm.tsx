@@ -143,7 +143,6 @@ const UploadForm = () => {
 
   return (
     <>
-      (
       {modal && (
         <ButtonModal
           texts={newThumbnail ? ["커버업로드", "초기화"] : ["커버업로드"]}
@@ -268,7 +267,10 @@ const UploadForm = () => {
           </CategoryBoxWrap>
         </CategoryWrap>
         <UploadButtonWrap>
-          <MainButton type="submit" text={"업로드"} />
+          <MainButton
+            type="submit"
+            text={isLoading ? "업로드중..." : "업로드"}
+          />
         </UploadButtonWrap>
       </Wrap>
     </>
@@ -294,7 +296,7 @@ const TextWrapper = styled.div`
 
 const Wrap = styled.form`
   width: 100%;
-  margin-top: 82px;
+
   display: flex;
   flex-direction: column;
   align-items: center;

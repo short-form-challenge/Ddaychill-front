@@ -25,7 +25,7 @@ const BackButtonHeader = ({
       )}
       {text}
       {isCloseButton && (
-        <CloseButton onClick={() => router.back()}>
+        <CloseButton onClick={() => router.replace("/")}>
           <span className="material-symbols-rounded">close</span>
         </CloseButton>
       )}

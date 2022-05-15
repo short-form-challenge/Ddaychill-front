@@ -34,14 +34,15 @@ const MyPage: NextPage = () => {
   }, []);
 
   const getMyData = async () => {
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) return;
     try {
       const res = await axios.get(`${API}/users/myProfile`, {
         headers: {
-          "X-AUTH-TOKEN": `${sessionStorage.getItem("accessToken")}`,
+          "X-AUTH-TOKEN": `${token}`,
         },
       });
       setItem(res.data.data);
-      console.log(res.data);
     } catch (error) {
       // alert(error);
     }
@@ -69,9 +70,8 @@ const MyPage: NextPage = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("accessToken");
-    router.push("/auth/login");
+    router.push("/");
   };
-  console.log(item.challenges);
   return (
     <>
       <Wrapper>

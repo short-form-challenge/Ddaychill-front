@@ -1,14 +1,41 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import Modal from "@components/modal/Modal";
 
 const Navigation = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [hasToken, setHasToken] = useState(false);
   const router = useRouter();
   const tabMenu = router.pathname;
 
+  useEffect(() => {
+    const token = sessionStorage.getItem("accessToken");
+    if (token) {
+      setHasToken(true);
+    }
+  }, []);
+
   return (
     <NavWrapper>
-      <Link href="/">
+      {showModal && (
+        <Modal
+          subConfirm="아니오"
+          mainConfirm="예"
+          onClickSubConfirm={() => {
+            setShowModal(false);
+            router.push("/");
+          }}
+          onClickMainCofirm={() => {
+            setShowModal(false);
+            router.push("/auth/login");
+          }}
+        >
+          <div>로그인을 통해 소통을 시작해보세요.</div>
+        </Modal>
+      )}
+      <Link href={"/"}>
         <NavItem
           className={
             tabMenu === "/" || tabMenu.includes("/videos")
@@ -22,9 +49,14 @@ const Navigation = () => {
           <a className="home">홈</a>
         </NavItem>
       </Link>
-      <Link href={"/myvideos"}>
+      <Link href={hasToken ? "/myvideos" : "#"}>
         <NavItem
           className={tabMenu.includes("/myvideos") ? "iconChecked" : "icon"}
+          onClick={() => {
+            if (!hasToken) {
+              setShowModal(true);
+            }
+          }}
         >
           <div>
             <span className="material-symbols-rounded">smart_display</span>
