@@ -2,33 +2,21 @@
 
 export default [
   {
+    // success: true,
+    // code: 0,
+    // msg: "성공했습니다.",
+    // count: null,
+    // data: {
     userId: 1,
+    nickname: "찌니",
+    profileFilePath: null,
     email: "gywlsh274@gmail.com",
+    totalBadgeCnt: 0,
+    ongoingChallengeCnt: 0,
+    challenges: [],
+    // login test
     token: "token1",
     msg: "성공했습니다.",
   },
-  {
-    userId: 2,
-    email: "gywlsh274@naver.com",
-    token: "token2",
-    msg: "성공했습니다.",
-  },
-  {
-    userId: 3,
-    email: "test@test.com",
-    token: "token3",
-    msg: "성공했습니다.",
-  },
-  {
-    userId: 4,
-    email: "test1@test.com",
-    token: "token4",
-    msg: "성공했습니다.",
-  },
-  {
-    userId: 5,
-    email: "test2@test.com",
-    token: "token5",
-    msg: "성공했습니다.",
-  },
+  // },
 ];

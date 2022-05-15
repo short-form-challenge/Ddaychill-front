@@ -1,6 +1,27 @@
+import VideoList from "@components/video/VideoList";
+import axios from "axios";
+import { API } from "config";
+import useUserVideo from "hooks/video/useUserVideo";
+import { IProfile } from "interface/profile";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Profile = () => {
+  const [item, setItem] = useState<IProfile>({});
+  const router = useRouter();
+  useEffect(() => {
+    getProfileData();
+  }, [router.query.id]);
+  const { data, isLoading, fetchNextPage } = useUserVideo(Number(item.userId));
+
+  const getProfileData = async () => {
+    try {
+      const res = await axios.get(`${API}/users/${router.query.id}/profile`);
+      console.log(res.data.data);
+      setItem(res.data.data);
+    } catch (err) {}
+  };
   return (
     <>
       <Wrapper>
@@ -8,16 +29,28 @@ const Profile = () => {
           <span className="material-symbols-rounded">arrow_back_ios</span>
         </BackArrowIcon>
         <UserInfoWrap>
-          <UserPhoto></UserPhoto>
-          <UserName>레오와 두리</UserName>
+          {item.profileFilePath ? (
+            <UserPhoto src={`${API + item.profileFilePath}`} />
+          ) : (
+            <UserPhoto src="/assets/img/noProfileImage.png" />
+          )}
+          <UserName>{item.nickname}</UserName>
         </UserInfoWrap>
         <TagWrap>
-          <CategoryTag>#운동</CategoryTag>
-          <CategoryTag>#공부</CategoryTag>
-          <DayTag>Day 1</DayTag>
+          {item?.challenges && item?.challenges[0]?.category && (
+            <CategoryTag>#운동</CategoryTag>
+          )}
+          {item?.challenges && item?.challenges[1]?.category && (
+            <CategoryTag>#공부</CategoryTag>
+          )}
+          <DayTag>Day {item?.ongoingChallengeCnt}</DayTag>
         </TagWrap>
       </Wrapper>
-      {/* <VideoList /> */}
+      <VideoList
+        data={data}
+        isLoading={isLoading}
+        fetchNextPage={fetchNextPage}
+      />
     </>
   );
 };
@@ -25,15 +58,15 @@ const Profile = () => {
 export default Profile;
 
 const Wrapper = styled.div`
-  background: linear-gradient(197.78deg, #4d23d6 30.81%, #8dabff 107.31%);
+  background: linear-gradient(197.78deg, #4d23d6 30.81%, #139ae9 107.31%);
   padding: 54px 20px 32px 20px;
-  margin-bottom: 12px;
 `;
 
 const BackArrowIcon = styled.div`
   width: 24px;
   height: 24px;
   color: white;
+  cursor: pointer;
 `;
 
 const UserInfoWrap = styled.div`
@@ -42,11 +75,10 @@ const UserInfoWrap = styled.div`
   align-items: center;
 `;
 
-const UserPhoto = styled.div`
+const UserPhoto = styled.img`
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background-color: sandybrown;
 `;
 
 const UserName = styled.div`
