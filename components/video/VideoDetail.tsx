@@ -84,9 +84,6 @@ const VideoDetail = ({ data, isLoading }: Props) => {
       setShowInfo(true);
       setShowDelete(false);
     }
-    if (v === "수정") {
-      router.push("/");
-    }
     if (v === "삭제") {
       setShowDelete(true);
       setShowModal(false);
@@ -110,7 +107,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
     <DetailWrapper>
       {showModal && (
         <ButtonModal
-          texts={["정보", "수정", "삭제"]}
+          texts={["정보", "삭제"]}
           onClose={() => setShowModal(false)}
           onClick={handleButtonModalClick}
         />
