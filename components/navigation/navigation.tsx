@@ -17,6 +17,15 @@ const Navigation = () => {
     }
   }, []);
 
+  const handleClick = (url: string) => {
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) {
+      setShowModal(true);
+    } else {
+      router.push(url);
+    }
+  };
+
   return (
     <NavWrapper>
       {showModal && (
@@ -49,29 +58,26 @@ const Navigation = () => {
           <a className="home">홈</a>
         </NavItem>
       </Link>
-      <Link href={hasToken ? "/myvideos" : "#"}>
-        <NavItem
-          className={tabMenu.includes("/myvideos") ? "iconChecked" : "icon"}
-          onClick={() => {
-            if (!hasToken) {
-              setShowModal(true);
-            }
-          }}
-        >
-          <div>
-            <span className="material-symbols-rounded">smart_display</span>
-          </div>
-          <a className="home">마이비디오</a>
-        </NavItem>
-      </Link>
-      <Link href="/favorites">
-        <NavItem className={tabMenu === "/favorites" ? "iconChecked" : "icon"}>
-          <div>
-            <span className="material-symbols-rounded">favorite</span>
-          </div>
-          <a className="home">관심영상</a>
-        </NavItem>
-      </Link>
+
+      <NavItem
+        className={tabMenu.includes("/myvideos") ? "iconChecked" : "icon"}
+        onClick={() => handleClick("/myvideos")}
+      >
+        <div>
+          <span className="material-symbols-rounded">smart_display</span>
+        </div>
+        <a className="home">마이비디오</a>
+      </NavItem>
+
+      <NavItem
+        className={tabMenu === "/favorites" ? "iconChecked" : "icon"}
+        onClick={() => handleClick("/favorites")}
+      >
+        <div>
+          <span className="material-symbols-rounded">favorite</span>
+        </div>
+        <a className="home">관심영상</a>
+      </NavItem>
       <Link href="/user/mypage">
         <NavItem
           className={tabMenu === "/user/mypage" ? "iconChecked" : "icon"}
