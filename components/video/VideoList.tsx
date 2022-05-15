@@ -2,7 +2,6 @@ import VideoCard from "./VideoCard";
 import { useEffect, useRef } from "react";
 import { ListWrapper } from "./style";
 
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import {
   FetchNextPageOptions,
@@ -21,8 +20,6 @@ interface Props {
 
 const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
   const listRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-  console.log(router.query.isLogin);
 
   useEffect(() => {
     function onScroll() {

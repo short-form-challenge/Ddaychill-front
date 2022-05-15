@@ -45,7 +45,6 @@ const UploadForm = () => {
   const onValid = (data: IUploadForm) => {
     if (isLoading) return;
     if (!thumbnail) return;
-    console.log(data, thumbnail, cateId);
 
     const videoInfo = {
       title: data.title,
@@ -64,7 +63,6 @@ const UploadForm = () => {
     );
     mutate(frm, {
       onSuccess: (data) => {
-        console.log(data);
         if (data) {
           router.push(`/videos/${data.data.data.id}`);
         }
@@ -88,10 +86,8 @@ const UploadForm = () => {
         "video/mpg",
       ].includes(files[0]?.type)
     ) {
-      console.log(errors.file?.message);
-      console.log(files);
       const videoUrl = URL.createObjectURL(files[0]);
-      console.log(videoUrl);
+
       setThumbnailUrl(videoUrl);
     }
   }, [files]);
@@ -120,7 +116,6 @@ const UploadForm = () => {
   // 새로운 섬네일 업로드 감지
   const images = watch("thumbnail");
   useEffect(() => {
-    console.log(images);
     if (!images) return;
     if (images.length <= 0) return;
     if (

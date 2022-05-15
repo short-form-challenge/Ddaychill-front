@@ -17,7 +17,6 @@ export const getVideos = async (cateId = 0, pageParam = 0, showId = 0) => {
         : {}
     )
     .then((res) => {
-      console.log(res);
       const { data, last } = res.data;
       return {
         result: data,
@@ -44,7 +43,6 @@ export const getMyVideos = async (pageParam = 0, showId = 0) => {
         : {}
     )
     .then((res) => {
-      console.log(res);
       const { data, last } = res.data;
       return {
         result: data,

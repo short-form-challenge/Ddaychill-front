@@ -55,7 +55,8 @@ const VideoDetail = ({ data, isLoading }: Props) => {
     toggleLike(videoId, {
       onSuccess: (data) => {
         if (data.code === 0) {
-          queryClient.invalidateQueries(["videoDetail", videoId + ""]);
+          queryClient.invalidateQueries(["videoDetail", videoId + "", "main"]);
+          queryClient.invalidateQueries(["videoDetail", videoId + "", "liked"]);
         }
       },
       onError: (err) => {
@@ -69,7 +70,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
     if (deleteLoading) return;
     deleteMutate(data?.data?.id!, {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(["videos", 1]);
+        queryClient.invalidateQueries(["videos", 1, "main"]);
         router.push("/");
       },
       onError: (err) => {
