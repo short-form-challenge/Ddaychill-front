@@ -20,7 +20,6 @@ interface Props {
 
 const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
   const listRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     function onScroll() {
       if (
@@ -45,7 +44,7 @@ const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
     <ListLayout>
       <ListWrapper ref={listRef}>
         {data?.pages?.map((group) =>
-          group.result.map((v) => <VideoCard key={v.id} item={v} />)
+          group?.result.map((v) => <VideoCard key={v.id} item={v} />)
         )}
       </ListWrapper>
     </ListLayout>

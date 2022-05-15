@@ -1,9 +1,9 @@
 import { getFavorites, getMyVideos, getVideos } from "apis/videos";
-import { QueryResult } from "interface/video";
+
 import { useInfiniteQuery } from "react-query";
 
 const useVideo = (cateId: number = 0, type: "main" | "my" | "liked") => {
-  return useInfiniteQuery<QueryResult>(
+  return useInfiniteQuery<any>(
     ["videos", cateId, type],
     ({ pageParam }) => {
       return type === "main"
@@ -14,8 +14,8 @@ const useVideo = (cateId: number = 0, type: "main" | "my" | "liked") => {
     },
     {
       getNextPageParam: (lastPage) => {
-        if (!lastPage.isLast) {
-          return lastPage.nextPage;
+        if (!lastPage?.isLast) {
+          return lastPage?.nextPage;
         } else {
           return undefined;
         }
