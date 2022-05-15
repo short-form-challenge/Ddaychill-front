@@ -91,7 +91,8 @@ const FormInput: FC<FormInputValue> = ({
             setEmailResValid(false);
           }
         } catch (err) {
-          console.log(err);
+          setEmailResValid(false);
+          validateInputValue(event.target.value, data.valueName, false);
         }
       }
       if (fieldName === "nickName") {
@@ -99,7 +100,7 @@ const FormInput: FC<FormInputValue> = ({
           const res = await axios.get(
             `${API}/validate/nickname?nickname=${event.target.value}`
           );
-          console.log(res.status);
+
           if (res.status === 200) {
             setNicknameResValid(true);
             validateInputValue(event.target.value, data.valueName, true);
@@ -107,7 +108,8 @@ const FormInput: FC<FormInputValue> = ({
             setNicknameResValid(false);
           }
         } catch (err) {
-          console.log(err);
+          setNicknameResValid(false);
+          validateInputValue(event.target.value, data.valueName, false);
         }
       }
     }, 500);

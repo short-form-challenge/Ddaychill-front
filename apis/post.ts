@@ -45,7 +45,6 @@ export const getVideoDetail = async (id: string | undefined) =>
   await axios.get(`/api/videos/${id}`).then((res) => res.data);
 
 export const postToggleLike = async (videoId: number, isLiked: boolean) => {
-  console.log(videoId);
   return isLiked
     ? await axios
         .post(`${API}/videos/downLikes/${videoId}/${1}`)
@@ -60,7 +59,7 @@ export const deleteVideo = async (videoId: number) =>
 
 export const postVideo = async (frm: FormData) => {
   const token = sessionStorage.getItem("accessToken");
-  console.log(API);
+
   if (!token) return;
   return await axios.post(`${API}/videos`, frm, {
     headers: {

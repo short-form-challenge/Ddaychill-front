@@ -49,12 +49,12 @@ const MyPage: NextPage = () => {
   };
   const onClickDeleteUser = async () => {
     try {
-      const res = await axios.delete(`${API}/users`, {
+      await axios.delete(`${API}/users`, {
         headers: {
           "X-AUTH-TOKEN": `${sessionStorage.getItem("accessToken")}`,
         },
       });
-      console.log(res);
+
       onClickToggleWithdrawalModal();
       sessionStorage.removeItem("accessToken");
       alert("회원탈퇴가 완료되었습니다.");
@@ -85,7 +85,7 @@ const MyPage: NextPage = () => {
               )}
               <UserNameWrap>
                 <UserName>{item.nickname}</UserName>
-                <ChallengeDay>Day {day}</ChallengeDay>
+                <ChallengeDay>Day_{day}</ChallengeDay>
               </UserNameWrap>
             </UserInfoWrap>
           ) : (

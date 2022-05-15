@@ -47,7 +47,6 @@ const VideoDetail = ({ data, isLoading }: Props) => {
   const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation(
     (videoId: number) => deleteVideo(videoId)
   );
-  console.log(data);
 
   // 좋아요 클릭시 핸들러
   const handleLikeClick = (videoId: number) => {
@@ -55,7 +54,8 @@ const VideoDetail = ({ data, isLoading }: Props) => {
     toggleLike(videoId, {
       onSuccess: (data) => {
         if (data.code === 0) {
-          queryClient.invalidateQueries(["videoDetail", videoId + ""]);
+          queryClient.invalidateQueries(["videoDetail", videoId + "", "main"]);
+          queryClient.invalidateQueries(["videos", 0, "liked"]);
         }
       },
       onError: (err) => {
@@ -69,7 +69,7 @@ const VideoDetail = ({ data, isLoading }: Props) => {
     if (deleteLoading) return;
     deleteMutate(data?.data?.id!, {
       onSuccess: (data) => {
-        queryClient.invalidateQueries(["videos", 1]);
+        queryClient.invalidateQueries(["videos", 1, "main"]);
         router.push("/");
       },
       onError: (err) => {
@@ -134,7 +134,6 @@ const VideoDetail = ({ data, isLoading }: Props) => {
         </Modal>
       )}
       <VideoWrapper>
-        d
         <video src={API + data?.data.filePath} ref={videoRef} autoPlay muted />
       </VideoWrapper>
       <ContentBox>

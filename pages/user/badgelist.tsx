@@ -41,7 +41,6 @@ const Badgelist = () => {
         },
       });
       setItem(res.data.data);
-      console.log(res.data);
     } catch (error) {
       // alert(error);
     }

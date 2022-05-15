@@ -29,11 +29,11 @@ const Profile = () => {
       setItem(res.data.data);
     } catch (err) {}
   };
-  console.log(item.userId);
+
   return (
     <>
       <Wrapper>
-        <BackArrowIcon onClick={() => router.back}>
+        <BackArrowIcon onClick={() => router.back()}>
           <span className="material-symbols-rounded">arrow_back_ios</span>
         </BackArrowIcon>
         <UserInfoWrap>
@@ -68,7 +68,7 @@ const Wrapper = styled.div`
   position: relative;
   background: linear-gradient(197.78deg, #4d23d6 30.81%, #139ae9 107.31%);
   padding: 54px 20px 32px 20px;
-  margin-bottom: -75px;
+  margin-bottom: 5px;
   z-index: 1;
 `;
 

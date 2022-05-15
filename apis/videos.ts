@@ -17,7 +17,6 @@ export const getVideos = async (cateId = 0, pageParam = 0, showId = 0) => {
         : {}
     )
     .then((res) => {
-      console.log(res);
       const { data, last } = res.data;
       return {
         result: data,
@@ -44,7 +43,6 @@ export const getMyVideos = async (pageParam = 0, showId = 0) => {
         : {}
     )
     .then((res) => {
-      console.log(res);
       const { data, last } = res.data;
       return {
         result: data,
@@ -57,12 +55,18 @@ export const getMyVideos = async (pageParam = 0, showId = 0) => {
     });
 };
 export const getOtherVideos = async (userId = 0, pageParam = 0, showId = 0) => {
+  const token = sessionStorage.getItem("accessToken");
+
   return await axios
     .get(
-      `${API}/videos/myVideos?userId=${userId}&lastId=${pageParam}&showId=${showId}`
+      `${API}/videos/myVideos?userId=${userId}&lastId=${pageParam}&showId=${showId}`,
+      {
+        headers: {
+          "X-AUTH-TOKEN": token!,
+        },
+      }
     )
     .then((res) => {
-      console.log(res);
       const { data, last } = res.data;
       return {
         result: data,
@@ -81,13 +85,14 @@ export const getFavorites = async (cateId = 0, pageParam = 0, showId = 0) =>
       `/videos/likeVideos?cate=${cateId}&showId=${showId}&lastId=${pageParam}`
     )
     .then((res) => {
-      const {
-        data: { videos, isLast },
-      } = res;
+      const { data, last } = res.data;
       return {
-        result: videos,
-        nextPage: videos[videos.length - 1].id,
-        isLast: isLast,
+        result: data,
+        nextPage: {
+          id: data[data.length - 1]?.id,
+          showId: data[data.length - 1]?.showId,
+        },
+        isLast: last,
       };
     });
 
@@ -131,8 +136,17 @@ export const postToggleLike = async (videoId: number, isLiked: boolean) => {
         .then((res) => res.data);
 };
 
-export const deleteVideo = async (videoId: number) =>
-  await axios.delete(`${API}/videos/${videoId}`).then((res) => res.data);
+export const deleteVideo = async (videoId: number) => {
+  const token = sessionStorage.getItem("accessToken");
+  if (!token) return;
+  return await axios
+    .delete(`${API}/videos/${videoId}`, {
+      headers: {
+        "X-AUTH-TOKEN": token,
+      },
+    })
+    .then((res) => res.data);
+};
 
 export const postVideo = async (frm: FormData) => {
   const token = sessionStorage.getItem("accessToken");

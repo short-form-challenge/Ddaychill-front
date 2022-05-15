@@ -71,17 +71,14 @@ const ProfileModify: NextPage = () => {
     }
     if (nickNm !== "") {
       try {
-        const res = await axios.get(
-          `${API}/validate/nickname?nickname=${nickNm}`
-        );
-        console.log(res);
+        await axios.get(`${API}/validate/nickname?nickname=${nickNm}`);
       } catch (error) {
         setErrMsg("이미 사용중인 닉네임입니다.");
         return;
       }
     }
     try {
-      const res = await axios.put(
+      await axios.put(
         nickNm !== ""
           ? `${API}/users/profile?nickname=${nickNm}`
           : `${API}/users/profile`,
@@ -93,7 +90,6 @@ const ProfileModify: NextPage = () => {
         }
       );
       onClickToggleModal();
-      console.log(res);
     } catch (error) {
       console.log(error);
     }

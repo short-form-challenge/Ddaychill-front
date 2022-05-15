@@ -4,9 +4,8 @@ import { useInfiniteQuery } from "react-query";
 
 const useVideo = (cateId: number = 0, type: "main" | "my" | "liked") => {
   return useInfiniteQuery<QueryResult>(
-    ["videos", cateId],
+    ["videos", cateId, type],
     ({ pageParam }) => {
-      console.log(pageParam);
       return type === "main"
         ? getVideos(cateId, 0, 0)
         : type === "my"
