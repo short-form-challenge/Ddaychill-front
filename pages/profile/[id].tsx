@@ -54,6 +54,7 @@ const Profile = () => {
         </TagWrap>
       </Wrapper>
       <VideoList
+        type="other"
         data={data}
         isLoading={isLoading}
         fetchNextPage={fetchNextPage}

@@ -13,12 +13,13 @@ import { QueryResult } from "interface/video";
 interface Props {
   data: InfiniteData<QueryResult> | undefined;
   isLoading: boolean;
+  type?: string;
   fetchNextPage: (
     options?: FetchNextPageOptions | undefined
   ) => Promise<InfiniteQueryObserverResult<QueryResult, unknown>>;
 }
 
-const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
+const VideoList = ({ data, isLoading, fetchNextPage, type }: Props) => {
   const listRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     function onScroll() {
@@ -27,6 +28,7 @@ const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
         listRef?.current!.scrollHeight - 300
       ) {
         if (!isLoading) {
+          console.log("next");
           fetchNextPage();
         }
       }
@@ -42,8 +44,8 @@ const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
 
   console.log(data);
   return (
-    <ListLayout>
-      <ListWrapper ref={listRef}>
+    <ListLayout ref={listRef} page={type}>
+      <ListWrapper>
         {data?.pages?.map((group) =>
           group?.result.map((v) => <VideoCard key={v.id} item={v} />)
         )}
@@ -52,9 +54,9 @@ const VideoList = ({ data, isLoading, fetchNextPage }: Props) => {
   );
 };
 
-const ListLayout = styled.div`
+const ListLayout = styled.div<{ page: string | undefined }>`
   -ms-overflow-style: none;
-  height: 75vh;
+  height: ${(props) => (props.page === "other" ? "50%" : "75%")};
   overflow-y: auto;
   overflow-x: auto;
   &::-webkit-scrollbar {
