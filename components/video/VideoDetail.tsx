@@ -139,13 +139,17 @@ const VideoDetail = ({ data, isLoading }: Props) => {
         <video src={API + data?.data.filePath} ref={videoRef} autoPlay muted />
       </VideoWrapper>
       <ContentBox>
-        <Profile>
+        <Profile
+          onClick={() => router.push(`/profile/${data?.data.postedBy.id}`)}
+        >
           <Avatar>
-            {data?.data.postedBy?.profileFilePath && (
+            {data?.data.postedBy?.profileFilePath ? (
               <img
                 src={API + data?.data.postedBy.profileFilePath}
                 alt="avatar"
               />
+            ) : (
+              <img src="/assets/img/noProfileImage.png" />
             )}
           </Avatar>
           <Nickname>@{data?.data.postedBy.nickname}</Nickname>
