@@ -99,6 +99,7 @@ const Signup = () => {
         </Flex>
         <ButtonDivider>
           <MainButton
+            type="button"
             text="확인"
             onClick={() => submitSignupForm()}
             // 임시
