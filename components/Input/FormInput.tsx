@@ -1,5 +1,7 @@
 import { Dispatch, FC, SetStateAction, ChangeEvent } from "react";
 import { ISignupForm, ISignupFormVaild, ISignupItem } from "interface/auth";
+import axios from "axios";
+import { API } from "config";
 import styled from "styled-components";
 
 import {
@@ -24,13 +26,21 @@ const FormInput: FC<FormInputValue> = ({
   data,
   setIsValid,
   isValid,
+  emailResValid,
+  setEmailResValid,
+  nicknameResValid,
+  setNicknameResValid,
 }) => {
-  const validateInputValue = (value: string, name: string) => {
+  const validateInputValue = (
+    value: string,
+    name: string,
+    resStatus?: string
+  ) => {
     switch (name) {
       case "email":
         setIsValid((prev) => ({
           ...prev,
-          email: checkEmail(value),
+          email: checkEmail(value, resStatus),
         }));
         break;
       case "password":
@@ -48,27 +58,68 @@ const FormInput: FC<FormInputValue> = ({
       case "nickName":
         setIsValid((prev) => ({
           ...prev,
-          nickName: checkNickName(value),
+          nickName: checkNickName(value, resStatus),
         }));
         break;
     }
   };
 
-  let timer: ReturnType<typeof setTimeout>;
-  const debouncInputValue = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+  const getIsEmailValid = async (inputEmail) => {
+    try {
+      const res = await axios.get(`${API}/validate/email?email=${inputEmail}`);
+      if (res.status === 200) {
+        setEmailResValid(true);
+      } else {
+        setEmailResValid(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  const getIsNicknameValid = async (inputNickname) => {
+    try {
+      const res = await axios.get(
+        `${API}/validate/nickname?nickname=${inputNickname}`
+      );
+      if (res.status === 200) {
+        setNicknameResValid(true);
+      } else {
+        setNicknameResValid(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  let timer: ReturnType<typeof setTimeout>;
+  const debouncInputValue = (
+    event: ChangeEvent<HTMLInputElement>,
+    fieldName: string
+  ) => {
+    event.preventDefault();
     if (timer) {
       clearTimeout(timer);
     }
     timer = setTimeout(function () {
-      console.log("여기에 ajax 요청", event.target.value);
       setSignupValues({
         ...signupValues,
         [data.valueName]: event.target.value,
       });
 
-      validateInputValue(event.target.value, data.valueName);
+      if (fieldName === "email") {
+        getIsEmailValid(event.target.value);
+        validateInputValue(event.target.value, data.valueName, emailResValid);
+        console.log("emaidsldsdsd");
+      }
+      if (fieldName === "nickName") {
+        getIsNicknameValid(event.target.value);
+        validateInputValue(
+          event.target.value,
+          data.valueName,
+          nicknameResValid
+        );
+      }
     }, 800);
   };
 
@@ -93,8 +144,8 @@ const FormInput: FC<FormInputValue> = ({
           type={data.type}
           onChange={(e) => {
             e.preventDefault();
-            if (data.valueName === ("email" || "nickName")) {
-              debouncInputValue(e);
+            if (data.valueName === "email" || data.valueName === "nickName") {
+              debouncInputValue(e, data.valueName);
             } else {
               handleValueimmediately(e);
             }

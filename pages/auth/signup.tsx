@@ -29,6 +29,8 @@ const Signup = () => {
     passwordCheck: null,
     nickName: null,
   });
+  const [emailResValid, setEmailResValid] = useState(false);
+  const [nicknameResValid, setNicknameResValid] = useState(false);
 
   const submitSignupForm = async () => {
     try {
@@ -87,6 +89,10 @@ const Signup = () => {
                 signupValues={signupValues}
                 isValid={isValid}
                 setIsValid={setIsValid}
+                emailResValid={emailResValid}
+                setEmailResValid={setEmailResValid}
+                nicknameResValid={nicknameResValid}
+                setNicknameResValid={setNicknameResValid}
               />
             );
           })}
@@ -96,7 +102,9 @@ const Signup = () => {
             text="확인"
             onClick={() => submitSignupForm()}
             // 임시
-            disabled={!signupValues.nickName}
+            disabled={
+              !signupValues.nickName || !emailResValid || !nicknameResValid
+            }
           />
         </ButtonDivider>
       </PaddingWrapperDiv>
