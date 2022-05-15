@@ -46,7 +46,6 @@ const Badgelist = () => {
       // alert(error);
     }
   };
-  console.log(item);
   return (
     <>
       <BackButtonHeader
@@ -79,9 +78,15 @@ const Badgelist = () => {
               key={index}
             />
           ))}
-          {new Array(18 - healthBgCnt - studyBgCnt).fill(1).map((index) => (
-            <EmptyBadge src="/assets/img/noBadge.png" key={index} />
-          ))}
+          {new Array(
+            18 - healthBgCnt - studyBgCnt >= 0
+              ? 18 - healthBgCnt - studyBgCnt
+              : 0
+          )
+            .fill(1)
+            .map((index) => (
+              <EmptyBadge src="/assets/img/noBadge.png" key={index} />
+            ))}
         </BadgeListWrap>
       </Wrapper>
     </>

@@ -9,6 +9,14 @@ import styled from "styled-components";
 
 const Profile = () => {
   const [item, setItem] = useState<IProfile>({});
+  const healthDayCnt =
+    item.challenges && item.challenges.find((x) => x.category === 1)?.dayCnt
+      ? Number(item.challenges.find((x) => x.category === 1)?.dayCnt)
+      : 0;
+  const studyDayCnt =
+    item.challenges && item.challenges.find((x) => x.category === 2)?.dayCnt
+      ? Number(item.challenges.find((x) => x.category === 2)?.dayCnt)
+      : 0;
   const router = useRouter();
   useEffect(() => {
     getProfileData();
@@ -36,13 +44,12 @@ const Profile = () => {
           <UserName>{item.nickname}</UserName>
         </UserInfoWrap>
         <TagWrap>
-          {item?.challenges && item?.challenges[0]?.category && (
-            <CategoryTag>#운동</CategoryTag>
+          {item.challenges && item.challenges.find((x) => x.category === 1) && (
+            <CategoryTag>{`#운동_day${healthDayCnt}`}</CategoryTag>
           )}
-          {item?.challenges && item?.challenges[1]?.category && (
-            <CategoryTag>#공부</CategoryTag>
+          {item.challenges && item.challenges.find((x) => x.category === 2) && (
+            <CategoryTag>{`#공부_day${studyDayCnt}`}</CategoryTag>
           )}
-          <DayTag>Day {item?.ongoingChallengeCnt}</DayTag>
         </TagWrap>
       </Wrapper>
       <VideoList
@@ -57,8 +64,11 @@ const Profile = () => {
 export default Profile;
 
 const Wrapper = styled.div`
+  position: relative;
   background: linear-gradient(197.78deg, #4d23d6 30.81%, #139ae9 107.31%);
   padding: 54px 20px 32px 20px;
+  margin-bottom: -75px;
+  z-index: 1;
 `;
 
 const BackArrowIcon = styled.div`
@@ -104,17 +114,5 @@ const CategoryTag = styled.span`
   color: #4d23d6;
   background-color: white;
   border-radius: 6px;
-  margin-right: 2px;
-`;
-
-const DayTag = styled.span`
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 17px;
-  padding: 6px 14px;
-  color: #4d23d6;
-  background-color: white;
-  border-radius: 6px;
-  margin-left: 6px;
+  margin-right: 7px;
 `;
