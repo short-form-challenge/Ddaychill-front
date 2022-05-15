@@ -190,7 +190,7 @@ const ProfileBG = styled.div`
   background: linear-gradient(197.78deg, #4d23d6 30.81%, #139ae9 107.31%);
 `;
 const UserInfoWrap = styled.div`
-  margin-top: 86px;
+  margin-top: 66px;
   display: flex;
   flex-direction: row;
   align-items: center;
