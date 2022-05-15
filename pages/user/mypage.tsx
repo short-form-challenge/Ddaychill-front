@@ -85,7 +85,7 @@ const MyPage: NextPage = () => {
               )}
               <UserNameWrap>
                 <UserName>{item.nickname}</UserName>
-                <ChallengeDay>Day {day}</ChallengeDay>
+                <ChallengeDay>Day_{day}</ChallengeDay>
               </UserNameWrap>
             </UserInfoWrap>
           ) : (
