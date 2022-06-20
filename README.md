@@ -13,6 +13,10 @@
 - TypeScript
 - ESlint
 
+## Docker
+- DockerFile을 이용하여 도커배포 진행
+- Docker-compose를 사용하여 컨테이너 관리 진행
+
 ## Script
 
 ```
